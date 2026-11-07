@@ -59,7 +59,7 @@ def p01(D):
     fig, ax = canvas(84); ax.plot(f[1:], db[1:], lw=.55, color=BASE)
     ax.set(xlim=(0,5), ylim=(-160,5), xlabel="频率（MHz）", ylabel="幅度（dBFS）"); ax.grid(alpha=.18)
     ax.text(.97,.93,f"SNDR {m['SNDR_dB']:.1f} dB\nSFDR {m['SFDR_dBc']:.1f} dBc\nDR {m['DR_dB']:.1f} dB",transform=ax.transAxes,ha="right",va="top",fontsize=7)
-    viz.annotate(fig,"输出频谱（100 kHz 输入）","10 MS/s、16384 点相干采样、矩形窗","模型生成；绝对指标未标定，不可签核。")
+    viz.annotate(fig,"输出频谱（100 kHz 输入）","10 MS/s、16384 点相干采样、矩形窗","模型未注入失真，SNDR 偏高（目标 99.4 dB）；绝对指标不可签核。")
     return fig,(W,84)
 
 
@@ -78,7 +78,7 @@ def p03(D):
         m = _metric(100e3, 10e6, amp=4.8*10**(a/20), seeds=2); snr.append(m["DR_dB"]); sndr.append(m["SNDR_dB"])
     fig, ax = canvas(84); ax.plot(amps, snr, "o-", color=BASE, ms=2.5, lw=.9, label="SNR"); ax.plot(amps, sndr, "s-", color=CAAZ, ms=2.2, lw=.9, label="SNDR")
     ax.set(xlabel="输入幅度（dBFS）", ylabel="dB", xlim=(-60,2)); ax.grid(alpha=.2); ax.legend(frameon=False, fontsize=6.6, loc="lower right")
-    viz.annotate(fig,"SNDR/SNR vs 输入幅度（DR 曲线）","低幅度进入噪声底；DR 由 26.5 µV 噪声决定","模型生成；未含参考/抖动非理想。")
+    viz.annotate(fig,"SNDR/SNR vs 输入幅度（DR 曲线）","低幅度进入噪声底；DR 由 26.5 µV 噪声决定","模型失真为零，SNDR≈SNR；曲线形状可参考，绝对值不可签核。")
     return fig,(W,84)
 
 

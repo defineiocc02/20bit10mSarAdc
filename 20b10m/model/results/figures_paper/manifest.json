@@ -1,7 +1,7 @@
 {
   "schema": "sar20_10m_model_figures_v1",
   "plot_source": "/Users/zhaoyi/WorkBuddy/pipelinedsar工作站/20b10m/model/paper_figures.py",
-  "plot_source_sha256": "ff9d0acc7ae1f1b35a2cd2e32e98ba7c2a04c8a3ea970fc8094f7c452b672ffc",
+  "plot_source_sha256": "f36c75ab5edfbf2b440db18c2ce4bb82d9e7e61495c4d5cbbd520d5ce8f857e9",
   "data_source_sha256": {
     "/Users/zhaoyi/WorkBuddy/pipelinedsar工作站/20b10m/model/results/results.json": "14c82e91aa1eefdaec1aa781de33daa770a61fcf53928fa130dc49294f5bbb14"
   },
@@ -70,15 +70,15 @@
     ]
   ],
   "output_sha256": {
-    "paper01_spectrum_100k.png": "5c04e2c54b660ac09150fe92361c53c80a61fbb001b359a6451b0f7e0d4ae6e1",
-    "paper01_spectrum_100k.svg": "b7b5e55243197111bb8d73fbe8e6013e6f00092a73fee070cae8b596a9941be7",
-    "paper01_spectrum_100k.pdf": "79d614c5d32fe76cec7f96f2fc03220d2dc95ff63737d5f35ec0e219b4462980",
+    "paper01_spectrum_100k.png": "b924c6497370a6e3f82a92da7c0a9b0333799b7eb57c97289c79acd2116f5786",
+    "paper01_spectrum_100k.svg": "d11f5347b634fb05438b8dc40f9aae6c3f70bfcc69a0af6683a91d67ba6641fd",
+    "paper01_spectrum_100k.pdf": "481e1918829ed4408ff1b40160cbc33b1ed5512ab058911805f0b7cbb6052a36",
     "paper02_spectrum_2m.png": "b5baa100fb9efa6bd4fe52e8733b0dfb8ec751e8f2a28908e9a82e8488ac8e5d",
     "paper02_spectrum_2m.svg": "90b8aa8ed8e873b7db6d58492817a13e422cca31d16072f42dfd4f5d2a0ed92e",
     "paper02_spectrum_2m.pdf": "44660b01750529aa56490cf5f6b752daf6344ef6ac3b7fd128cddbc083ae582e",
-    "paper03_dr_curve.png": "f7f52f1fa190e7acc0bc061e0489b8f31c05d8403353d9a32f23399537fa17fc",
-    "paper03_dr_curve.svg": "daf1273930c831b049a21beea7d4bd2908230bafa2ddcc72407a13c5424dee45",
-    "paper03_dr_curve.pdf": "9d783aedcf4b35d99dcf0a66d598436734a208fc9bd75c68110a42ca6bdcccde",
+    "paper03_dr_curve.png": "67c46d96cf379c24c46399f8ea2206c71acfec5069c61d7b73ae040dc5808051",
+    "paper03_dr_curve.svg": "c839a4e0ba06ec2acdedb2d92b8b5c242d6fb251257b1aeed06f15dc8656e5d9",
+    "paper03_dr_curve.pdf": "33e9870e80d048fae16c21aeb8804e73e769abb61b892e4545bf91cbabdb4d36",
     "paper04_sndr_vs_fin.png": "44b6df2e5141f6e7f76b73efad30483acc4cf8e0d46cf29a4111ff8f8f50330b",
     "paper04_sndr_vs_fin.svg": "974ead9b79e1fe040e585a7dca0dabcf3ef727b57526b63003d3ca29292e10f6",
     "paper04_sndr_vs_fin.pdf": "ccd3f57db903aec0931b49428eb232c2e79fe6cbef9ed6afb04e3e69c350396b",
