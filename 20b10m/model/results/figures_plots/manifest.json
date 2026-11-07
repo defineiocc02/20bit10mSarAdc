@@ -1,0 +1,54 @@
+{
+  "schema": "sar20_10m_model_figures_v1",
+  "plot_source": "/Users/zhaoyi/WorkBuddy/pipelinedsar工作站/20b10m/model/plots.py",
+  "plot_source_sha256": "8b74885b41e28c4e7b4ea168c035676d2ab71bdd060c84f0dceb3c74617eb977",
+  "data_source_sha256": {
+    "/Users/zhaoyi/WorkBuddy/pipelinedsar工作站/20b10m/model/results/results.json": "5189cc6d26ec10d0f75a17d8d89a7a2031b1c214db3f33be6cfb4c990eee9c8b"
+  },
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "font": {
+    "family": "Hiragino Sans GB",
+    "checked_glyph": "码"
+  },
+  "dimensions_mm": [
+    [
+      146,
+      78
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      86
+    ],
+    [
+      146,
+      110
+    ],
+    [
+      146,
+      82
+    ]
+  ],
+  "output_sha256": {
+    "fig1_caaz.png": "970689397b3a589c2ca304730f5246d68658c83637d374fcf2687b58d738df80",
+    "fig1_caaz.svg": "c2c15fe74005f25d11c9af7c057e7ea0b9fa89dd32f92da00e95808c151a6ed1",
+    "fig1_caaz.pdf": "f1f09df58fcb16cc525532d2636feaf94f64cf2aa6ce04ead9b410de3f85142a",
+    "fig2_tracking.png": "3fd3c90b95c22178fb144621711b54a8fea2e9c726f3a2586e9d17a0e248fea6",
+    "fig2_tracking.svg": "5fa39b19b63bde5beb28bd29963239318033aa1a0f7bc5b19e3c5c1d6112126b",
+    "fig2_tracking.pdf": "ad18d3154074fc37d002eee83cfb20e70afcb56e6510a2c95ce644ee30ed0330",
+    "fig3_interleave.png": "80fcd572cc7be3ca58be54fbb0ea283880445b7de4202637eb1572548f9611c5",
+    "fig3_interleave.svg": "622113ddaeded686a0fef951c5d862bf3707c1e5b613d14b6a6b230602c90c23",
+    "fig3_interleave.pdf": "f78e3d2c725376407191283a8e1fa0bf8575809d675930180e7484a019ae595b",
+    "fig4_static.png": "a336732646afbd13ff347de1d224c1f5af172714a8b7ededfcdb08fa18e7f08f",
+    "fig4_static.svg": "b362e4c0746c6938cea4b310efc8ab6dfd3bd74740af50f9a1d92e47a6ab4691",
+    "fig4_static.pdf": "b0f7fb5bfed856a144d628c062ef9034221533a93b0f0e49c895949df66cbe2a",
+    "fig5_spectrum.png": "cad7b10c484d889017c15df8af5fd1a689fb140a53d581ffb34036bcca989288",
+    "fig5_spectrum.svg": "e46e45116b28fb67c0612231ef1c2f70bc4cc3e97a699a7cdc621eda3e029331",
+    "fig5_spectrum.pdf": "0971b26cf822d86618d3dbaa64179d96bf265265be279abe808eb27cba8296f6"
+  },
+  "notes": "CAAZ/tracking/interleave/static/spectrum；绝对指标未标定，不可签核"
+}

@@ -34,8 +34,9 @@ VIN → 18 片 DAC1 池（8 转换 + 8 采样 + 2 备）
 ```
 20b10m/
 ├── README.md              本文件
-├── CODE_INDEX.md          代码索引（先看这个）
-├── TECH_EFFECTIVENESS.md  各技术有效性对比（结论总表，先看这个）
+├── HANDOVER.md            交接文档（接手先读：现状/缺陷/下一步）
+├── CODE_INDEX.md          代码索引
+├── TECH_EFFECTIVENESS.md  各技术有效性对比（结论总表）
 ├── FILE_LAYOUT.md         文件存放规范
 ├── plan/                  规划、架构裁决、面积/floorplan、SPEC 主文档
 ├── spec/                  层次、端口、位分配、时序、10M 规格表
@@ -57,6 +58,7 @@ VIN → 18 片 DAC1 池（8 转换 + 8 采样 + 2 备）
 
 | 想了解 | 文件 |
 |:---|:---|
+| 接手这个项目 | `HANDOVER.md`（30 秒摘要 → P0 缺陷 → 里程碑） |
 | 代码在哪、怎么读 | `CODE_INDEX.md` |
 | 架构裁决与预算 | `plan/master_plan_20b5m.md`、`plan/arch_10m.md`、`plan/coarse_quant_decision.md` |
 | 10M 逐块规格 | `spec/spec_tree_10m.md` |

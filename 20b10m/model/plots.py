@@ -21,7 +21,8 @@ from . import static, viz
 
 ROOT = Path(__file__).resolve().parents[1]
 RES = ROOT / "model/results"
-OUT = RES / "figures"
+# 注意：不能写进 results/figures——那会覆盖 figures.py 的 41 图 manifest（本轮踩过）
+OUT = RES / "figures_plots"
 
 BASE = "#626C75"   # 基线/关闭
 CAAZ = "#0072B2"   # 开启/目标
