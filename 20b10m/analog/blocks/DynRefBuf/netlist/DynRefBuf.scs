@@ -1,0 +1,16 @@
+// DynRefBuf.scs —— 动态参考缓冲：粗预充 + 300 pF 去耦
+// 端口：REF_IN VREFP_PRE VREFP_OUT VREFN_OUT PRE VDD5 GND
+// 说明：5 nF 片上去耦不可实现（1.8–4.2 mm²），定 300 pF + R_buf 30–50 Ω。
+simulator lang=spectre
+
+subckt DynRefBuf REF_IN VREFP_PRE VREFP_OUT VREFN_OUT PRE VDD5 GND
+// 去耦：300 pF（MOM/MOS 混用，L1 定）
+Cdec (VREFP_OUT GND) capacitor c=300p
+Cdec2 (VREFN_OUT GND) capacitor c=60p
+
+// 预充开关：PRE 高时把 VREFP_PRE 接到去耦节点（低阻），建立后断开
+Xsw (VREFP_PRE VREFP_OUT PRE PREB VDD5 GND) tg5 wn=120u wp=240u
+
+// 阻尼电阻：抑制键合电感与 Cdec 的谐振（R_buf 30–50 Ω 的一部分）
+Rd (REF_IN VREFP_OUT) resistor r=20
+ends DynRefBuf

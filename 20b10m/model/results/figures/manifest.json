@@ -1,0 +1,307 @@
+{
+  "schema": "sar20_10m_model_figures_v1",
+  "plot_source": "/Users/zhaoyi/WorkBuddy/pipelinedsar工作站/20b10m/model/figures.py",
+  "plot_source_sha256": "feef2855d530c39652e87cee57e54bc2493ae57ac0ec69f46e8eec7c5b02810e",
+  "data_source_sha256": {
+    "/Users/zhaoyi/WorkBuddy/pipelinedsar工作站/20b10m/model/results/results.json": "14c82e91aa1eefdaec1aa781de33daa770a61fcf53928fa130dc49294f5bbb14"
+  },
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "font": {
+    "family": "Hiragino Sans GB",
+    "checked_glyph": "码"
+  },
+  "dimensions_mm": [
+    [
+      146,
+      78
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      78
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      80
+    ],
+    [
+      146,
+      80
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      78
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      74
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      78
+    ],
+    [
+      146,
+      78
+    ],
+    [
+      146,
+      80
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      78
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      78
+    ],
+    [
+      146,
+      82
+    ],
+    [
+      146,
+      92
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      86
+    ],
+    [
+      146,
+      82
+    ],
+    [
+      146,
+      78
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      74
+    ],
+    [
+      146,
+      74
+    ],
+    [
+      146,
+      78
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      76
+    ],
+    [
+      146,
+      74
+    ],
+    [
+      146,
+      70
+    ],
+    [
+      146,
+      74
+    ],
+    [
+      146,
+      78
+    ],
+    [
+      146,
+      78
+    ],
+    [
+      146,
+      80
+    ],
+    [
+      146,
+      76
+    ]
+  ],
+  "output_sha256": {
+    "fig01_caaz_freq.png": "325634ceeb5cc90ff04aa60dc1d8c5fbb8ba0e26daa554c0d10e5c415fb74f45",
+    "fig01_caaz_freq.svg": "ae0970935b62d7ee6f10e7010d834e15a8f2286d6abd52ee2639241a2c848320",
+    "fig01_caaz_freq.pdf": "05153698a3f27dbea44aba36a5efceff43cb146a09e209d44d620dd86d0045a0",
+    "fig02_caaz_az_share.png": "ca0a0733622cfa6d10bf27a16198b6fe2cbaf8ba125465f0df775f4ad5f28ff1",
+    "fig02_caaz_az_share.svg": "f0c5fba1839fca99d0e1aa15dd4e339cdddc94ff3e309d7f39da3f569f7133af",
+    "fig02_caaz_az_share.pdf": "349ce918796a290f74d3496147c2944df21eae66b4bef56c60fa7b20dee80ed9",
+    "fig03_caaz_unique_vs_share.png": "5685dbbb81e6b1191f52ca4b0039193646e34fc59abac0375ffb09f887601d62",
+    "fig03_caaz_unique_vs_share.svg": "0f75f965437779a63d8cac2bcfeaca8b0f4a9ceae60635095cd9b6d161092b35",
+    "fig03_caaz_unique_vs_share.pdf": "e7422eb7969bf1cc1bcb5bb41996a28344f6c60bb1fa0ae06cb231397655c6ae",
+    "fig04_caaz_rate_tradeoff.png": "ab806c7180589d4dec321d2a42eb06b67945765d93296b40fff66ade05f70c06",
+    "fig04_caaz_rate_tradeoff.svg": "8ab330f855c4bbc8117edfc91cc47c016484df518751c5ef5a6effe73f8aa94f",
+    "fig04_caaz_rate_tradeoff.pdf": "9d7164be65711d2ed6e2a6442fc43416437cd64af391ff71a0aade024ab69e1a",
+    "fig05_caaz_sinc.png": "5bf5da3f0986afd7250c8d86066a1dbb563174e94011043a791701d3bbfe661e",
+    "fig05_caaz_sinc.svg": "f802deeaad55ead3dc2d06bc0cb962042fbee5477883b28aba79222dd46404b8",
+    "fig05_caaz_sinc.pdf": "cd551e31402b97019c47ed51a29a7ce9115bf9861d80db20f4621943ab623d72",
+    "fig06_caaz_noise_budget.png": "c303798945c2b9cc10cf3a0643ad668fba6511b4b80febb9e05f0158fc6cc421",
+    "fig06_caaz_noise_budget.svg": "ce5f7159c8d91051d7533d2d6ac43d460625be7d073ec28e488e22756f5e6cf0",
+    "fig06_caaz_noise_budget.pdf": "320cf1a5b67ea521adad99a44ab5da929e90763efc16d486085eee483731e15c",
+    "fig07_caaz_spectrum.png": "4b78be9d49cb343f9f7e149421382e1be33b221766636c46eeee9ff5cecc62cb",
+    "fig07_caaz_spectrum.svg": "46e65ef980c0c8f9199c1933be15e9f70f1cea618520f51056b64cfcc0946a32",
+    "fig07_caaz_spectrum.pdf": "7bfd18b4c41e0303393e8156b70a0e7f5cb39fcb769d76dcd98cd6de85a64b1a",
+    "fig08_tracking_M.png": "7e6b8a40933989872d7b41f5167adfb6d66390f1ae45bea02553839cac82a41e",
+    "fig08_tracking_M.svg": "030efa89514bebf3cb3df6069a118561c1253cbcecf7e08830a7edd1bfe869a6",
+    "fig08_tracking_M.pdf": "b237ce1ebf4bc195bdeef3ff03466d0f8929355350b3e7f50ee5d35e4f9c403b",
+    "fig09_tracking_F_vs_rho.png": "dccc4e5cd3e52a1de4ad71f151fbaf0d46ce03fb9402779c52689ae36a447265",
+    "fig09_tracking_F_vs_rho.svg": "4d1199588138a64be22ffe2ff57796959b4685f7dbee14235b9dce465872a12e",
+    "fig09_tracking_F_vs_rho.pdf": "baa1d827fcfcebad491fdafb0ef7cea732097846de2841155f0ef5c1076f0a1b",
+    "fig10_tracking_rho_sweep.png": "1a5de8cf1237aef3e3c3d23dbba5303cf21e0cbbdcec25250b17f8dae22144ca",
+    "fig10_tracking_rho_sweep.svg": "317225d190a46a0bca7be9d1edf8efcc789c5e450f76c72cc97f876b1b38ad2e",
+    "fig10_tracking_rho_sweep.pdf": "0c9f274867548a6a1154953ea4c3a031976d002469adb6b27c672e67bb4f8cf7",
+    "fig11_tracking_autocorr.png": "e44a9703ef98ba042d77e2a71c4f3ad19ff3915de3fa0a9c668a0680a37f175a",
+    "fig11_tracking_autocorr.svg": "dac3191326abbe9cd2681af29ee37b18a0013e6eb7ac7cf9593f69505c19849e",
+    "fig11_tracking_autocorr.pdf": "8bf7b47842b32e824d3f0c18fbca52211bba601c27effffd555446101d7d53a7",
+    "fig12_tracking_gain_vs_M.png": "a66f342bd2429e2cbbd2f957f9e8324b8d04cc233821ff1c133d6d28be80cc23",
+    "fig12_tracking_gain_vs_M.svg": "ff197cde749fd414ef51ecce890ed7d5e19241a8e265cd529293b4f78bafcb90",
+    "fig12_tracking_gain_vs_M.pdf": "ec8dfdcfecdda3e36b7456873c331d16699b4475e5c240ec3efee76a626b1521",
+    "fig13_caaz_tracking_matrix.png": "98317786b4c670369ce13376fd437217d8ddbc2b6771717005f743fcf1faa6cc",
+    "fig13_caaz_tracking_matrix.svg": "c2c65ead368079c7717780566a2c4b573ef38e589fd5593d99dce6701d2b54b5",
+    "fig13_caaz_tracking_matrix.pdf": "b727e54048cd96c58755f94137e682dd57f34f8bb136476f5eac050b83932065",
+    "fig14_speed_compare.png": "af4700c89f5a1a5b565fc7b31e646dfc7f26b2ff3585e811618fbcbc343b1eda",
+    "fig14_speed_compare.svg": "9c72514bcc06085a43b334ad57819c85f020adc60244b45c1c954e24bd0af46c",
+    "fig14_speed_compare.pdf": "1f22bee72199eca7f93c7bab9e70a4529141153c1d02143db8857fa685ca16b1",
+    "fig15_skew_dr_sfdr.png": "00b080319ee585270e5eb294c3f0813b7277f46c79003fa375e9ee0f44bb78d2",
+    "fig15_skew_dr_sfdr.svg": "737e50bc7c70148e0b01fcdd4fd5f1f1d4e65607f86db7f9d8eb8606c7c4400b",
+    "fig15_skew_dr_sfdr.pdf": "08fd19417388e617e73951c1cb3ac96a73736a7c754fd64778bbe347c65c6572",
+    "fig16_skew_dr.png": "0038e1038cce884ecc4711efa31ba192b443cfdf1c7f57aa5548bf3f6b58dd0e",
+    "fig16_skew_dr.svg": "762740106388ca86062ebcbbcc47354dc2d0426153f4a7a019d5d3247e72d995",
+    "fig16_skew_dr.pdf": "b25909f77235d7ca76c19e9de43796588a1e3d5396fdce13496662ef9a7e258c",
+    "fig17_gain_sweep.png": "39de917f8fec59b811d77e54481612d2b2e3440e8d300c295ea3c734fd287090",
+    "fig17_gain_sweep.svg": "10f2400c6d04db6b0bbb4f93e1f7c64da1a0e458e88c51ce725f268bcf7aeda1",
+    "fig17_gain_sweep.pdf": "c511f10a0692dec6375e5acbb3383f0a12dc2206e90802de508b316984300bfa",
+    "fig18_offset_sweep.png": "f2d43a05ee239258bf9a1f241af3fc397127f594479c5705bebea3f876d91037",
+    "fig18_offset_sweep.svg": "49dc661e6d0546460ec43b984bddc043c0c434c8b88991469cefdbe32746bf85",
+    "fig18_offset_sweep.pdf": "284df3d84dac290151cb65719cbdc989e13e4c85e4143840da1d69974a55cfa9",
+    "fig19_shuffle_bar.png": "f8e7eecb95fabbc10bcc03e58c7cf42d814d423ac1248fc34a4bf703fe8ab5b8",
+    "fig19_shuffle_bar.svg": "8a9153fd6451d53e2b2a49e84b5051ec25a5841aa6b6579179317ee068d02280",
+    "fig19_shuffle_bar.pdf": "d7d60ab116f3b476d842238c8ac17f5a05857781e8ff832c6a430039be1832a0",
+    "fig20_spur_spectrum.png": "e483f6905095083527627ec34e41681192bd54f3803fc6bdd870250195e00599",
+    "fig20_spur_spectrum.svg": "13235234a5fd877885a4de859f45706a0044f3e7978abb4ce576c548677f48a5",
+    "fig20_spur_spectrum.pdf": "beed377b572ceac8b80e762846a56ff5b6667703cbf794f60ddbf8051f15264d",
+    "fig21_slice_timeline.png": "3d1a1b66a13cd7a96221fc00c3ddd31cf494b89fabaf7e6eb3be226c2c020d0f",
+    "fig21_slice_timeline.svg": "ecfc78c54d769e9572314e8b242a71777d88f14413ec5e219b85a9b5ef40dc9d",
+    "fig21_slice_timeline.pdf": "c5deb18016e840039792370c28adad001ca8de891adb628478dcc55ac081b6f8",
+    "fig22_slice_util.png": "5f5d6c4edba5674654d0c05944ea18f5f30121dc245758e9e27eab7c7bd2efe8",
+    "fig22_slice_util.svg": "ca938602ce62c1335d4e48f2467fee67ba82d0ea1790df23c5126542dab0bf20",
+    "fig22_slice_util.pdf": "cb0dbb94e1a0daa483c2201bf06d433dc1b764b93d3d4f56bd349e167269c1f9",
+    "fig23_inl_raw_cal.png": "a7d436d2b531ff23627d51308c58dfb3d8506cf708e423e7143df4bd3873e322",
+    "fig23_inl_raw_cal.svg": "e11cbaf64eac19689422c2b63a971f1a484a212c472922a989669301bf0db40b",
+    "fig23_inl_raw_cal.pdf": "b564d02e7a7818537f66ebc5520c3b7df768cd391807772cf10d8b6256ba9af2",
+    "fig24_dnl_raw_cal.png": "60e44c84bd67f701adec3d4740c05d26f2045c0f7585c2b11a030d07e26fe57e",
+    "fig24_dnl_raw_cal.svg": "940bbcf277dd9f63cee5b1fc15a454484892f052c063a8a4ee52cd245ebabc37",
+    "fig24_dnl_raw_cal.pdf": "9284ecebbdbef48595e93597c91ef70515ce604315901587690643e55138e784",
+    "fig25_inl_vs_sigma.png": "c048f688979f3a1589217a9196de2f54839a6c3ecf62b7f4095ac5a2db714e88",
+    "fig25_inl_vs_sigma.svg": "df535edc53788a5c7b96a9a2f5feeb04cdb5a262d9f5e08cd910be8495df1981",
+    "fig25_inl_vs_sigma.pdf": "d1af682f0ccd0b73ec47bface55a4df9fa62edf3c559faeab3ab60d5d9f83657",
+    "fig26_coef_precision.png": "cac1252e0f565bda0940f5b5584b51a24dad63f57217dd9434191809b4dfa8d0",
+    "fig26_coef_precision.svg": "de8d55ea6deadd7e9875eb4e578c38e64c0c78b70e6a250770bd3fea16967261",
+    "fig26_coef_precision.pdf": "3167142d532f5ee94e96f4d65a45e03b0b09b4531eae3a83e45b5b5e985f4a71",
+    "fig27_dnl_hist.png": "18693848e8e1cb62d1f169df928be802de97e7599330ba7430d317d47305bee0",
+    "fig27_dnl_hist.svg": "4098c458b3782d83728427beb594cd757c0f4ed466bf8984045844144acbe0b6",
+    "fig27_dnl_hist.pdf": "255f8cd7d2eff7d11b136beb5c7f2c5f6d5f242dc32025489763374f1b5c6916",
+    "fig28_inl_gradient.png": "dfea7d00b159b5dd7a325f81468a14b4b18bf16003e3ff73e3d9fa4983b3e27d",
+    "fig28_inl_gradient.svg": "0339e63dd3d2b21226c5915d40ba6e56be24e6ed6d3457cf675ee857b3a18915",
+    "fig28_inl_gradient.pdf": "cf4cdba227367b3c0f5c153652756883b121248cf82510fbabd5a44e92e19416",
+    "fig29_cal_points.png": "d0b1080b68953c277505b5eff8a926b917cb26e64db2b66ee7a8c06ce67691bf",
+    "fig29_cal_points.svg": "2f81c92c2024fb714643cb1a5c8cfee0c6b84fc94e2f6b3fc303582cff99a468",
+    "fig29_cal_points.pdf": "a67ff437c4b2d8924241347bfeda84d15f0bb6f44b9bd76452eb698ee3b3bc88",
+    "fig30_noise_budget.png": "3fbdaf465ad679dbdd4ab98cc92bbb2f7c32f9ad99f750f58c6272a84656c963",
+    "fig30_noise_budget.svg": "72b73ce3b5fd99b990bc33c769b457cf120f1ab80a5d70b0ab756b3ddb2a96d6",
+    "fig30_noise_budget.pdf": "43f5a98a3deabf33ae570db40635f4fc72cb85c705e9ce4e9e8b9ff9bf8de053",
+    "fig31_dr_vs_cap.png": "2891cdb83e876dfe182ca9c8164fa3aaeb078c516f90ae362149f9a60a5aa84d",
+    "fig31_dr_vs_cap.svg": "549fe5ded1b3ae569aae1791f691ec1872ae76d03ee7d36d17c2029799337475",
+    "fig31_dr_vs_cap.pdf": "e31b44c074c690b7d325ddf2dff5cc7ba400be25a4f691303d9c049b171c489c",
+    "fig32_jitter_sndr.png": "7b015134b8737e3698e9e6210a3d95b5ffa43662a7c0770fd1f18f3dcda04d4d",
+    "fig32_jitter_sndr.svg": "85fb56518a003c0fc10a0365600e480f3a014fde186483acd0c61d1760f06f26",
+    "fig32_jitter_sndr.pdf": "b97c3df043f687cf713b7a1113f6adb0bbcb1a4fa6542802489cfd8f7627d1e3",
+    "fig33_ref_droop.png": "69a4d3851e73d2cb8edcbd345f8f1176f1f7bf9ca85edfcadd22c5cf7a5059fc",
+    "fig33_ref_droop.svg": "038219ce452a89b7dfc3fc0ecc1e7d90b21c89ee108c8fe0a7b99182be2bbcc3",
+    "fig33_ref_droop.pdf": "eb1c34d4a97d23ecc5120019b81069fd8a13f6b1a46a3760d2272a1d6473751d",
+    "fig34_settling.png": "b173134b5249841390c19bca1fca9c32b608a0d53f8a531a13f186f919e11111",
+    "fig34_settling.svg": "95e3cb427777776e4b71e2ceca5bb155bea9a2c9dcf526dd56736e566f91a4e8",
+    "fig34_settling.pdf": "ce543af25146c70b688c219c4f7e5f308011270387e7774098c3ffc000910caf",
+    "fig35_ref_ripple_inl.png": "1e10f8f751b8c56809faf64b76a9d68d3a9a35bf5c2bd6459a3c8648c2dfdaa7",
+    "fig35_ref_ripple_inl.svg": "e87da6a4c50388d477adc3c130a296ecd8bcf412e36137ef6d2cc130a97bc4f0",
+    "fig35_ref_ripple_inl.pdf": "7ee512648e76bcb154f244d1b6b19bdd71d56f050a001225f93bad28ca82726d",
+    "fig36_timing.png": "4e573e150dafd1fd38886742c0d0ea1b950543abc5fb77cb4db1e34e6fbeb3af",
+    "fig36_timing.svg": "0c0eb113964d8c575fa03a37e2ccf78a9df5db5ee6353210e069932d5037ae70",
+    "fig36_timing.pdf": "f39ec172c4fa0fa5d04f7f440cdd1b8e691f4da791f2cfa7004e517adadd7749",
+    "fig37_power.png": "39e7c6be1efccc9815f70df36dff5e3378fe060948d3dd5e427720e4ba6be274",
+    "fig37_power.svg": "c6b0b86b8b64647bbe55d7b71570d87a6564cb4fa99930151b4ece3fb674568b",
+    "fig37_power.pdf": "ca2af268681ac0a384122f39779379dbeb81b03b21f374778d13eaef85052108",
+    "fig38_area.png": "32c168db4198b61133e3550639160d11df06add5ddd7fb6305d66ae9dc5ce97c",
+    "fig38_area.svg": "87aa92932a0b94e82e4d1271604421c5078c5076268a68d66fcb93a006a6e782",
+    "fig38_area.pdf": "b6628a60475cc9636747c0773ca38694a1959bb55a3a3a9783d255f74aa6a9ba",
+    "fig39_fom.png": "d87c88d9fe303812ab03291baafca3a36a2d6442d83d8c214e3d5f74061b866c",
+    "fig39_fom.svg": "08b460b1e72c0ce09a6655cff66e624044c10b2939ab0bc2131bcf51fd73227f",
+    "fig39_fom.pdf": "564a6c1d4882c82e7bb81eb7950d8748067c7495ec4ffc12f76039bc76dab5b1",
+    "fig40_error_waterfall.png": "d1bef894c1a6a1a828e9b56cf16ec4bb60b22514e90223aa76300eab6cc62e9c",
+    "fig40_error_waterfall.svg": "3826bd8f12a896a7202cc75817e6af89b65af3d3acddcb1b1d6ce0e6923a8f59",
+    "fig40_error_waterfall.pdf": "29e45787f8c885eafd2b3f5d75606b07ab0aa32532e531d26a97a04f6ce12cdd",
+    "fig41_design_levers.png": "46a73c9107ce49e686acf0045cd36b3e54a05afc120668190ed05e3df77ed240",
+    "fig41_design_levers.svg": "10f2492214820e86a608750e8919b724627174a7276a56b0785da35d637ac164",
+    "fig41_design_levers.pdf": "22f92ef9bb8c85df12a6f709c7b5864407ac3ea34e6c923fd8f59ee9e834cab9"
+  },
+  "figure_count": 41,
+  "note": "模型图；绝对指标未标定，不可签核"
+}

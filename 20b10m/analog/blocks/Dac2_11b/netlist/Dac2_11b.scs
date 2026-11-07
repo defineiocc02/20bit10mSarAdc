@@ -1,0 +1,66 @@
+// Dac2_11b.scs —— DAC2 11 bit：5 bit 主阵（32 单位）+ 桥 + 6 bit 子阵（64 单位）
+// 端口：DIN<10:0> VREFP VREFN VCM VTOP VDD18 GND
+// 总顶板等效 ≈0.89 pF；桥容 28 fF 为初值，L1 必须按 INL 台阶重解（见 MANIFEST 缺口 5）
+// DINB<10:0> 由数字侧给（每位反相），避免在模拟块内加 11 个反相器延时
+simulator lang=spectre
+
+subckt Dac2_11b DIN<10:0> VREFP VREFN VCM VTOP VDD18 GND
+Xib0 (DIN<0> DINB<0> VDD18 GND) inv18
+Xib1 (DIN<1> DINB<1> VDD18 GND) inv18
+Xib2 (DIN<2> DINB<2> VDD18 GND) inv18
+Xib3 (DIN<3> DINB<3> VDD18 GND) inv18
+Xib4 (DIN<4> DINB<4> VDD18 GND) inv18
+Xib5 (DIN<5> DINB<5> VDD18 GND) inv18
+Xib6 (DIN<6> DINB<6> VDD18 GND) inv18
+Xib7 (DIN<7> DINB<7> VDD18 GND) inv18
+Xib8 (DIN<8> DINB<8> VDD18 GND) inv18
+Xib9 (DIN<9> DINB<9> VDD18 GND) inv18
+Xib10 (DIN<10> DINB<10> VDD18 GND) inv18
+Cm0 (VTOP m0) capacitor c=432f
+Xmr0 (VREFP m0 DIN<10> DINB<10> VDD18 GND) tg18 wn=4u wp=8u
+Xmg0 (VREFN m0 DINB<10> DIN<10> VDD18 GND) tg18 wn=4u wp=8u
+Cm1 (VTOP m1) capacitor c=216f
+Xmr1 (VREFP m1 DIN<9> DINB<9> VDD18 GND) tg18 wn=4u wp=8u
+Xmg1 (VREFN m1 DINB<9> DIN<9> VDD18 GND) tg18 wn=4u wp=8u
+Cm2 (VTOP m2) capacitor c=108f
+Xmr2 (VREFP m2 DIN<8> DINB<8> VDD18 GND) tg18 wn=4u wp=8u
+Xmg2 (VREFN m2 DINB<8> DIN<8> VDD18 GND) tg18 wn=4u wp=8u
+Cm3 (VTOP m3) capacitor c=54f
+Xmr3 (VREFP m3 DIN<7> DINB<7> VDD18 GND) tg18 wn=4u wp=8u
+Xmg3 (VREFN m3 DINB<7> DIN<7> VDD18 GND) tg18 wn=4u wp=8u
+Cm4 (VTOP m4) capacitor c=27f
+Xmr4 (VREFP m4 DIN<6> DINB<6> VDD18 GND) tg18 wn=4u wp=8u
+Xmg4 (VREFN m4 DINB<6> DIN<6> VDD18 GND) tg18 wn=4u wp=8u
+Cmdum (VTOP VCM) capacitor c=27f
+Cbr (VTOP SUB) capacitor c=28f
+Cs0 (SUB s0) capacitor c=864f
+Xsr0 (VREFP s0 DIN<5> DINB<5> VDD18 GND) tg18 wn=4u wp=8u
+Xsg0 (VREFN s0 DINB<5> DIN<5> VDD18 GND) tg18 wn=4u wp=8u
+Cs1 (SUB s1) capacitor c=432f
+Xsr1 (VREFP s1 DIN<4> DINB<4> VDD18 GND) tg18 wn=4u wp=8u
+Xsg1 (VREFN s1 DINB<4> DIN<4> VDD18 GND) tg18 wn=4u wp=8u
+Cs2 (SUB s2) capacitor c=216f
+Xsr2 (VREFP s2 DIN<3> DINB<3> VDD18 GND) tg18 wn=4u wp=8u
+Xsg2 (VREFN s2 DINB<3> DIN<3> VDD18 GND) tg18 wn=4u wp=8u
+Cs3 (SUB s3) capacitor c=108f
+Xsr3 (VREFP s3 DIN<2> DINB<2> VDD18 GND) tg18 wn=4u wp=8u
+Xsg3 (VREFN s3 DINB<2> DIN<2> VDD18 GND) tg18 wn=4u wp=8u
+Cs4 (SUB s4) capacitor c=54f
+Xsr4 (VREFP s4 DIN<1> DINB<1> VDD18 GND) tg18 wn=4u wp=8u
+Xsg4 (VREFN s4 DINB<1> DIN<1> VDD18 GND) tg18 wn=4u wp=8u
+Cs5 (SUB s5) capacitor c=27f
+Xsr5 (VREFP s5 DIN<0> DINB<0> VDD18 GND) tg18 wn=4u wp=8u
+Xsg5 (VREFN s5 DINB<0> DIN<0> VDD18 GND) tg18 wn=4u wp=8u
+Csdum (SUB VCM) capacitor c=27f
+Xrstm0 (VCM m0 RST RSTB VDD18 GND) tg18 wn=2u wp=4u
+Xrstm1 (VCM m1 RST RSTB VDD18 GND) tg18 wn=2u wp=4u
+Xrstm2 (VCM m2 RST RSTB VDD18 GND) tg18 wn=2u wp=4u
+Xrstm3 (VCM m3 RST RSTB VDD18 GND) tg18 wn=2u wp=4u
+Xrstm4 (VCM m4 RST RSTB VDD18 GND) tg18 wn=2u wp=4u
+Xrsts0 (VCM s0 RST RSTB VDD18 GND) tg18 wn=2u wp=4u
+Xrsts1 (VCM s1 RST RSTB VDD18 GND) tg18 wn=2u wp=4u
+Xrsts2 (VCM s2 RST RSTB VDD18 GND) tg18 wn=2u wp=4u
+Xrsts3 (VCM s3 RST RSTB VDD18 GND) tg18 wn=2u wp=4u
+Xrsts4 (VCM s4 RST RSTB VDD18 GND) tg18 wn=2u wp=4u
+Xrsts5 (VCM s5 RST RSTB VDD18 GND) tg18 wn=2u wp=4u
+ends Dac2_11b

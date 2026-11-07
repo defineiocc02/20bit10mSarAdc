@@ -1,0 +1,17 @@
+// tb_Cmp1.scs —— 一级比较器 L1 台架：失调/噪声/再生时间
+simulator lang=spectre
+include "../../../netlist/common_cells.scs"
+include "../../Cmp1/netlist/Cmp1.scs"
+
+parameters VCM=2.5
+VDD18 (vdd18 0) vsource dc=1.8
+VINP (vinp 0) vsource type=sine freq=100k ampl=0.5m dc=2.5
+VINN (vinn 0) vsource type=sine freq=100k ampl=0.5m dc=2.5 phase=180
+CLK  (clk 0) vsource type=pulse val0=0 val1=1.8 period=5n width=2.5n rise=50p fall=50p
+
+Xcmp (vinp vinn clk outp outn vdd18 0) Cmp1
+CLP (outp 0) capacitor c=20f
+CLN (outn 0) capacitor c=20f
+
+tran tran stop=200n errpreset=conservative maxstep=2p
+save outp outn vinp vinn clk

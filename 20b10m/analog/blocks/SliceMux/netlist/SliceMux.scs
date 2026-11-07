@@ -1,0 +1,49 @@
+// ============================================================
+// [CODE-INDEX] SliceMux.scs —— 18:1 顶板选通（8 片同时导通）
+// 端口：VTOPP/N<17:0>（池顶板）、SEL/SELB<17:0>（8 个高）、VOUTP/N（到 RA）
+// 指标：Ron ≤20 Ω/片；片间偏斜 ≤50 ps；总线寄生 ≤0.5 pF；先断后合
+// 说明：SEL 由 SliceSched 的 conv 组给出；SELB 为反相，避免模拟侧加反相器。
+// ============================================================
+// SliceMux.scs —— 18:1 顶板选通（8 片同时导通，汇到 RA 输入）
+// 端口：VTOPP<17:0> VTOPN<17:0> SEL<17:0> SELB<17:0> VOUTP VOUTN VDD5 GND
+// 指标：Ron ≤20 Ω/片；片间偏斜 ≤50 ps；总线寄生 ≤0.5 pF；先断后合
+simulator lang=spectre
+
+subckt SliceMux VTOPP<17:0> VTOPN<17:0> SEL<17:0> SELB<17:0> VOUTP VOUTN VDD5 GND
+Xmp0 (VTOPP<0> VOUTP SEL<0> SELB<0> VDD5 GND) tg5 wn=40u wp=80u
+Xmn0 (VTOPN<0> VOUTN SEL<0> SELB<0> VDD5 GND) tg5 wn=40u wp=80u
+Xmp1 (VTOPP<1> VOUTP SEL<1> SELB<1> VDD5 GND) tg5 wn=40u wp=80u
+Xmn1 (VTOPN<1> VOUTN SEL<1> SELB<1> VDD5 GND) tg5 wn=40u wp=80u
+Xmp2 (VTOPP<2> VOUTP SEL<2> SELB<2> VDD5 GND) tg5 wn=40u wp=80u
+Xmn2 (VTOPN<2> VOUTN SEL<2> SELB<2> VDD5 GND) tg5 wn=40u wp=80u
+Xmp3 (VTOPP<3> VOUTP SEL<3> SELB<3> VDD5 GND) tg5 wn=40u wp=80u
+Xmn3 (VTOPN<3> VOUTN SEL<3> SELB<3> VDD5 GND) tg5 wn=40u wp=80u
+Xmp4 (VTOPP<4> VOUTP SEL<4> SELB<4> VDD5 GND) tg5 wn=40u wp=80u
+Xmn4 (VTOPN<4> VOUTN SEL<4> SELB<4> VDD5 GND) tg5 wn=40u wp=80u
+Xmp5 (VTOPP<5> VOUTP SEL<5> SELB<5> VDD5 GND) tg5 wn=40u wp=80u
+Xmn5 (VTOPN<5> VOUTN SEL<5> SELB<5> VDD5 GND) tg5 wn=40u wp=80u
+Xmp6 (VTOPP<6> VOUTP SEL<6> SELB<6> VDD5 GND) tg5 wn=40u wp=80u
+Xmn6 (VTOPN<6> VOUTN SEL<6> SELB<6> VDD5 GND) tg5 wn=40u wp=80u
+Xmp7 (VTOPP<7> VOUTP SEL<7> SELB<7> VDD5 GND) tg5 wn=40u wp=80u
+Xmn7 (VTOPN<7> VOUTN SEL<7> SELB<7> VDD5 GND) tg5 wn=40u wp=80u
+Xmp8 (VTOPP<8> VOUTP SEL<8> SELB<8> VDD5 GND) tg5 wn=40u wp=80u
+Xmn8 (VTOPN<8> VOUTN SEL<8> SELB<8> VDD5 GND) tg5 wn=40u wp=80u
+Xmp9 (VTOPP<9> VOUTP SEL<9> SELB<9> VDD5 GND) tg5 wn=40u wp=80u
+Xmn9 (VTOPN<9> VOUTN SEL<9> SELB<9> VDD5 GND) tg5 wn=40u wp=80u
+Xmp10 (VTOPP<10> VOUTP SEL<10> SELB<10> VDD5 GND) tg5 wn=40u wp=80u
+Xmn10 (VTOPN<10> VOUTN SEL<10> SELB<10> VDD5 GND) tg5 wn=40u wp=80u
+Xmp11 (VTOPP<11> VOUTP SEL<11> SELB<11> VDD5 GND) tg5 wn=40u wp=80u
+Xmn11 (VTOPN<11> VOUTN SEL<11> SELB<11> VDD5 GND) tg5 wn=40u wp=80u
+Xmp12 (VTOPP<12> VOUTP SEL<12> SELB<12> VDD5 GND) tg5 wn=40u wp=80u
+Xmn12 (VTOPN<12> VOUTN SEL<12> SELB<12> VDD5 GND) tg5 wn=40u wp=80u
+Xmp13 (VTOPP<13> VOUTP SEL<13> SELB<13> VDD5 GND) tg5 wn=40u wp=80u
+Xmn13 (VTOPN<13> VOUTN SEL<13> SELB<13> VDD5 GND) tg5 wn=40u wp=80u
+Xmp14 (VTOPP<14> VOUTP SEL<14> SELB<14> VDD5 GND) tg5 wn=40u wp=80u
+Xmn14 (VTOPN<14> VOUTN SEL<14> SELB<14> VDD5 GND) tg5 wn=40u wp=80u
+Xmp15 (VTOPP<15> VOUTP SEL<15> SELB<15> VDD5 GND) tg5 wn=40u wp=80u
+Xmn15 (VTOPN<15> VOUTN SEL<15> SELB<15> VDD5 GND) tg5 wn=40u wp=80u
+Xmp16 (VTOPP<16> VOUTP SEL<16> SELB<16> VDD5 GND) tg5 wn=40u wp=80u
+Xmn16 (VTOPN<16> VOUTN SEL<16> SELB<16> VDD5 GND) tg5 wn=40u wp=80u
+Xmp17 (VTOPP<17> VOUTP SEL<17> SELB<17> VDD5 GND) tg5 wn=40u wp=80u
+Xmn17 (VTOPN<17> VOUTN SEL<17> SELB<17> VDD5 GND) tg5 wn=40u wp=80u
+ends SliceMux

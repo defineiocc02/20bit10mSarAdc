@@ -1,0 +1,47 @@
+// ============================================================
+// [CODE-INDEX] Sar20bTop.scs —— 10 MS/s 部分交织顶层
+// 架构：CICC 2026 单相 90 ns 帧 + ADI ISSCC2024 9.8 部分交织
+// 信号链：VIN → 18 片池(8 转换/8 采样/2 备) → SliceMux(18:1)
+//          → RA → CT2(C_INC+DAC2+replica) → DigitalTop → LVDS
+// 时序：CLK200 = 5 ns/tick；帧 20 tick(100 ns)；转换 18 tick(90 ns)
+// 单位：V / F / Ω；模型名 nch5/pch5/nch18/pch18（见 netlist/pdk_models.scs）
+// 假设：PHI_* 与 ACQ/CONV/SEL 由 DigitalTop_stub 驱动；数字实体见 digital/
+// ============================================================
+// Sar20bTop.scs —— 10 MS/s 部分交织顶层（单转换链 + 18 片池）
+// 端口：VINP VINN VREFP VREFN VREF2 VCM CLKP CLKN RSTN CAL_EN IREF
+//       DOUT<21:0> DOUT_RDY MON VDD5 VDD18 VDDIO GND
+simulator lang=spectre
+
+subckt Sar20bTop VINP VINN VREFP VREFN VREF2 VCM CLKP CLKN RSTN CAL_EN IREF DOUT<21:0> DOUT_RDY MON VDD5 VDD18 VDDIO GND
+
+// ---- 时钟与基准 ----
+Xclk  (CLKP CLKN CLK200 VDD18 GND) ClkRx
+Xref  (VREFP VREFP_B VREFN VCM_BUF VDD5 GND) RefBuffer
+Xdyn  (VREFP_B VREFP_B VREFP_OUT VREFN_OUT PRE VDD5 GND) DynRefBuf
+Xbias (IREF CAL_EN VBP1 VBP2 VBN1 VBN2 VCM_BUF VDD18 GND) BiasGen
+
+// ---- DAC1：18 片池（8 转换 + 8 采样 + 2 备）----
+Xpool (VINP VINN VREFP_OUT VREFN VCM VGND D1<6:0> ACQ<17:0> CONV<17:0> EN<17:0>
+       VTOPP<17:0> VTOPN<17:0> VDD5 GND) SdacPool18
+
+// ---- 18:1 顶板选通：8 片汇到 RA 输入 ----
+Xmux (VTOPP<17:0> VTOPN<17:0> SEL<17:0> SELB<17:0> VSUM_P VSUM_N VDD5 GND) SliceMux
+
+// ---- 一级：4b flash + 2b SAR + 5b 细搜（单套）----
+Xsar1 (VSUM_P VSUM_N VREFP_OUT VCM VGND COARSE<14:0> PHI_C0 PHI_C1
+       D1<10:0> SAMN<10:0> CMP1P CMP1N DONE1 VDD5 VDD18 GND) Sar1Top
+Xflash (VSUM_P VSUM_N VREFP_OUT VREFN PHI_C0 COARSE<14:0> VDD18 GND) CmpCoarse4b
+
+// ---- RA（单套）----
+Xra (VSUM_P VSUM_N VOUTP VOUTN VCM PHI_RA PHI_AZ EN_RA VBP1 VBN1 VCP VCN VDD18 GND) RingAmp3
+
+// ---- CT 二级（单套）----
+Xs2 (VOUTP VOUTN VREF2 VREFN VCM PHI_RA PHI_C2 D2<10:0> DT<7:0> DONE2 VDD18 GND) Sar2Ct
+
+// ---- 数字后端（单套）----
+Xdig (CLK200 RSTN D1<10:0> D2<10:0> DT<7:0> DONE1 DONE2 COARSE<14:0>
+      ACQ<17:0> CONV<17:0> EN<17:0> SEL<17:0> SELB<17:0>
+      PHI_C0 PHI_C1 PHI_RA PHI_AZ PHI_C2 PRE HOLD EN_RA
+      DOUT<21:0> DOUT_RDY MON<7:0> VDD18 GND) DigitalTop_stub
+
+ends Sar20bTop

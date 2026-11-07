@@ -1,0 +1,19 @@
+// tb_SwSample5v.scs —— 自举开关 L1 台架：Ron 线性度 + 电荷注入
+simulator lang=spectre
+include "../../../netlist/common_cells.scs"
+include "../../SwSample5v/netlist/SwSample5v.scs"
+
+parameters VCM=2.5
+VDD5 (vdd5 0) vsource dc=5.0
+VDD18 (vdd18 0) vsource dc=1.8
+VIN  (vin 0) vsource type=sine freq=1M ampl=2.4 dc=2.5
+PHI  (phi 0) vsource type=pulse val0=0 val1=5 period=200n width=110n rise=0.5n fall=0.5n
+CKS  (cks 0) vsource type=pulse val0=0 val1=5 period=200n width=85n delay=112n rise=0.5n fall=0.5n
+
+Xsw (vin vout phi cks vdd5 vdd18 0) SwSample5v
+CL (vout 0) capacitor c=28p
+// 观测 Ron：导通时 vout/电流
+Itest (vout 0) isource dc=0
+
+tran tran stop=1u errpreset=conservative maxstep=5p
+save vout vin phi cks

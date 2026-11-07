@@ -1,0 +1,28 @@
+// SwSample5v.scs —— 5 V 自举采样开关（拓扑参考 Pipe_SAR/Bootstrap，R1 级复用）
+// 端口与 blocks/SwSample5v/spec.md 一致
+// 关键：M0 的栅极在导通时被抬到 VIN+VDD5；CKS 与 PHI_S 必须不重叠。
+simulator lang=spectre
+
+subckt SwSample5v VIN VOUT PHI_S CKS VDD5 VDD18 GND
+// 主开关：Ron 目标 ≤20 Ω（W=100 µm / L=0.5 µm，5 V 厚栅）
+M0 (VOUT boot VIN GND) nch5 w=100u l=0.5u
+
+// 自举电容：跨栅—源（boot—sbot），1.7 pF ≈ 10× 栅容
+Cb (boot sbot) capacitor c=1.7p
+
+// 预充：CKS 低时 boot 接 VDD5，sbot 接 GND
+M1 (VDD5 CKS  boot VDD5) pch5 w=40u l=0.5u
+M2 (sbot CKSB GND  GND)  nch5 w=20u l=0.5u
+
+// 跟踪：PHI_S 高时 sbot 接 VIN（TG，5 V）
+M3 (VIN PHI_S  sbot GND)  nch5 w=40u l=0.5u
+M4 (VIN PHI_SB sbot VDD5) pch5 w=80u l=0.5u
+
+// 反相器：CKS→CKSB、PHI_S→PHI_SB
+M5 (CKSB CKS VDD5 VDD5) pch5 w=8u l=0.5u
+M6 (CKSB CKS GND  GND)  nch5 w=4u l=0.5u
+M7 (PHI_SB PHI_S VDD5 VDD5) pch5 w=8u l=0.5u
+M8 (PHI_SB PHI_S GND  GND)  nch5 w=4u l=0.5u
+
+// VDD18 预留：栅压电平转换（L1 若确认 PHI_S 为 1.8 V 域，在此加 level shifter）
+ends SwSample5v

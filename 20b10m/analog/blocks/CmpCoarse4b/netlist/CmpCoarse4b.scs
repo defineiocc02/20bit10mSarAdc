@@ -1,0 +1,45 @@
+// ============================================================
+// [CODE-INDEX] CmpCoarse4b.scs —— 4 bit 粗量化（15 cmp + 16 段梯）
+// 输入：VINP/VINN 接“转换总线”（8 片求和后的顶板），不是 VIN。
+// 输出：D<14:0> 温度计码；再由 Sar1Ctrl 的 2 步 SAR 细化到 6 bit。
+// 指标：2.0 ns；±0.5 LSB4 = ±8 LSB1 ≤ 细窗 ±16 LSB1；逐 cmp 修调。
+// ============================================================
+// CmpCoarse4b.scs —— 4 bit 粗量化：16 段梯 + 15 个比较器（再经 2 步 SAR 细化到 6 bit）
+// 端口：VINP VINN VREFP VREFN PHI_C0 D<14:0> VDD18 GND
+// 说明：输入接转换总线（8 片求和后的顶板），不是 VIN；比较器复用 Cmp1 骨架。
+simulator lang=spectre
+
+subckt CmpCoarse4b VINP VINN VREFP VREFN PHI_C0 D<14:0> VDD18 GND
+R0 (VREFP t0) resistor r=1k
+R1 (t0 t1) resistor r=1k
+R2 (t1 t2) resistor r=1k
+R3 (t2 t3) resistor r=1k
+R4 (t3 t4) resistor r=1k
+R5 (t4 t5) resistor r=1k
+R6 (t5 t6) resistor r=1k
+R7 (t6 t7) resistor r=1k
+R8 (t7 t8) resistor r=1k
+R9 (t8 t9) resistor r=1k
+R10 (t9 t10) resistor r=1k
+R11 (t10 t11) resistor r=1k
+R12 (t11 t12) resistor r=1k
+R13 (t12 t13) resistor r=1k
+R14 (t13 t14) resistor r=1k
+R15 (t14 t15) resistor r=1k
+R16 (t15 VREFN) resistor r=1k
+Xc0 (VINP t0 PHI_C0 D<0> n0 VDD18 GND) Cmp1
+Xc1 (VINP t1 PHI_C0 D<1> n1 VDD18 GND) Cmp1
+Xc2 (VINP t2 PHI_C0 D<2> n2 VDD18 GND) Cmp1
+Xc3 (VINP t3 PHI_C0 D<3> n3 VDD18 GND) Cmp1
+Xc4 (VINP t4 PHI_C0 D<4> n4 VDD18 GND) Cmp1
+Xc5 (VINP t5 PHI_C0 D<5> n5 VDD18 GND) Cmp1
+Xc6 (VINP t6 PHI_C0 D<6> n6 VDD18 GND) Cmp1
+Xc7 (VINP t7 PHI_C0 D<7> n7 VDD18 GND) Cmp1
+Xc8 (VINP t8 PHI_C0 D<8> n8 VDD18 GND) Cmp1
+Xc9 (VINP t9 PHI_C0 D<9> n9 VDD18 GND) Cmp1
+Xc10 (VINP t10 PHI_C0 D<10> n10 VDD18 GND) Cmp1
+Xc11 (VINP t11 PHI_C0 D<11> n11 VDD18 GND) Cmp1
+Xc12 (VINP t12 PHI_C0 D<12> n12 VDD18 GND) Cmp1
+Xc13 (VINP t13 PHI_C0 D<13> n13 VDD18 GND) Cmp1
+Xc14 (VINP t14 PHI_C0 D<14> n14 VDD18 GND) Cmp1
+ends CmpCoarse4b

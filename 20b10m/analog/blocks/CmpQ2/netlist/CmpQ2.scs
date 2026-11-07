@@ -1,0 +1,15 @@
+// CmpQ2.scs —— 第二量化器（与 Cmp1 同构，暂不实例化；用于转换结束时避免扰动输入）
+// 端口：VINP VINN CLK OUTP OUTN VDD18 GND
+simulator lang=spectre
+
+subckt CmpQ2 VINP VINN CLK OUTP OUTN VDD18 GND
+Mtail (tail CLK GND GND) nch18 w=24u l=0.18u
+M1 (d1 VINP tail GND) nch5 w=40u l=0.5u
+M2 (d2 VINN tail GND) nch5 w=40u l=0.5u
+M3 (d1 d2 tail GND) nch18 w=16u l=0.18u
+M4 (d2 d1 tail GND) nch18 w=16u l=0.18u
+M5 (d1 CLK VDD18 VDD18) pch18 w=12u l=0.18u
+M6 (d2 CLK VDD18 VDD18) pch18 w=12u l=0.18u
+Xinv1 (d1 OUTN VDD18 GND) inv18
+Xinv2 (d2 OUTP VDD18 GND) inv18
+ends CmpQ2

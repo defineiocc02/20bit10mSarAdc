@@ -1,0 +1,15 @@
+// AmpA2.scs —— 第二级：差分对 + diode-connected 负载（提高次极点）
+// 端口：VINP VINN VOUTP VOUTN VBP VBN VDD18 GND
+simulator lang=spectre
+
+subckt AmpA2 VINP VINN VOUTP VOUTN VBP VBN VDD18 GND
+Mtail (tail VBN GND GND) nch18 w=30u l=0.18u
+M1 (outn VINP tail GND) nch18 w=60u l=0.18u
+M2 (outp VINN tail GND) nch18 w=60u l=0.18u
+// diode-connected PMOS 负载
+M3 (outn outn VDD18 VDD18) pch18 w=20u l=0.18u
+M4 (outp outp VDD18 VDD18) pch18 w=20u l=0.18u
+// 输出到 VOUT（本征增益级，单位增益由下一级 FIA 完成）
+R1 (outp VOUTP) resistor r=1k
+R2 (outn VOUTN) resistor r=1k
+ends AmpA2

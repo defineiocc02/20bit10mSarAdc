@@ -1,0 +1,20 @@
+// clk_rx.scs —— 200 MHz 差分时钟接收（LVDS / AC 耦合正弦）
+// 端口：CLKP CLKN CLK200 VDD18 GND
+// 说明：不用 PLL；片内只做差分接收 + 整形，抖动预算 ≤0.3 ps。
+simulator lang=spectre
+
+subckt ClkRx CLKP CLKN CLK200 VDD18 GND
+// 自偏置差分对
+Rterm (CLKP CLKN) resistor r=100
+Rtail (tail GND) resistor r=5k
+M1 (d1 CLKP tail GND) nch18 w=20u l=0.18u
+M2 (d2 CLKN tail GND) nch18 w=20u l=0.18u
+M3 (d1 d1 VDD18 VDD18) pch18 w=10u l=0.18u
+M4 (d2 d1 VDD18 VDD18) pch18 w=10u l=0.18u
+// 两级整形
+Xinv1 (d2 n1 VDD18 GND) inv18
+Xinv2 (n1 n2 VDD18 GND) inv18
+Xinv3 (n2 CLK200 VDD18 GND) inv18
+Xinv4 (d1 m1 VDD18 GND) inv18
+Xinv5 (m1 m2 VDD18 GND) inv18
+ends ClkRx

@@ -1,0 +1,118 @@
+{
+  "schema": "sar20_10m_model_figures_v1",
+  "plot_source": "/Users/zhaoyi/WorkBuddy/pipelinedsar工作站/20b10m/model/paper_figures.py",
+  "plot_source_sha256": "ff9d0acc7ae1f1b35a2cd2e32e98ba7c2a04c8a3ea970fc8094f7c452b672ffc",
+  "data_source_sha256": {
+    "/Users/zhaoyi/WorkBuddy/pipelinedsar工作站/20b10m/model/results/results.json": "14c82e91aa1eefdaec1aa781de33daa770a61fcf53928fa130dc49294f5bbb14"
+  },
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "font": {
+    "family": "Hiragino Sans GB",
+    "checked_glyph": "码"
+  },
+  "dimensions_mm": [
+    [
+      146,
+      84
+    ],
+    [
+      146,
+      84
+    ],
+    [
+      146,
+      84
+    ],
+    [
+      146,
+      82
+    ],
+    [
+      146,
+      84
+    ],
+    [
+      146,
+      80
+    ],
+    [
+      146,
+      84
+    ],
+    [
+      146,
+      84
+    ],
+    [
+      146,
+      80
+    ],
+    [
+      146,
+      84
+    ],
+    [
+      146,
+      80
+    ],
+    [
+      146,
+      80
+    ],
+    [
+      146,
+      80
+    ],
+    [
+      146,
+      78
+    ]
+  ],
+  "output_sha256": {
+    "paper01_spectrum_100k.png": "5c04e2c54b660ac09150fe92361c53c80a61fbb001b359a6451b0f7e0d4ae6e1",
+    "paper01_spectrum_100k.svg": "b7b5e55243197111bb8d73fbe8e6013e6f00092a73fee070cae8b596a9941be7",
+    "paper01_spectrum_100k.pdf": "79d614c5d32fe76cec7f96f2fc03220d2dc95ff63737d5f35ec0e219b4462980",
+    "paper02_spectrum_2m.png": "b5baa100fb9efa6bd4fe52e8733b0dfb8ec751e8f2a28908e9a82e8488ac8e5d",
+    "paper02_spectrum_2m.svg": "90b8aa8ed8e873b7db6d58492817a13e422cca31d16072f42dfd4f5d2a0ed92e",
+    "paper02_spectrum_2m.pdf": "44660b01750529aa56490cf5f6b752daf6344ef6ac3b7fd128cddbc083ae582e",
+    "paper03_dr_curve.png": "f7f52f1fa190e7acc0bc061e0489b8f31c05d8403353d9a32f23399537fa17fc",
+    "paper03_dr_curve.svg": "daf1273930c831b049a21beea7d4bd2908230bafa2ddcc72407a13c5424dee45",
+    "paper03_dr_curve.pdf": "9d783aedcf4b35d99dcf0a66d598436734a208fc9bd75c68110a42ca6bdcccde",
+    "paper04_sndr_vs_fin.png": "44b6df2e5141f6e7f76b73efad30483acc4cf8e0d46cf29a4111ff8f8f50330b",
+    "paper04_sndr_vs_fin.svg": "974ead9b79e1fe040e585a7dca0dabcf3ef727b57526b63003d3ca29292e10f6",
+    "paper04_sndr_vs_fin.pdf": "ccd3f57db903aec0931b49428eb232c2e79fe6cbef9ed6afb04e3e69c350396b",
+    "paper05_inl_20b.png": "a08edca1de014736e220fea16a37067ed4359257e7e61619c230e8482aa3ed6e",
+    "paper05_inl_20b.svg": "bfbd07ca2807fce380e0a9a3a9c3b75162969ebac96048260b6c0c19f0c7a16c",
+    "paper05_inl_20b.pdf": "17128ee3ee36ddbeb06af4e54cf5e8fa42c539028bffd23cfed01a7cdd607ae0",
+    "paper06_dnl_20b.png": "74529272168e71419080d25050b6954a2bd85c8baf782c3bc84fdbf813fe993f",
+    "paper06_dnl_20b.svg": "01fe170f112471ffb8fd574f953ce2d61be544c44c11c1aad16f4eb5ef514eb4",
+    "paper06_dnl_20b.pdf": "040c16e6829e2e36d7a640ed34444fd20f0e1b44540f7c668445740063b6cc08",
+    "paper07_noise_breakdown.png": "53f7ff4b3cf4461f27663d94de2093da02838c579aa95fdfbe6fec8e2f888456",
+    "paper07_noise_breakdown.svg": "06a7b770821f25ff39aa9376f85b85693d79c2d6227790c7731651cf65d7b804",
+    "paper07_noise_breakdown.pdf": "b30c073847624635697fdb7bb76694ad788876a89764b1d826a4e4f9e3f00ec2",
+    "paper08_caaz_spectrum.png": "9e97a69c7d7d04a3da6e8b737621055cfbcb65473407484f1dfcb9544db0574d",
+    "paper08_caaz_spectrum.svg": "bfdd724272d8b739de6d7f22e09b49f2e6515956d05ee883fb0c9e100c372546",
+    "paper08_caaz_spectrum.pdf": "d90150aa82e80b71fb7ed747bef0362f0636c1ce6bb7ccf52cfe5834d4c17494",
+    "paper09_m_sweep.png": "9f6254e10ab7dbce11e1debbef730934899e27817014c5e6bb7b4ba15a685fca",
+    "paper09_m_sweep.svg": "6c6dc504683c330392dbc21edbebd4e06fe65c1046647c4ac112177c6a325c85",
+    "paper09_m_sweep.pdf": "727b88d4991465a84085102a6fc5fecdce0e04564eb37cfc3d3944473324d6d9",
+    "paper10_skew_spectrum.png": "4324838c5da8cb03259e4e8d9c9227e002a4436e35dd49f9366045974cc7f012",
+    "paper10_skew_spectrum.svg": "1362f0be3bb29d4627a25479c1ff478ed0201bbcc8a4560216ab5b98970247a8",
+    "paper10_skew_spectrum.pdf": "1319e455a9c4261fc6b6df87d9e4153148e44758ff9f221d1d690edbcbef953c",
+    "paper11_power.png": "fe9f6888e9cb68fe9e23c7b5345e183ae10e89f427d79834417f275917c53746",
+    "paper11_power.svg": "1f4f8050e514135e8a46b9cfdf96bb3a5bf46d93842ed45708a708028e64d290",
+    "paper11_power.pdf": "56246e7e42247d105f6d1065e1ef7cca2737c8dacc03ff6447b108683f751570",
+    "paper12_fom.png": "b4fe08163493ffff1c6975fe8ab3d27892f41705a77a7709c028add5d8b534cd",
+    "paper12_fom.svg": "940cd6967af684384fa63f828e7023a6758161757bd3bce807fcaee0802ac8ae",
+    "paper12_fom.pdf": "f0fcd9a3725a59dc618b729c7585358a5a0eac6fd4a255631afbca86dfcc2045",
+    "paper13_histogram.png": "25f8e4a47a20dc3262b81e0dd08eb306e8634facde0f0a8205e83f1d10139bc1",
+    "paper13_histogram.svg": "5c639c01c2ff254bf267f94f50a094031f6f16ab9f9ccddb0c49ba9dd2c0cd36",
+    "paper13_histogram.pdf": "92d7eedd09355c734e36fbb33b483996545a2e702d6ae9c60fcfeb274671b900",
+    "paper14_temp.png": "20a5c4a8d0e71f4d5f3e03d1856852d0c074a66615d88f1a6f28e848deaafa6a",
+    "paper14_temp.svg": "eb96ba03017e0837c598ca47b37a6ae75dd0f1c536cebb90d6a81fdb4aabad39",
+    "paper14_temp.pdf": "2e4587deb21625654b74639b1be60887d021e43f366d0bf4149f14e4032b9177"
+  },
+  "figure_count": 14,
+  "note": "论文测试风格图；模型生成，绝对指标未标定"
+}

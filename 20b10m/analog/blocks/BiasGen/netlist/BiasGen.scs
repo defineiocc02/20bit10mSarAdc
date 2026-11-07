@@ -1,0 +1,19 @@
+// BiasGen.scs —— 偏置与共模（bandgap 未在 Pipe_SAR 中，需自建或外供）
+// 端口：IREF EN VBP1 VBP2 VBN1 VBN2 VCM_OUT VDD18 GND
+// 说明：IREF 由外部 10 µA 或片内电阻产生；EN 低时全部偏置关断。
+simulator lang=spectre
+
+subckt BiasGen IREF EN VBP1 VBP2 VBN1 VBN2 VCM_OUT VDD18 GND
+// 输入电流镜
+M0 (diode IREF GND GND) nch18 w=10u l=0.5u
+M1 (VBN1 diode GND GND) nch18 w=10u l=0.5u
+M2 (VBN2 diode GND GND) nch18 w=20u l=0.5u
+// PMOS 镜像
+M3 (VBP1 VBP1 VDD18 VDD18) pch18 w=10u l=0.5u
+M4 (VBP2 VBP1 VDD18 VDD18) pch18 w=20u l=0.5u
+// EN 门控
+Men (diode EN GND GND) nch18 w=20u l=0.18u
+// VCM：1.8 V 分压 + 缓冲（简化）
+Rv1 (VDD18 VCM_OUT) resistor r=100k
+Rv2 (VCM_OUT GND)  resistor r=100k
+ends BiasGen

@@ -1,0 +1,33 @@
+// Sar20bTop_tb.scs —— 顶层测试台骨架
+// 说明：数字后端（DigitalTop）尚无行为模型，PHI_* 由内部黑盒驱动，当前只能做
+//       L0 连接性检查与 DC 工作点；G3 前必须补 digital_behavioral.va（见 tb/README.md）。
+simulator lang=spectre
+
+include "build.scs"
+
+parameters VCM=2.5 VAMP=0.5 FREQ=200M
+
+// 电源
+VDD5  (vdd5  0) vsource dc=5.0
+VDD18 (vdd18 0) vsource dc=1.8
+VDDIO (vddio 0) vsource dc=1.8
+IREF  (iref  0) isource dc=10u
+
+// 输入：差分 1 Vpp（小信号，避免削顶）
+VINP (vinp 0) vsource type=sine freq=100k ampl=VAMP dc=VCM
+VINN (vinn 0) vsource type=sine freq=100k ampl=VAMP dc=VCM sinedc=0 phase=180
+
+// 时钟：200 MHz 差分
+CLKP (clkp 0) vsource type=pulse val0=0.9 val1=1.5 period=5n width=2.5n rise=100p fall=100p
+CLKN (clkn 0) vsource type=pulse val0=1.5 val1=0.9 period=5n width=2.5n rise=100p fall=100p
+
+// 基准
+VREFP (vrefp 0) vsource dc=5.0
+VREF2 (vref2 0) vsource dc=2.5
+
+Xtop (vinp vinn vrefp 0 vref2 vcm clkp clkn rstn cal_en iref
+      dout<21:0> dout_rdy mon vdd5 vdd18 vddio 0) Sar20bTop
+
+RSTN (rstn 0) vsource type=pulse val0=0 val1=1.8 delay=10n rise=1n
+
+tran tran stop=2u errpreset=conservative maxstep=20p

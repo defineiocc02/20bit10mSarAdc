@@ -1,0 +1,19 @@
+// RaMux.scs —— 两相共享 RA 的输入选择（Pipe_SAR/TG_8C，R1）
+// 端口：VINA_P VINA_N VINB_P VINB_N PHI_SEL VOUTP VOUTN VDD18 GND
+// 时序要求：A/B 切换必须在两相 ΦRA 之间的空档完成，切换沿 <200 ps，偏斜 ≤50 ps。
+simulator lang=spectre
+
+subckt RaMux VINA_P VINA_N VINB_P VINB_N PHI_SEL VOUTP VOUTN VDD18 GND
+// PHI_SEL=1 → A 相；=0 → B 相
+M0 (VOUTP PHI_SEL  VINA_P VDD18) pch18 w=16u l=0.18u
+M1 (VOUTP PHI_SELB VINA_P GND)   nch18 w=8u  l=0.18u
+M2 (VOUTN PHI_SEL  VINA_N VDD18) pch18 w=16u l=0.18u
+M3 (VOUTN PHI_SELB VINA_N GND)   nch18 w=8u  l=0.18u
+
+M4 (VOUTP PHI_SELB VINB_P VDD18) pch18 w=16u l=0.18u
+M5 (VOUTP PHI_SEL  VINB_P GND)   nch18 w=8u  l=0.18u
+M6 (VOUTN PHI_SELB VINB_N VDD18) pch18 w=16u l=0.18u
+M7 (VOUTN PHI_SEL  VINB_N GND)   nch18 w=8u  l=0.18u
+
+// PHI_SELB 由数字域给（不在此产生，避免额外延时）
+ends RaMux

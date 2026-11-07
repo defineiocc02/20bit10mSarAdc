@@ -1,0 +1,23 @@
+// pdk_models.scs —— PDK 模型映射（G2 前必须填）
+//
+// 本文件是唯一允许出现 PDK 路径与模型名的地方。网表只使用四个别名：
+//   nch5 / pch5   : 5 V 厚栅（DAC1 开关、自举、5 V 输入对）
+//   nch18 / pch18 : 1.8 V 薄栅（RA、Cmp2、数字、参考）
+//
+// 填法（二选一）：
+// A) PDK 模型名就是 nch5/pch5/nch18/pch18 → 直接 include：
+//    include "/path/to/smic18/spectre/models.scs" section=tt
+//
+// B) PDK 模型名不同（例如 nch_5v/pch_5v/nch_18/pch_18）→ 在 PDK include 之后
+//    用 subckt 包装成别名：
+//    subckt nch5 d g s b params: w=1u l=0.5u
+//    M0 (d g s b) nch_5v w=w l=l
+//    ends nch5
+//
+// 注意：
+// 1. 不许把 PDK 文件复制进仓库；只写路径。
+// 2. 不许为了"先跑起来"用理想 MOS 代替；那会把 L1 结论变成假结论。
+// 3. 角点用 section=tt/ss/ff 切换，不在网表里写死。
+
+simulator lang=spectre
+// include "/path/to/pdk/models.scs" section=tt

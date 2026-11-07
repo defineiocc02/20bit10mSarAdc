@@ -1,0 +1,21 @@
+// Cmp1.scs —— 一级精比较器（Pipe_SAR/comparator4in2 的 StrongARM 骨架，R1）
+// 端口：VINP VINN CLK OUTP OUTN VDD18 GND
+// 说明：输入对用 5 V 厚栅以承受 0–5 V 共模；尾电流/交叉耦合用 1.8 V 器件。
+simulator lang=spectre
+
+subckt Cmp1 VINP VINN CLK OUTP OUTN VDD18 GND
+// 尾开关
+Mtail (tail CLK GND GND) nch18 w=24u l=0.18u
+// 输入对（5 V 厚栅，w/l 待 L1 按噪声 366 µV@顶板 调）
+M1 (d1 VINP tail GND) nch5 w=40u l=0.5u
+M2 (d2 VINN tail GND) nch5 w=40u l=0.5u
+// 再生交叉耦合
+M3 (d1 d2 tail GND) nch18 w=16u l=0.18u
+M4 (d2 d1 tail GND) nch18 w=16u l=0.18u
+// 预充
+M5 (d1 CLK VDD18 VDD18) pch18 w=12u l=0.18u
+M6 (d2 CLK VDD18 VDD18) pch18 w=12u l=0.18u
+// 输出整形（d1 低→OUTN 高；d2 低→OUTP 高）
+Xinv1 (d1 OUTN VDD18 GND) inv18
+Xinv2 (d2 OUTP VDD18 GND) inv18
+ends Cmp1

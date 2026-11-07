@@ -1,0 +1,51 @@
+// common_cells.scs —— 全片共用单元（必须先于所有块被 include）
+// 模型名映射见 pdk_models.scs；本文件不出现任何 PDK 专有参数。
+simulator lang=spectre
+
+parameters CUNIT=27f
+
+// ---------------------------------------------------------------
+// 单位电容：全片唯一。DAC1 slice / DAC2 / C_INC / replica 必须共用。
+subckt unitcap TOP BOT
+C0 (TOP BOT) capacitor c=CUNIT
+ends unitcap
+
+// 1.8 V 反相器（数字/驱动用，最小尺寸）
+subckt inv18 A Y VDD18 GND
+M0 (Y A VDD18 VDD18) pch18 w=2u l=0.18u
+M1 (Y A GND GND)     nch18 w=1u l=0.18u
+ends inv18
+
+// 5 V 反相器（三电平驱动/自举时钟）
+subckt inv5 A Y VDD5 GND
+M0 (Y A VDD5 VDD5) pch5 w=8u l=0.5u
+M1 (Y A GND GND)   nch5 w=4u l=0.5u
+ends inv5
+
+// 5 V 传输门（Ron 目标见各块 spec；w 由实例参数给）
+subckt tg5 A B EN ENB VDD5 GND params: wn=20u wp=40u
+M0 (A EN B GND)  nch5 w=wn l=0.5u
+M1 (A ENB B VDD5) pch5 w=wp l=0.5u
+ends tg5
+
+// 1.8 V 传输门
+subckt tg18 A B EN ENB VDD18 GND params: wn=4u wp=8u
+M0 (A EN B GND)  nch18 w=wn l=0.18u
+M1 (A ENB B VDD18) pch18 w=wp l=0.18u
+ends tg18
+
+// 5 V 单管开关（底板开关，源极接固定轨，不需要自举）
+subckt sw5 A B EN VDD5 GND params: wn=20u
+M0 (A EN B GND) nch5 w=wn l=0.5u
+ends sw5
+
+// 电流镜负载（RA 的 A2 diode-load）
+subckt diode18 A VDD18 GND params: w=8u
+M0 (A A GND GND) nch18 w=w l=0.18u
+ends diode18
+
+// 理想共模感测（仅 testbench）
+subckt cm_sense P N VCM
+R0 (P VCM) resistor r=1G
+R1 (N VCM) resistor r=1G
+ends cm_sense

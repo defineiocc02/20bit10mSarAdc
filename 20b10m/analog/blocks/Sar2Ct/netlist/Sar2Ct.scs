@@ -1,0 +1,21 @@
+// Sar2Ct.scs —— CT 二级：C_INC + DAC2 11b + replica + Cmp2 + SAR2 逻辑
+// 端口：VRESP VRESN VREFP2 VREFN2 VCM PHI_RA PHI_C2 D2<10:0> DT<7:0> DONE2 VDD18 GND
+// 说明：每相一套（A/B 各一），不共享；8× 重复的 DT<7:1> 反馈到 DAC2 低 7 个单位电容。
+simulator lang=spectre
+
+subckt Sar2Ct VRESP VRESN VREFP2 VREFN2 VCM PHI_RA PHI_C2 D2<10:0> DT<7:0> DONE2 VDD18 GND
+// 耦合与复位
+Xcc (VRESP VRESN VXP VXN VCM D2<10:0> PHI_RA PHI_RST VDD18 GND) CincCouple
+
+// DAC2 主阵
+Xdac (D2<10:0> VREFP2 VREFN2 VCM VXP VDD18 GND) Dac2_11b
+
+// 比较器
+Xcmp (VXP VXN PHI_C2 CMPP CMPN VDD18 GND) Cmp2
+
+// 8× 重复：DT<7:1> 逐拍反馈到 7 个单位电容（由 Dac2_11b 的 s0..s6 复用，L1 加 mux）
+// 数字 SAR2 逻辑（黑盒，端口见 interfaces.csv）
+Xsar (CMPP CMPN PHI_C2 D2<10:0> DT<7:0> DONE2 VDD18 GND) SarLogic2_stub
+
+// PHI_RST 由 PHI_RA 的下降沿产生（数字域）
+ends Sar2Ct

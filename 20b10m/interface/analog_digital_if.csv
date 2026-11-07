@@ -1,0 +1,39 @@
+﻿signal,direction,width,domain,kind,timing,reset,note
+CLK,ext->both,1,1.8,clock,"200MHz, 50%±2%, jitter<50ps",-,主时钟
+RSTN,ext->both,1,1.8,reset,"低≥10ns，同步释放",低,异步复位
+PHI_S_A,d2a,1,5V,phase,"高 100ns，下降沿关键，jitter<1ps",低,采样 A
+PHI_S_B,d2a,1,5V,phase,"高 100ns，与 A 不重叠≥0.5ns",低,采样 B
+PHI_C0_A,d2a,1,5V,phase,"10ns，距 PHI_S ≥0.5ns",低,6b 粗量化
+PHI_C0_B,d2a,1,5V,phase,10ns,低,6b 粗量化
+PHI_C1_A,d2a,1,5V,phase,15ns,低,5b 精量化
+PHI_C1_B,d2a,1,5V,phase,15ns,低,5b 精量化
+PHI_RA_A,d2a,1,1.8,phase,25ns,低,RA 放大
+PHI_RA_B,d2a,1,1.8,phase,25ns,低,RA 放大
+PHI_C2_A,d2a,1,1.8,phase,"40ns，20×2ns",低,二级 12b+8×
+PHI_C2_B,d2a,1,1.8,phase,"40ns，20×2ns",低,二级 12b+8×
+PHI_AZ,d2a,1,1.8,phase,"15ns，比 PHI_RA 早关≥2ns",低,共享 RA auto-zero
+EN_RA,d2a,1,1.8,enable,"50ns，采样期断电",低,RA 上电
+HOLD_A,d2a,1,5V,hold,90ns,低,hold-low FET
+HOLD_B,d2a,1,5V,hold,90ns,低,hold-low FET
+CMP1_CLK_A,d2a,1,1.8,clock,1.6ns 内 1 拍,低,一级比较器时钟
+CMP1_CLK_B,d2a,1,1.8,clock,1.6ns 内 1 拍,低,一级比较器时钟
+CMP1_P_A,a2d,1,1.8,decision,"CLK 后 ≤1.2ns 有效",-,一级判决 高有效
+CMP1_N_A,a2d,1,1.8,decision,"CLK 后 ≤1.2ns 有效",-,一级判决
+CMP1_P_B,a2d,1,1.8,decision,"CLK 后 ≤1.2ns 有效",-,一级判决
+CMP1_N_B,a2d,1,1.8,decision,"CLK 后 ≤1.2ns 有效",-,一级判决
+CMP2_CLK_A,d2a,1,1.8,clock,2ns 一拍,低,二级比较器时钟
+CMP2_CLK_B,d2a,1,1.8,clock,2ns 一拍,低,二级比较器时钟
+CMP2_P_A,a2d,1,1.8,decision,"CLK 后 ≤1.2ns 有效",-,二级判决
+CMP2_N_A,a2d,1,1.8,decision,"CLK 后 ≤1.2ns 有效",-,二级判决
+CMP2_P_B,a2d,1,1.8,decision,"CLK 后 ≤1.2ns 有效",-,二级判决
+CMP2_N_B,a2d,1,1.8,decision,"CLK 后 ≤1.2ns 有效",-,二级判决
+ELIGIBLE,a2d,18,1.8,handshake,"片内复位后 ≤1ns 置位",1,每片可采样标志
+SEL_VALID,d2a,1,1.8,handshake,周期开始前 0.5ns 稳定,0,选片有效
+SLICE_ID,d2a,40,1.8,bus,同 SEL_VALID,0,8×5bit 有序物理编号
+STALL,d2a,1,1.8,status,-,0,合格片<8
+D1,d2a,11,1.8,code,"相位首 tick 前 0.5ns 稳定",0,一级码 偏移二进制
+D1_MASK,d2a,TBD,1.8,code,同上,0,逐片电容开关 mask（位宽待 slice 几何）
+D2,d2a,12,1.8,code,同上,0,二级码 偏移二进制
+DT,d2a,8,1.8,code,同上,0,8× 重复累加码
+DITHER,d2a,6,1.8,code,同上,0,Fig.19 两路
+FAULT,a2d,4,1.8,status,"事件后 ≤2ns 置位，保持到本笔结束",0,"bit0 RA clip, bit1 ADC2 ovf, bit2 ref droop"

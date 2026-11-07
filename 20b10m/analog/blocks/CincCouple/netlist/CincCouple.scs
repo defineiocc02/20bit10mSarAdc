@@ -1,0 +1,22 @@
+// CincCouple.scs —— C_INC 串联耦合 + 复位 + replica 注入（kickback 抵消）
+// 端口：VINP VINN VOUTP VOUTN VCM D2<10:0> PHI_RA PHI_RST VDD18 GND
+// 说明：VINP/N 来自 RaMux（RA 输出），VOUTP/N 接 Dac2_11b 顶板 VTOP。
+//       replica 的抵消网络（反相注入级）在 L1 定型；本网表先给出 1:1 复刻与耦合电容位置。
+simulator lang=spectre
+
+subckt CincCouple VINP VINN VOUTP VOUTN VCM D2<10:0> PHI_RA PHI_RST VDD18 GND
+// 主耦合电容：1.0 pF/侧（37 × 27 fF）
+Cip (VINP VOUTP) capacitor c=1.0p
+Cin (VINN VOUTN) capacitor c=1.0p
+
+// 复位：ΦRA 前把 DAC2 顶板拉到 VCM
+Xrp (VOUTP VCM PHI_RST PHI_RSTB VDD18 GND) tg18 wn=4u wp=8u
+Xrn (VOUTN VCM PHI_RST PHI_RSTB VDD18 GND) tg18 wn=4u wp=8u
+
+// replica：同一 DIN 驱动，顶板经 Crep 注入到主顶板（极性由反相级决定，L1 定）
+Xrep (D2<10:0> VCM VCM VCM VREPP VDD18 GND) Dac2Replica
+Crep (VREPP VOUTP) capacitor c=1.0p
+Cren (VREPP VOUTN) capacitor c=1.0p
+
+// PHI_RSTB 由数字域给
+ends CincCouple

@@ -1,0 +1,40 @@
+// build.scs —— 模拟网表编译根（按叶子→顶层顺序 include）
+// 用法（PDK 映射完成后）：
+//   cd 20b10m/analog/netlist && spectre -f build.scs +escchars
+// 注意：pdk_models.scs 未落地前，MOS 模型名 nch5/pch5/nch18/pch18 未定义，
+//       本文件只能用于结构检查（check_hier.py），不能实跑。
+simulator lang=spectre
+
+// include "pdk_models.scs"        // ← G2 前必须打开并填 PDK 路径
+
+include "common_cells.scs"
+include "digital_stubs.scs"
+include "clk_rx.scs"
+
+include "../blocks/SwSample5v/netlist/SwSample5v.scs"
+include "../blocks/Cmp1/netlist/Cmp1.scs"
+include "../blocks/Cmp2/netlist/Cmp2.scs"
+include "../blocks/RaMux/netlist/RaMux.scs"
+include "../blocks/SliceMux/netlist/SliceMux.scs"
+include "../blocks/TriLevelDrv/netlist/TriLevelDrv.scs"
+
+include "../blocks/SdacSlice/netlist/SdacSlice.scs"
+include "../blocks/SdacPool18/netlist/SdacPool18.scs"
+
+include "../blocks/Dac2_11b/netlist/Dac2_11b.scs"
+include "../blocks/Dac2Replica/netlist/Dac2Replica.scs"
+include "../blocks/CincCouple/netlist/CincCouple.scs"
+include "../blocks/Sar2Ct/netlist/Sar2Ct.scs"
+
+include "../blocks/FiaA1/netlist/FiaA1.scs"
+include "../blocks/AmpA2/netlist/AmpA2.scs"
+include "../blocks/FiaA3/netlist/FiaA3.scs"
+include "../blocks/RingAmp3/netlist/RingAmp3.scs"
+
+include "../blocks/RefBuffer/netlist/RefBuffer.scs"
+include "../blocks/DynRefBuf/netlist/DynRefBuf.scs"
+include "../blocks/BiasGen/netlist/BiasGen.scs"
+include "../blocks/CmpCoarse4b/netlist/CmpCoarse4b.scs"
+
+include "../blocks/Sar1Top/netlist/Sar1Top.scs"
+include "../blocks/Sar20bTop/netlist/Sar20bTop.scs"

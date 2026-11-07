@@ -1,0 +1,26 @@
+// RefBuffer.scs —— 5 V 主参考缓冲 + 2.5 V VCM 缓冲
+// 端口：VREF_IN VREFP VREFN VCM VDD5 GND
+// 指标：R_out ≤20 Ω、噪声 ≤2.9 µV、静态 400–500 µW；两相共享。
+simulator lang=spectre
+
+subckt RefBuffer VREF_IN VREFP VREFN VCM VDD5 GND
+// ---- 5 V 主缓冲：PMOS pass + 误差放大器 ----
+Mpass (VDD5 nctrl VREFP VDD5) pch5 w=800u l=0.5u
+Rf1 (VREFP fb) resistor r=100k
+Rf2 (fb VREFN) resistor r=100k
+
+Rtail (tail GND) resistor r=50k
+Me1 (d1 VREF_IN tail GND) nch5 w=40u l=0.5u
+Me2 (d2 fb tail GND)      nch5 w=40u l=0.5u
+Ml1 (d1 d1 VDD5 VDD5) pch5 w=20u l=0.5u
+Ml2 (d2 d1 VDD5 VDD5) pch5 w=20u l=0.5u
+Mdrv (nctrl d2 GND GND) nch5 w=40u l=0.5u
+Cc (d2 nctrl) capacitor c=2p
+
+// ---- VCM 缓冲：5 V 分压 + PMOS 源随 ----
+Rv1 (VDD5 vcmd) resistor r=100k
+Rv2 (vcmd GND)  resistor r=100k
+Mv  (VDD5 vcmd VCM VDD5) pch5 w=200u l=0.5u
+
+// 尾电流由 Rtail 设定（5 V/50 kΩ ≈ 100 µA）；L1 换成 BiasGen 的镜像
+ends RefBuffer

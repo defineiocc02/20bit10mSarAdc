@@ -1,0 +1,16 @@
+// digital_stubs.scs —— 数字块黑盒端口（G3 前替换为 RTL/VA 实体）
+simulator lang=spectre
+
+subckt SarLogic1_stub CMPP CMPN COARSE<14:0> PHI_C0 PHI_C1 D1<10:0> SAMN<10:0> DONE1 VDD18 GND
+ends SarLogic1_stub
+
+subckt SarLogic2_stub CMPP CMPN PHI_C2 D2<10:0> DT<7:0> DONE2 VDD18 GND
+ends SarLogic2_stub
+
+// 单套数字顶层：只交织 DAC 池，其余单链
+subckt DigitalTop_stub CLK200 RSTN
++ D1<10:0> D2<10:0> DT<7:0> DONE1 DONE2 COARSE<14:0>
++ ACQ<17:0> CONV<17:0> EN<17:0> SEL<17:0> SELB<17:0>
++ PHI_C0 PHI_C1 PHI_RA PHI_AZ PHI_C2 PRE HOLD EN_RA
++ DOUT<21:0> DOUT_RDY MON<7:0> VDD18 GND
+ends DigitalTop_stub

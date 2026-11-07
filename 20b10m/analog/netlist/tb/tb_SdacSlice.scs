@@ -1,0 +1,29 @@
+// tb_SdacSlice.scs —— DAC1 单片 L1 台架：7 bit 单调性 + 建立
+simulator lang=spectre
+include "../../../netlist/common_cells.scs"
+include "../../SdacSlice/netlist/SdacSlice.scs"
+
+parameters VCM=2.5
+VDD5 (vdd5 0) vsource dc=5.0
+VINP (vinp 0) vsource dc=2.5
+VINN (vinn 0) vsource dc=2.5
+VREFP (vrefp 0) vsource dc=5.0
+VREFN (vrefn 0) vsource dc=0
+ACQ  (acq 0)  vsource type=pulse val0=0 val1=5 period=400n width=200n rise=0.5n fall=0.5n
+CONV (conv 0) vsource type=pulse val0=0 val1=5 period=400n width=150n delay=210n rise=0.5n fall=0.5n
+
+// D<6:0> 由 7 位码源给（示例：全 0 → 全 1 扫描）
+XD0 (d0 0) vsource type=pwl wave=[0 0 210n 0 211n 5 400n 5]
+XD1 (d1 0) vsource type=pwl wave=[0 0 210n 0 211n 5 400n 5]
+XD2 (d2 0) vsource type=pwl wave=[0 0 210n 0 211n 5 400n 5]
+XD3 (d3 0) vsource type=pwl wave=[0 0 210n 0 211n 5 400n 5]
+XD4 (d4 0) vsource type=pwl wave=[0 0 210n 0 211n 5 400n 5]
+XD5 (d5 0) vsource type=pwl wave=[0 0 210n 0 211n 5 400n 5]
+XD6 (d6 0) vsource type=pwl wave=[0 0 210n 0 211n 5 400n 5]
+
+Xslice (vinp vinn vrefp vrefn 2.5 0 d0 d1 d2 d3 d4 d5 d6 acq conv vdd5 vtopp vtopn vdd5 0) SdacSlice
+CLP (vtopp 0) capacitor c=3.5p
+CLN (vtopn 0) capacitor c=3.5p
+
+tran tran stop=2u errpreset=conservative maxstep=10p
+save vtopp vtopn acq conv

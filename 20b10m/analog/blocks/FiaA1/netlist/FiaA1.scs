@@ -1,0 +1,22 @@
+// FiaA1.scs —— 第一级浮栅反相放大器（AZ）
+// 端口：VINP VINN VOUTP VOUTN VBP VBN PHI_AZ VDD18 GND
+// 结构：电流源负载的 CMOS 反相器对；AZ 开关跨接输入/输出。
+simulator lang=spectre
+
+subckt FiaA1 VINP VINN VOUTP VOUTN VBP VBN PHI_AZ VDD18 GND
+// P 侧：电流源 + 反相器
+M0 (srcp VBP VDD18 VDD18) pch18 w=40u l=0.18u
+M1 (VOUTP VINP srcp srcp)  pch18 w=80u l=0.18u
+M2 (VOUTP VINN tailn tailn) nch18 w=40u l=0.18u
+M3 (tailn VBN GND GND)      nch18 w=20u l=0.18u
+
+// N 侧（镜像）
+M4 (srcn VBP VDD18 VDD18) pch18 w=40u l=0.18u
+M5 (VOUTN VINN srcn srcn)  pch18 w=80u l=0.18u
+M6 (VOUTN VINP tailn2 tailn2) nch18 w=40u l=0.18u
+M7 (tailn2 VBN GND GND)     nch18 w=20u l=0.18u
+
+// AZ：输入/输出短接（PHI_AZ 高有效）
+Xazp (VINP VOUTP PHI_AZ PHI_AZB VDD18 GND) tg18 wn=6u wp=12u
+Xazn (VINN VOUTN PHI_AZ PHI_AZB VDD18 GND) tg18 wn=6u wp=12u
+ends FiaA1

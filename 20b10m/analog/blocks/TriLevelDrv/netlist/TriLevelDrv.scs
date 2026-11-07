@@ -1,0 +1,48 @@
+// TriLevelDrv.scs —— 每位三电平开关驱动（Pipe_SAR/DYSARcontrl，R1）
+// 端口：VREF VCM VGND VIN SAMN OUT VDD5 GND
+// 功能：把数字码（VIN/SAMN 差分）译成 VREF/VCM/VGND 三轨之一，驱动 74 µm 栅宽。
+simulator lang=spectre
+
+subckt TriLevelDrv VREF VCM VGND VIN SAMN OUT VDD5 GND
+// 输入反相/缓冲
+M0 (VINB VIN VDD5 VDD5) pch5 w=8u l=0.5u
+M1 (VINB VIN GND  GND)  nch5 w=4u l=0.5u
+
+// 上拉：VIN=0 → VREF
+M2 (OUT VINB VREF VDD5) pch5 w=40u l=0.5u
+M3 (OUT VIN  VREF GND)  nch5 w=80u l=0.5u
+
+// 下拉：SAMN=0 → VGND
+M4 (OUT SAMN VGND VDD5) pch5 w=40u l=0.5u
+M5 (OUT SAMNB VGND GND) nch5 w=80u l=0.5u
+
+// 中间态：VIN 与 SAMN 同时有效时接 VCM（死区由数字侧保证）
+M6 (OUT MID  VCM VDD5) pch5 w=20u l=0.5u
+M7 (OUT MIDB VCM GND)  nch5 w=40u l=0.5u
+
+// 辅助反相
+M8 (SAMNB SAMN VDD5 VDD5) pch5 w=8u l=0.5u
+M9 (SAMNB SAMN GND  GND)  nch5 w=4u l=0.5u
+// MID = VIN AND SAMN（NAND + 反相）
+M10 (MID VIN  VDD5 VDD5) pch5 w=4u l=0.5u
+M11 (MID SAMN VDD5 VDD5) pch5 w=4u l=0.5u
+M12 (MID VIN  n2 GND)    nch5 w=2u l=0.5u
+M13 (n2  SAMN GND GND)   nch5 w=2u l=0.5u
+M14 (MIDB MID VDD5 VDD5) pch5 w=4u l=0.5u
+M15 (MIDB MID GND  GND)  nch5 w=2u l=0.5u
+ends TriLevelDrv
+
+// 11 位驱动组：每位一个 TriLevelDrv；VIN/SAMN 由数字译码给
+subckt TriLevelBank11 VREF VCM VGND D<10:0> SAMN<10:0> OUT<10:0> VDD5 GND
+Xb0  (VREF VCM VGND D<0>  SAMN<0>  OUT<0>  VDD5 GND) TriLevelDrv
+Xb1  (VREF VCM VGND D<1>  SAMN<1>  OUT<1>  VDD5 GND) TriLevelDrv
+Xb2  (VREF VCM VGND D<2>  SAMN<2>  OUT<2>  VDD5 GND) TriLevelDrv
+Xb3  (VREF VCM VGND D<3>  SAMN<3>  OUT<3>  VDD5 GND) TriLevelDrv
+Xb4  (VREF VCM VGND D<4>  SAMN<4>  OUT<4>  VDD5 GND) TriLevelDrv
+Xb5  (VREF VCM VGND D<5>  SAMN<5>  OUT<5>  VDD5 GND) TriLevelDrv
+Xb6  (VREF VCM VGND D<6>  SAMN<6>  OUT<6>  VDD5 GND) TriLevelDrv
+Xb7  (VREF VCM VGND D<7>  SAMN<7>  OUT<7>  VDD5 GND) TriLevelDrv
+Xb8  (VREF VCM VGND D<8>  SAMN<8>  OUT<8>  VDD5 GND) TriLevelDrv
+Xb9  (VREF VCM VGND D<9>  SAMN<9>  OUT<9>  VDD5 GND) TriLevelDrv
+Xb10 (VREF VCM VGND D<10> SAMN<10> OUT<10> VDD5 GND) TriLevelDrv
+ends TriLevelBank11

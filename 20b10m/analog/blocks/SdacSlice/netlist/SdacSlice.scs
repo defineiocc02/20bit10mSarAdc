@@ -1,0 +1,98 @@
+// SdacSlice.scs —— DAC1 单片：3.456 pF = 128 x 27 fF，片内 7 bit 二进制（高 3 bit 由池做 unary）
+// 端口：VINP VINN VREFP VREFN VCM VGND D<6:0> PHI_ACQ PHI_CONV EN VTOPP VTOPN VDD5 GND
+// 说明：每片 128 单位；D<6:0> 为片内 7 bit；EN=0 时所有底板接 VCM（备用片/未选中片）。
+//       CR/CG 由片内 NAND 译码产生（CONV & D / CONV & ~D），L1 需按 5 V 驱动能力复核。
+simulator lang=spectre
+
+subckt nand5 A B Y VDD5 GND
+M0 (Y A VDD5 VDD5) pch5 w=8u l=0.5u
+M1 (Y B VDD5 VDD5) pch5 w=8u l=0.5u
+M2 (Y A n1 GND)    nch5 w=4u l=0.5u
+M3 (n1 B GND GND)  nch5 w=4u l=0.5u
+ends nand5
+
+subckt inv5s A Y VDD5 GND
+M0 (Y A VDD5 VDD5) pch5 w=8u l=0.5u
+M1 (Y A GND GND)   nch5 w=4u l=0.5u
+ends inv5s
+
+subckt sdac_half TOP VIN VREFP VREFN VCM VGND D<6:0> ACQ CONV EN VDD5 GND
+C0 (TOP b0) capacitor c=27f
+C1 (TOP b1) capacitor c=54f
+C2 (TOP b2) capacitor c=108f
+C3 (TOP b3) capacitor c=216f
+C4 (TOP b4) capacitor c=432f
+C5 (TOP b5) capacitor c=864f
+C6 (TOP b6) capacitor c=1728f
+Cdum (TOP VCM) capacitor c=27f
+// bit 0
+Xnd0 (D<0> CONV CR0 VDD5 GND) nand5
+Xnv0 (CR0 CG0 VDD5 GND) inv5s
+Xa0 (VIN b0 ACQ ACQB VDD5 GND) tg5 wn=20u wp=40u
+Xr0 (VREFP b0 CR0 CRB0 VDD5 GND) tg5 wn=20u wp=40u
+Xg0 (VREFN b0 CG0 CGB0 VDD5 GND) tg5 wn=20u wp=40u
+// bit 1
+Xnd1 (D<1> CONV CR1 VDD5 GND) nand5
+Xnv1 (CR1 CG1 VDD5 GND) inv5s
+Xa1 (VIN b1 ACQ ACQB VDD5 GND) tg5 wn=20u wp=40u
+Xr1 (VREFP b1 CR1 CRB1 VDD5 GND) tg5 wn=20u wp=40u
+Xg1 (VREFN b1 CG1 CGB1 VDD5 GND) tg5 wn=20u wp=40u
+// bit 2
+Xnd2 (D<2> CONV CR2 VDD5 GND) nand5
+Xnv2 (CR2 CG2 VDD5 GND) inv5s
+Xa2 (VIN b2 ACQ ACQB VDD5 GND) tg5 wn=20u wp=40u
+Xr2 (VREFP b2 CR2 CRB2 VDD5 GND) tg5 wn=20u wp=40u
+Xg2 (VREFN b2 CG2 CGB2 VDD5 GND) tg5 wn=20u wp=40u
+// bit 3
+Xnd3 (D<3> CONV CR3 VDD5 GND) nand5
+Xnv3 (CR3 CG3 VDD5 GND) inv5s
+Xa3 (VIN b3 ACQ ACQB VDD5 GND) tg5 wn=20u wp=40u
+Xr3 (VREFP b3 CR3 CRB3 VDD5 GND) tg5 wn=20u wp=40u
+Xg3 (VREFN b3 CG3 CGB3 VDD5 GND) tg5 wn=20u wp=40u
+// bit 4
+Xnd4 (D<4> CONV CR4 VDD5 GND) nand5
+Xnv4 (CR4 CG4 VDD5 GND) inv5s
+Xa4 (VIN b4 ACQ ACQB VDD5 GND) tg5 wn=20u wp=40u
+Xr4 (VREFP b4 CR4 CRB4 VDD5 GND) tg5 wn=20u wp=40u
+Xg4 (VREFN b4 CG4 CGB4 VDD5 GND) tg5 wn=20u wp=40u
+// bit 5
+Xnd5 (D<5> CONV CR5 VDD5 GND) nand5
+Xnv5 (CR5 CG5 VDD5 GND) inv5s
+Xa5 (VIN b5 ACQ ACQB VDD5 GND) tg5 wn=20u wp=40u
+Xr5 (VREFP b5 CR5 CRB5 VDD5 GND) tg5 wn=20u wp=40u
+Xg5 (VREFN b5 CG5 CGB5 VDD5 GND) tg5 wn=20u wp=40u
+// bit 6
+Xnd6 (D<6> CONV CR6 VDD5 GND) nand5
+Xnv6 (CR6 CG6 VDD5 GND) inv5s
+Xa6 (VIN b6 ACQ ACQB VDD5 GND) tg5 wn=20u wp=40u
+Xr6 (VREFP b6 CR6 CRB6 VDD5 GND) tg5 wn=20u wp=40u
+Xg6 (VREFN b6 CG6 CGB6 VDD5 GND) tg5 wn=20u wp=40u
+Xia (ACQ ACQB VDD5 GND) inv5s
+Xir0 (CR0 CRB0 VDD5 GND) inv5s
+Xig0 (CG0 CGB0 VDD5 GND) inv5s
+Xir1 (CR1 CRB1 VDD5 GND) inv5s
+Xig1 (CG1 CGB1 VDD5 GND) inv5s
+Xir2 (CR2 CRB2 VDD5 GND) inv5s
+Xig2 (CG2 CGB2 VDD5 GND) inv5s
+Xir3 (CR3 CRB3 VDD5 GND) inv5s
+Xig3 (CG3 CGB3 VDD5 GND) inv5s
+Xir4 (CR4 CRB4 VDD5 GND) inv5s
+Xig4 (CG4 CGB4 VDD5 GND) inv5s
+Xir5 (CR5 CRB5 VDD5 GND) inv5s
+Xig5 (CG5 CGB5 VDD5 GND) inv5s
+Xir6 (CR6 CRB6 VDD5 GND) inv5s
+Xig6 (CG6 CGB6 VDD5 GND) inv5s
+Xe0 (VCM b0 ENB VDD5 GND) sw5 wn=10u
+Xe1 (VCM b1 ENB VDD5 GND) sw5 wn=10u
+Xe2 (VCM b2 ENB VDD5 GND) sw5 wn=10u
+Xe3 (VCM b3 ENB VDD5 GND) sw5 wn=10u
+Xe4 (VCM b4 ENB VDD5 GND) sw5 wn=10u
+Xe5 (VCM b5 ENB VDD5 GND) sw5 wn=10u
+Xe6 (VCM b6 ENB VDD5 GND) sw5 wn=10u
+Xie (EN ENB VDD5 GND) inv5s
+ends sdac_half
+
+subckt SdacSlice VINP VINN VREFP VREFN VCM VGND D<6:0> PHI_ACQ PHI_CONV EN VTOPP VTOPN VDD5 GND
+Xhp (VTOPP VINP VREFP VREFN VCM VGND D<6:0> PHI_ACQ PHI_CONV EN VDD5 GND) sdac_half
+Xhn (VTOPN VINN VREFN VREFP VCM VGND D<6:0> PHI_ACQ PHI_CONV EN VDD5 GND) sdac_half
+ends SdacSlice

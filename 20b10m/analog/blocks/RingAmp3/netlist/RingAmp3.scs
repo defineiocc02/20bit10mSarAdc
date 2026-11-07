@@ -1,0 +1,25 @@
+// RingAmp3.scs —— 三级 ring amp（共享，RaMux 选相）
+// 端口：VINP VINN VOUTP VOUTN VCM PHI_RA PHI_AZ EN VBP VBN VCP VCN VDD18 GND
+// 结构：FiaA1（AZ）→ AmpA2（diode-load）→ FiaA3（输出 FIA）
+// 关键：ΦAZ 必须比 ΦRA 早关 ≥2 ns；4 pF 负载；摆幅 ≥1.7 V；Zout 设计点 300 Ω。
+simulator lang=spectre
+
+subckt RingAmp3 VINP VINN VOUTP VOUTN VCM PHI_RA PHI_AZ EN VBP VBN VCP VCN VDD18 GND
+// 第一级 FIA + AZ
+Xa1 (VINP VINN n1p n1n VBP VBN PHI_AZ VDD18 GND) FiaA1
+
+// 级间耦合（AC，共模由 CMFB 定；此处用大电阻弱定义，L1 换成实际 CMFB）
+C1p (n1p n2p) capacitor c=1.0p
+C1n (n1n n2n) capacitor c=1.0p
+R1p (n2p VCM) resistor r=1G
+R1n (n2n VCM) resistor r=1G
+
+// 第二级
+Xa2 (n2p n2n n3p n3n VBP VBN VDD18 GND) AmpA2
+
+// 输出级 FIA
+Xa3 (n3p n3n VOUTP VOUTN VCP VCN PHI_RA VDD18 GND) FiaA3
+
+// 采样期断电（EN 低）
+Mpd (VDD18 EN VDD18 VDD18) pch18 w=100u l=0.18u
+ends RingAmp3

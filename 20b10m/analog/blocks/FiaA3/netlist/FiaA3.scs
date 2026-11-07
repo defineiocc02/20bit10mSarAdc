@@ -1,0 +1,14 @@
+// FiaA3.scs —— 输出级偏置 FIA（无需全局 CMFB，大摆幅）
+// 端口：VINP VINN VOUTP VOUTN VCP VCN PHI_RA VDD18 GND
+// 目标：1.7 V 摆幅、4 pF 负载、Zout ≤300 Ω（ΦC2 期）。
+simulator lang=spectre
+
+subckt FiaA3 VINP VINN VOUTP VOUTN VCP VCN PHI_RA VDD18 GND
+// 输出级：共源对，VCP/VCN 为偏置（A3 的 FIA 接法）
+M0 (VOUTP VINP VDD18 VDD18) pch18 w=200u l=0.18u
+M1 (VOUTP VINN GND GND)     nch18 w=100u l=0.18u
+M2 (VOUTN VINN VDD18 VDD18) pch18 w=200u l=0.18u
+M3 (VOUTN VINP GND GND)     nch18 w=100u l=0.18u
+// VCP/VCN 为 BiasGen 给的偏置，本块不再自造电流支路
+// PHI_RA 无效时输出高阻（简化：拉 VCM 由下一级复位）
+ends FiaA3

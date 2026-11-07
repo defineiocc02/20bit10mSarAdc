@@ -1,0 +1,8 @@
+// Dac2Replica.scs —— DAC2 1:1 复刻，仅用于 kickback 抵消，不参与量化
+// 端口：DIN<10:0> VREFP VREFN VCM VTOP VDD18 GND
+// 规则：与 Dac2_11b 同尺寸、同方向、同邻居、同开关、同驱动；偏斜 ≤50 ps
+simulator lang=spectre
+
+subckt Dac2Replica DIN<10:0> VREFP VREFN VCM VTOP VDD18 GND
+Xcore (DIN<10:0> VREFP VREFN VCM VTOP VDD18 GND) Dac2_11b
+ends Dac2Replica
