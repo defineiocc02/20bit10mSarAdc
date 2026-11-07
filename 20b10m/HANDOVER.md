@@ -176,7 +176,7 @@ VIN → 18 片 DAC1 池（8 转换 + 8 采样 + 2 备）
 ### 3.6 仓库与工程化（A）
 
 - 远端 `git@github.com:defineiocc02/20bit10mSarAdc.git`，main。
-- **远端 HEAD = `a7584c6`（docs: 增加交接文档 HANDOVER.md）** `[复核]`；上一提交 `886e214`（图重做）、`cfb9bee`（模型口径修正）。
+- **本文件 r2 的提交 = `02f41f8`** `[复核]`；其前为 `a7584c6`（r1 交接文档）、`886e214`（图重做）、`cfb9bee`（模型口径修正）。要确认当前 HEAD 请用 `git -C /tmp/20bit10mSarAdc log -1`，不要信本文里的 hash。
 - 每张图带 `manifest.json`（脚本 SHA256 / 数据 SHA256 / 输出 SHA256 / 字体 / 尺寸 / figure_count）。
 - `CODE_INDEX.md` 索引全部代码入口；每个入口文件头有 `[CODE-INDEX]` 注释。
 
@@ -352,7 +352,7 @@ rsync -a --delete --exclude='.git' ./ /tmp/20bit10mSarAdc/20b10m/
 cd /tmp/20bit10mSarAdc && git add -A && git commit -m "..." && git push origin main
 ```
 
-⚠️ `/tmp/20bit10mSarAdc` 是临时克隆，随时可能被清掉；丢了重新 `git clone git@github.com:defineiocc02/20bit10mSarAdc.git`，仓库里已有完整内容（HEAD `a7584c6`）。
+⚠️ `/tmp/20bit10mSarAdc` 是临时克隆，随时可能被清掉；丢了重新 `git clone git@github.com:defineiocc02/20bit10mSarAdc.git`，仓库里已有完整内容（本文件 r2 自 `02f41f8` 起）。
 ⚠️ 本机 Python 3.13.12（`~/.workbuddy/binaries/python/versions/3.13.12/bin/python3`），numpy 2.5.4 / matplotlib 3.11.2。**本机无 iverilog / verilator / yosys**；Spectre / Calibre / Virtuoso 在另一套环境。
 
 ### 6.4 模型口径与踩过的坑（别再踩一遍）
@@ -399,7 +399,7 @@ cd /tmp/20bit10mSarAdc && git add -A && git commit -m "..." && git push origin m
 - [ ] `cd 20b10m && python3 -m model.selftest` → 4 项 PASS（本轮实测通过）
 - [ ] 读 `TECH_EFFECTIVENESS.md`（152 行）——这是全部结论
 - [ ] 读 §4.1 的 P0 四条，确认你认同优先级
-- [ ] `git -C /tmp/20bit10mSarAdc log --oneline -5` → 应为 `a7584c6`；若临时克隆没了，先 clone
+- [ ] `git -C /tmp/20bit10mSarAdc log --oneline -5` 确认远端可用；`02f41f8` 及之后应能看到本文件；若临时克隆没了，先 clone
 
 **第一天**
 - [ ] 随机抽 3 张图用看图工具打开，对照 `manifest.json` 的 SHA256（确认图不是旧的）
