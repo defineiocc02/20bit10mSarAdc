@@ -85,7 +85,9 @@
 | `model/plots.py` | — | 5 张图：CAAZ/M/交织/INL-DNL/频谱 |
 | `model/PLOT_DESIGN.md` | — | 借什么/丢什么/样式合同 |
 | `model/AUDIT.md` | — | 来源/假设/错误/可信度 |
-| `model/results/figures/` | — | 15 个图件 + manifest.json + README |
+| `model/results/figures/` | — | 41 张诊断图（123 文件）+ manifest |
+| `model/results/figures_paper/` | — | 14 张论文风格图（42 文件）+ manifest |
+| `model/paper_figures.py` | — | 论文测试风格图入口 |
 
 ## 5. 运行
 

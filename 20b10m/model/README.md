@@ -166,7 +166,7 @@ $$
 
 - 入口：`python3 -m model.plots`；输出 `results/figures/fig*.png|svg|pdf` + `manifest.json`。
 - 样式：146 mm 单栏、Hiragino Sans GB（校验“码”字）、8 pt、PNG 300 dpi + SVG(path) + PDF、三段式标题。
-- 图件：`fig1_caaz`（频率响应）、`fig2_tracking`（M 扫描）、`fig3_interleave`（skew/洗牌）、`fig4_static`（INL/DNL）、`fig5_spectrum`（频谱）。
+- 图件：**41 张诊断**（`figures/`）+ **14 张论文测试风格**（`figures_paper/`）；入口 `python3 -m model.figures` / `python3 -m model.paper_figures`。
 - 设计取舍：`PLOT_DESIGN.md`（借 manifest/字体校验/mm/三段式；丢掉跨模块硬耦合、过度分图、手工哈希）。
 
 ## 5. 还没建模的（下一步）

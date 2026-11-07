@@ -1,37 +1,52 @@
-# 模型图件（SAR20-10M）
+# 诊断图（41 张）
 
-> 生成：`python3 -m model.plots`（脚本 `model/plots.py`，样式 `model/viz.py`）。
-> 清单：`manifest.json`（脚本/数据/输出 SHA256、字体、尺寸、Matplotlib/NumPy 版本）。
-> 口径：所有绝对 DR/SNDR 为**模型值，未标定**，不能当签核；图只支持相对结论。
+> 生成：`python3 -m model.figures`｜清单：`manifest.json`（脚本/数据/输出 SHA256、字体、尺寸）。
+> 绝对指标为模型值，未标定，不可签核；图只支持相对结论。
 
-![CAAZ 频率响应](fig1_caaz.png)
+## A. CAAZ（fig01–07）
 
-**图 1｜CAAZ 的频率响应。** 10 MS/s 输出 / 20 MS/s raw；100 kHz +3.58 dB，1 MHz +3.47 dB，2 MHz +3.14 dB。其中约 3 dB 是任何两点平均都有的，AZ 共享抵消只贡献约 0.6 dB。数据：[results.json](../results.json) · 脚本：[plots.py](../../plots.py) · 口径：[AUDIT.md](../../AUDIT.md)。
+![CAAZ 频率响应](fig01_caaz_freq.png)
 
-![8× tracking 的 M 扫描](fig2_tracking.png)
+**fig01｜CAAZ 频率响应。** 100 kHz +3.58 dB、2 MHz +3.14；其中 3 dB 是两点平均，AZ 抵消只 0.6 dB。
 
-**图 2｜8× tracking 的有效平均。** ρ=0.61 的 AR(1) 相关噪声，M=1→8 只有 +1.71 dB，不是理论 4 dB。ρ 未实测，属推断值。数据：[results.json](../results.json) · 脚本：[plots.py](../../plots.py)。
+![CAAZ 独家增益](fig03_caaz_unique_vs_share.png)
 
-![部分交织的 skew 与失配](fig3_interleave.png)
+**fig03｜CAAZ 独家增益 vs AZ 份额。** 我们 AZ 只占 13–18%，所以只有 0.6–0.9 dB；论文 26% 才有 1.3 dB。
 
-**图 3｜部分交织的代价。** 左：2 MHz 下 skew 0.5/1/2 ps，DR 从 100.4 掉到 98.7；右：100 kHz 下不洗牌 SFDR 107.5 dBc、洗牌 126.3 dBc，但 DR 从 98.6 掉到 96.5——洗牌把杂散换成噪声。数据：[results.json](../results.json) 的 `interleave` 表。
+## B. tracking（fig08–13）
 
-![DAC1 静态线性度](fig4_static.png)
+![M 扫描](fig08_tracking_M.png)
 
-**图 4｜DAC1 校准前后 INL/DNL。** σu=0.2%、位权失配 + 1.5 ppm 非位权残差；校准只扣位权项，raw 38.6 ppm → cal 1.8 ppm。注意：这是 10 bit DAC1 的逐码曲线，不是 20.5 bit 系统 INL。脚本：[static.py](../../static.py)。
+**fig08｜M=1→8 只有 +1.71 dB。** ρ=0.61 的 AR(1)；不是理论 4 dB。
 
-![CAAZ 频谱对比](fig5_spectrum.png)
+## C. 交织（fig14–22）
 
-**图 5｜CAAZ 频谱对比。** 100.1 kHz、10 MS/s、16384 点相干采样；101 bin 平滑后 1–4 MHz 噪声底差 3.69 dB。绝对噪底为模型值，未标定。
+![skew](fig15_skew_dr_sfdr.png)
+
+**fig15｜2 MHz 下 skew 0.5/1/2 ps。** DR 从 100.4 掉到 98.7；skew 是头号杀手。
+
+![slice 调度](fig21_slice_timeline.png)
+
+**fig21｜18 片角色调度。** 深色=转换、浅色=采样、灰=备用；base 每次 +8 mod 18。
+
+## D. 静态（fig23–29）
+
+![INL](fig23_inl_raw_cal.png)
+
+**fig23｜DAC1 INL：38.6 ppm → 1.8 ppm。** σu=0.2%；校准只扣位权项。
+
+## E. 噪声/参考/抖动（fig30–35）
+
+![建立](fig34_settling.png)
+
+**fig34｜DAC1 粗装载建立。** Ron 32 Ω 是硬上限；52 Ω 在 ss 角超 ΦC0。
+
+## F. 系统（fig36–41）
+
+![FoM](fig39_fom.png)
+
+**fig39｜FoM 对标。** 目标 187.8 dB；论文 Table I。
 
 ---
 
-## 复现
-
-```bash
-cd 20b10m
-python3 -m model.experiments     # 生成 results.json
-python3 -m model.plots           # 生成 15 个图件 + manifest.json
-```
-
-图件采用 **146 mm 单栏、Hiragino Sans GB（校验“码”）、PNG 300 dpi + SVG(path) + PDF**，与参考仓库 `20b10mtask` 的出图方案一致。设计取舍见 [PLOT_DESIGN.md](../../PLOT_DESIGN.md)。
+完整 41 张见目录；每张都有 PNG/SVG/PDF 三件套。设计取舍见 [PLOT_DESIGN.md](../../PLOT_DESIGN.md)。

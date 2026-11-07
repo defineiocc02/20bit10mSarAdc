@@ -33,15 +33,19 @@
 | 6 | 图内大量 `ax.text` 绝对坐标 | 改尺寸就错位 | 统一 `annotate()` 与 `subplots_adjust` |
 | 7 | 所有图都出 SVG+PDF+PNG | 冗余；网页只需要 PNG/SVG | 主图三格式，调试图不出 PDF |
 
-## 3. 我们的图（5 张，各回答一个问题）
+## 3. 我们的图（55 张：41 诊断 + 14 论文风格）
+
+- 诊断图 `results/figures/`：CAAZ（7）、tracking（6）、交织（9）、静态（7）、噪声/参考/抖动（6）、系统（6）。
+- 论文测试风格 `results/figures_paper/`：频谱、DR 曲线、SNDR-f、INL/DNL、噪声分解、CAAZ、M 扫、skew 频谱、功耗、FoM、直方图、温度。
+
 
 | 图 | 回答什么 | 关键标注 |
 |:---|:---|:---|
-| `fig1_caaz` | CAAZ 到底值多少 dB、随频率怎么掉 | 100 kHz +3.58、2 MHz +3.14；注明“含 3 dB 通用平均” |
-| `fig2_tracking` | 8× 重复为什么只有 +1.7 dB | ρ=0.61；标注 M=1→8 |
-| `fig3_interleave` | 部分交织卡在哪：skew 还是失配/洗牌 | 2 MHz skew 扫描；洗牌把 SFDR 106→126 |
-| `fig4_static` | 校准前后 INL/DNL；校准吃不掉什么 | σu=0.2%、1.5 ppm 非位权残差；raw 38.6→cal 1.8 ppm |
-| `fig5_spectrum` | CAAZ 在频域的样子 | 1–4 MHz 噪声底差 3.69 dB（101 bin 平滑） |
+| `fig01_caaz_freq` | CAAZ 到底值多少 dB、随频率怎么掉 | 100 kHz +3.58、2 MHz +3.14；注明“含 3 dB 通用平均” |
+| `fig08_tracking_M` | 8× 重复为什么只有 +1.7 dB | ρ=0.61；标注 M=1→8 |
+| `fig15_skew_dr_sfdr` | 部分交织卡在哪：skew 还是失配/洗牌 | 2 MHz skew 扫描；洗牌把 SFDR 106→126 |
+| `fig23_inl_raw_cal` | 校准前后 INL/DNL；校准吃不掉什么 | σu=0.2%、1.5 ppm 非位权残差；raw 38.6→cal 1.8 ppm |
+| `fig07_caaz_spectrum` | CAAZ 在频域的样子 | 1–4 MHz 噪声底差 3.69 dB（101 bin 平滑） |
 
 ## 4. 样式合同（写死在 `viz.py`）
 
