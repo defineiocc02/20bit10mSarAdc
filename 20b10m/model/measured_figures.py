@@ -230,47 +230,104 @@ def inl_dnl_20b(D):
 
 
 def dr_curve(D):
-    amps = np.arange(-60, 1, 5); snr=[]; sndr=[]
+    """SNDR vs 输入幅度：三条曲线说明"失真限制"与"校准把它修掉"。"""
+    amps = np.arange(-60, 1, 5)
     fc = round(100e3*N_FFT/10e6)*10e6/N_FFT     # 必须相干，否则泄漏把 DR 打崩
-    for a in amps:
-        old=P.amp; P.amp=4.8*10**(a/20)
-        try:
-            m=fft_metrics(simulate(fc, fs=10e6, n=N_FFT, seed=21, dac_inl="cal")[0], 10e6, fc)
-        finally:
-            P.amp=old
-        snr.append(m["DR_dB"]); sndr.append(m["SNDR_dB"])
-    fig, ax = plt.subplots(figsize=(W/MM, 88/MM)); fig.subplots_adjust(left=.12,right=.965,top=.78,bottom=.18)
-    ax.plot(amps, snr, "o-", ms=2.5, lw=.9, color=OFF, label="SNR")
-    ax.plot(amps, sndr, "s-", ms=2.2, lw=.9, color=ON, label="SNDR")
-    ax.set(xlabel="输入幅度（dBFS）", ylabel="dB", xlim=(-60,2)); ax.grid(alpha=.23); ax.legend(frameon=False, fontsize=6.6, loc="lower right")
-    viz.annotate(fig,"SNDR／SNR vs 输入幅度（DR 曲线）","低幅度进入噪声底；DR 由 26.5 µV 噪声 ⊕ 5.5 µV 在环量化决定","模型生成；DAC1 已按校准后残差注入，失真项仍为零，SNDR≈SNR。")
-    return fig,(W,88)
+    cfgs = ((None, OFF, "理想（无静态误差）"), ("raw", WARN, "未校准 DAC1"),
+            ("cal", ON, "校准后"))
+    curves = {}
+    for tag, _c, _lab in cfgs:
+        ys = []
+        for a in amps:
+            old = P.amp; P.amp = 4.8*10**(a/20)
+            try:
+                m = fft_metrics(simulate(fc, fs=10e6, n=N_FFT, seed=21, dac_inl=tag)[0], 10e6, fc)
+            finally:
+                P.amp = old
+            ys.append(m["SNDR_dB"])
+        curves[tag] = np.array(ys)
+    fig, ax = plt.subplots(figsize=(W/MM, 90/MM))
+    fig.subplots_adjust(left=.115, right=.965, top=.775, bottom=.19)
+    for tag, c, lab in cfgs:
+        ax.plot(amps, curves[tag], "o-", ms=2.4, lw=.9, color=c, label=lab)
+    ax.set(xlabel="输入幅度（dBFS）", ylabel="SNDR（dB）", xlim=(-60, 10))
+    ax.grid(alpha=.23); ax.legend(frameon=False, fontsize=6.2, loc="lower right")
+    # 满量程处的差值直接用竖线标出来，比拉一条跨图的箭头干净
+    gap = curves["cal"][-1] - curves["raw"][-1]
+    ax.plot([0, 0], [curves["raw"][-1], curves["cal"][-1]], color=WARN, lw=.9)
+    ax.text(1.2, (curves["raw"][-1] + curves["cal"][-1])/2, f"{gap:.1f} dB",
+            color=WARN, fontsize=6.2, va="center")
+    ax.text(1.2, curves["raw"][-1] - 2.2, "未校准", color=WARN, fontsize=5.8, va="center")
+    viz.annotate(fig, "SNDR vs 输入幅度：校准把顶端的塌陷抬平",
+                 "未校准在大信号端被 DAC1 静态非线性压住；校准后一路到 0 dBFS 都是噪声底",
+                 "模型无抖动/无建立误差，高频与满量程端仍偏乐观；DR 取满量程 SNDR。")
+    return fig, (W, 90)
 
 
 def sndr_fin(D):
-    fins=[6e3,100e3,1e6,2e6]; s=[]
-    for f in fins:
-        fc=round(f*N_FFT/10e6)*10e6/N_FFT
-        s.append(fft_metrics(simulate(fc, fs=10e6, n=N_FFT, seed=31, dac_inl="cal")[0],10e6,fc)["SNDR_dB"])
-    fig, ax = plt.subplots(figsize=(W/MM,84/MM)); fig.subplots_adjust(left=.12,right=.965,top=.78,bottom=.20)
-    ax.plot(np.array(fins)/1e3, s, "o-", ms=3, lw=.9, color=OFF)
-    for x,y in zip(np.array(fins)/1e3,s): ax.annotate(f"{y:.1f}",(x,y),textcoords="offset points",xytext=(0,6),ha="center",fontsize=6.4)
-    ax.set(xscale="log", xlabel="输入频率（kHz）", ylabel="SNDR（dB）"); ax.grid(alpha=.23, which="both")
-    _plain_ticks(ax, "x", [6, 10, 100, 1000, 2000])
-    viz.annotate(fig,"SNDR vs 输入频率","目标：100.5@6k、99.4@100k、95.7@2M","模型未注入抖动/失真，高频偏高；绝对指标不可签核。")
-    return fig,(W,84)
+    """SNDR vs 输入频率：时钟抖动是高频端的唯一下降机制。"""
+    fins = [6e3, 30e3, 100e3, 300e3, 1e6, 2e6, 3e6]
+    res = {}
+    for jt, c, lab in ((0.0, OFF, "理想时钟"), (1e-12, ON, "σt = 1 ps")):
+        ys = []
+        for f in fins:
+            fc = round(f*N_FFT/10e6)*10e6/N_FFT
+            ys.append(fft_metrics(simulate(fc, fs=10e6, n=N_FFT, seed=31,
+                                           dac_inl="cal", jitter=jt)[0], 10e6, fc)["SNDR_dB"])
+        res[lab] = np.array(ys)
+        ax = None
+    fig, ax = plt.subplots(figsize=(W/MM, 86/MM))
+    fig.subplots_adjust(left=.115, right=.965, top=.775, bottom=.195)
+    for jt, c, lab in ((0.0, OFF, "理想时钟"), (1e-12, ON, "σt = 1 ps")):
+        ax.semilogx(np.array(fins)/1e3, res[lab], "o-", ms=2.6, lw=.9, color=c, label=lab)
+    ax.ticklabel_format(axis="y", useOffset=False)
+    ax.set(xlabel="输入频率（kHz）", ylabel="SNDR（dB）")
+    ax.grid(alpha=.23, which="both"); ax.legend(frameon=False, fontsize=6.2, loc="lower left")
+    _plain_ticks(ax, "x", [6, 30, 100, 300, 1000, 2000])
+    ax.text(6, res["σt = 1 ps"][0] - 2.6,
+            f"2 MHz 处抖动限制 {20*np.log10(1/(2*np.pi*2e6*1e-12)):.1f} dB",
+            fontsize=6.0, color=ON)
+    viz.annotate(fig, "SNDR vs 输入频率：抖动决定高频端",
+                 "理想时钟下 SNDR 与频率无关；加 1 ps 抖动后按 20log(2πfσt) 滚降",
+                 "模型只含抖动，未含采样网络带宽/RA 建立；实测高频还会再低一些。")
+    return fig, (W, 86)
 
 
 def noise_breakdown(D):
-    labels=["sampling","RA amp","RA AZ","other"]; before=[27.4,52.9,8.6,8.6]; after=[27.4,52.9/5,8.6,8.6]
-    fig, ax = plt.subplots(figsize=(W/MM,88/MM)); fig.subplots_adjust(left=.12,right=.97,top=.78,bottom=.18)
-    x=np.arange(2); bottom=np.zeros(2)
-    for lab,b,a,c in zip(labels,before,after,["#B5D4F4","#7FB3D5","#F5B7B1","#C3B1E1"]):
-        ax.bar(x,[b,a],.45,bottom=bottom,color=c,edgecolor="white",lw=.4,label=lab); bottom+=np.array([b,a])
-    ax.set(xticks=x,xticklabels=["before tracking","after tracking"],ylabel="噪声功率占比（%）",ylim=(0,110)); ax.grid(alpha=.23,axis="y"); ax.legend(frameon=False,fontsize=6.2,ncol=2,loc="upper right")
-    viz.annotate(fig,"噪声分解：RA 放大相是主导项","sampling 27.4%、RA amp 52.9%、RA AZ 8.6%、other 8.6%","按 Fig.12 条带/预算；after 按 −80% 功率。")
-    return fig,(W,88)
-
+    """噪声功率分解：基线 / 8× tracking / +CAAZ，三档都归一化到 100%。"""
+    import numpy as np
+    sig = np.array([P.ktc, P.ra_broad, P.ra_az, np.hypot(P.cmp, P.ref)])
+    names = ["采样 kT/C", "RA 宽带", "RA AZ", "比较器+基准"]
+    cols = ["#B5D4F4", "#7FB3D5", "#F5B7B1", "#C3B1E1"]
+    F = 0.393                     # AR(1) 下 8× 平均的残留功率比（selftest 实测）
+    caaz_avg = 0.5                # 两点平均：全部噪声功率减半
+    caaz_az = 1 / 10**(0.58/10)   # AZ 抵消的独家收益 0.58 dB
+    stage = [sig**2,
+             np.array([sig[0]**2, sig[1]**2*F, sig[2]**2, sig[3]**2]),
+             np.array([sig[0]**2*caaz_avg, sig[1]**2*F*caaz_avg,
+                       sig[2]**2*caaz_az*caaz_avg, sig[3]**2*caaz_avg])]
+    fig, ax = plt.subplots(figsize=(W/MM, 92/MM))
+    fig.subplots_adjust(left=.115, right=.965, top=.755, bottom=.20)
+    x = np.arange(3); bottom = np.zeros(3)
+    for k, (n, c) in enumerate(zip(names, cols)):
+        v = np.array([100*st[k]/st.sum() for st in stage])
+        ax.bar(x, v, .5, bottom=bottom, color=c, edgecolor="white", lw=.5, label=n)
+        for i, (vv, bb) in enumerate(zip(v, bottom)):
+            if vv > 6:
+                ax.text(i, bb+vv/2, f"{vv:.0f}", ha="center", va="center", fontsize=6.2)
+        bottom += v
+    tot = np.array([np.sqrt(st.sum()) for st in stage])   # V
+    ax.set(xticks=x, xticklabels=["基线", "8× tracking", "+CAAZ"],
+           ylabel="噪声功率占比（%，归一化）", ylim=(0, 108))
+    ax.grid(alpha=.23, axis="y"); ax.legend(frameon=False, fontsize=6.2, ncol=4,
+                                            loc="upper center", bbox_to_anchor=(.5, 1.14))
+    viz.annotate(fig, "噪声分解：做完 tracking 之后，kT/C 变成第一项",
+                 f"输入折算噪声 {tot[0]*1e6:.1f} → {tot[1]*1e6:.1f} → {tot[2]*1e6:.1f} µV；"
+                 f"对应 SNDR {20*np.log10(3.536/tot[0]):.1f} → "
+                 f"{20*np.log10(3.536/tot[1]):.1f} → {20*np.log10(3.536/tot[2]):.1f} dB",
+                 "RA 宽带按 AR(1) 残留 0.393 折；CAAZ 按两点平均 ×0.5 再加 AZ 独家 0.58 dB。\n"
+                 "结论：tracking 之后该加 C_s，而不是继续堆平均次数。")
+    return fig, (W, 92)
 
 
 def _cal_gain():

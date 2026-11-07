@@ -14,7 +14,7 @@ def quantize(x, bits=22, fs_diff=P.fs_diff):
     return (code / 2**bits - 0.5) * fs_diff
 
 def simulate(fin, fs=None, n=None, *, caaz=False, M=None, rho=None,
-             interleave=None, az_share=1.0, seed=1, dac_inl=None):
+             interleave=None, az_share=1.0, seed=1, dac_inl=None, jitter=0.0):
     """返回输出码（伏特）。interleave=None 或 dict。
 
     dac_inl: None|"raw"|"cal"|(codes, volts) —— DAC1 静态 INL 折算到输入端的加性误差。
@@ -28,7 +28,9 @@ def simulate(fin, fs=None, n=None, *, caaz=False, M=None, rho=None,
     raw = 2 if caaz else 1
     nr = n * raw
     t = np.arange(nr) / (fs*raw)
-    vin = P.amp * np.sin(2*np.pi*fin*t)
+    # jitter：采样时刻抖动，等效于用 t+Δt 求值；默认 0（其余图按理想时钟）
+    t_eff = t + (rng.normal(0, jitter, nr) if jitter else 0.0)
+    vin = P.amp * np.sin(2*np.pi*fin*t_eff)
 
     if dac_inl is not None:
         if isinstance(dac_inl, str):
