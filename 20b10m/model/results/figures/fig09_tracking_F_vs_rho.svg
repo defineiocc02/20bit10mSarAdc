@@ -2139,7 +2139,7 @@ L 375.294145 77.88052
   </g>
   <g id="text_16">
    <!-- 相关噪声的平均上限：ρ 决定能拿多少 dB -->
-   <g transform="translate(45.524409 14.767559) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-f4d" d="M 1133 3590 
 C 1062 3296 928 2925 774 2605 
@@ -3164,7 +3164,7 @@ z
   </g>
   <g id="text_17">
    <!-- M=8 在 ρ=0.61 时只有 4.05 dB（RA 单独），整机更少 -->
-   <g transform="translate(45.524409 22.165165) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-111d" d="M 2758 4416 
 C 2816 4544 2938 4838 3002 4992 
@@ -3931,7 +3931,7 @@ z
   </g>
   <g id="text_18">
    <!-- 等权平均解析式；SINC2 三角权会略有差异。 -->
-   <g transform="translate(45.524409 216.956014) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 217.437904) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-5a9" d="M 1766 4474 
 C 1933 4179 2010 4019 2118 3693 

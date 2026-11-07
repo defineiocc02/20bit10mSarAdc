@@ -5275,7 +5275,7 @@ L 401.44252 49.889764
   </g>
   <g id="text_18">
    <!-- DNL：±0.4 ppm 量级 -->
-   <g transform="translate(45.524409 14.909291) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-25" d="M 506 749 
 C 506 365 493 166 454 -96 
@@ -5690,7 +5690,7 @@ z
   </g>
   <g id="text_19">
    <!-- 模型合成；20.5 bit 逐码 DNL 受噪声平滑，不能直接测 -->
-   <g transform="translate(45.524409 22.562016) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-b06" d="M 5472 966 
 C 5741 966 5901 954 6093 928 
@@ -6931,7 +6931,7 @@ z
   </g>
   <g id="text_20">
    <!-- 示意/模型曲线。 -->
-   <g transform="translate(45.524409 222.356454) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 222.923383) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-d55" d="M 3046 3053 
 L 3046 230 

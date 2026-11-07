@@ -819,8 +819,8 @@ z
    <g id="matplotlib.axis_2">
     <g id="ytick_1">
      <g id="line2d_13">
-      <path d="M 49.662992 169.648175 
-L 401.44252 169.648175 
+      <path d="M 49.662992 160.354228 
+L 401.44252 160.354228 
 " clip-path="url(#pe037c32ae8)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.26; stroke-width: 0.45; stroke-linecap: square"/>
      </g>
      <g id="line2d_14">
@@ -830,12 +830,12 @@ L 3.5 0
 " style="stroke: #000000; stroke-width: 0.7"/>
       </defs>
       <g>
-       <use xlink:href="#mecb1e51d98" x="49.662992" y="169.648175" style="stroke: #000000; stroke-width: 0.7"/>
+       <use xlink:href="#mecb1e51d98" x="49.662992" y="160.354228" style="stroke: #000000; stroke-width: 0.7"/>
       </g>
      </g>
      <g id="text_8">
       <!-- 92 -->
-      <g transform="translate(35.650492 173.168175) scale(0.08 -0.08)">
+      <g transform="translate(35.650492 163.874228) scale(0.08 -0.08)">
        <defs>
         <path id="HiraginoSansGB-W3-1a" d="M 416 934 
 C 582 595 685 448 864 301 
@@ -872,18 +872,18 @@ z
     </g>
     <g id="ytick_2">
      <g id="line2d_15">
-      <path d="M 49.662992 146.635637 
-L 401.44252 146.635637 
+      <path d="M 49.662992 138.903591 
+L 401.44252 138.903591 
 " clip-path="url(#pe037c32ae8)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.26; stroke-width: 0.45; stroke-linecap: square"/>
      </g>
      <g id="line2d_16">
       <g>
-       <use xlink:href="#mecb1e51d98" x="49.662992" y="146.635637" style="stroke: #000000; stroke-width: 0.7"/>
+       <use xlink:href="#mecb1e51d98" x="49.662992" y="138.903591" style="stroke: #000000; stroke-width: 0.7"/>
       </g>
      </g>
      <g id="text_9">
       <!-- 94 -->
-      <g transform="translate(35.619242 150.155637) scale(0.08 -0.08)">
+      <g transform="translate(35.619242 142.423591) scale(0.08 -0.08)">
        <use xlink:href="#HiraginoSansGB-W3-1a"/>
        <use xlink:href="#HiraginoSansGB-W3-15" transform="translate(65.703125 0)"/>
       </g>
@@ -891,18 +891,18 @@ L 401.44252 146.635637
     </g>
     <g id="ytick_3">
      <g id="line2d_17">
-      <path d="M 49.662992 123.623098 
-L 401.44252 123.623098 
+      <path d="M 49.662992 117.452954 
+L 401.44252 117.452954 
 " clip-path="url(#pe037c32ae8)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.26; stroke-width: 0.45; stroke-linecap: square"/>
      </g>
      <g id="line2d_18">
       <g>
-       <use xlink:href="#mecb1e51d98" x="49.662992" y="123.623098" style="stroke: #000000; stroke-width: 0.7"/>
+       <use xlink:href="#mecb1e51d98" x="49.662992" y="117.452954" style="stroke: #000000; stroke-width: 0.7"/>
       </g>
      </g>
      <g id="text_10">
       <!-- 96 -->
-      <g transform="translate(35.650492 127.143098) scale(0.08 -0.08)">
+      <g transform="translate(35.650492 120.972954) scale(0.08 -0.08)">
        <use xlink:href="#HiraginoSansGB-W3-1a"/>
        <use xlink:href="#HiraginoSansGB-W3-17" transform="translate(65.703125 0)"/>
       </g>
@@ -910,18 +910,18 @@ L 401.44252 123.623098
     </g>
     <g id="ytick_4">
      <g id="line2d_19">
-      <path d="M 49.662992 100.61056 
-L 401.44252 100.61056 
+      <path d="M 49.662992 96.002317 
+L 401.44252 96.002317 
 " clip-path="url(#pe037c32ae8)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.26; stroke-width: 0.45; stroke-linecap: square"/>
      </g>
      <g id="line2d_20">
       <g>
-       <use xlink:href="#mecb1e51d98" x="49.662992" y="100.61056" style="stroke: #000000; stroke-width: 0.7"/>
+       <use xlink:href="#mecb1e51d98" x="49.662992" y="96.002317" style="stroke: #000000; stroke-width: 0.7"/>
       </g>
      </g>
      <g id="text_11">
       <!-- 98 -->
-      <g transform="translate(35.650492 104.13056) scale(0.08 -0.08)">
+      <g transform="translate(35.650492 99.522317) scale(0.08 -0.08)">
        <use xlink:href="#HiraginoSansGB-W3-1a"/>
        <use xlink:href="#HiraginoSansGB-W3-19" transform="translate(65.703125 0)"/>
       </g>
@@ -929,18 +929,18 @@ L 401.44252 100.61056
     </g>
     <g id="ytick_5">
      <g id="line2d_21">
-      <path d="M 49.662992 77.598022 
-L 401.44252 77.598022 
+      <path d="M 49.662992 74.55168 
+L 401.44252 74.55168 
 " clip-path="url(#pe037c32ae8)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.26; stroke-width: 0.45; stroke-linecap: square"/>
      </g>
      <g id="line2d_22">
       <g>
-       <use xlink:href="#mecb1e51d98" x="49.662992" y="77.598022" style="stroke: #000000; stroke-width: 0.7"/>
+       <use xlink:href="#mecb1e51d98" x="49.662992" y="74.55168" style="stroke: #000000; stroke-width: 0.7"/>
       </g>
      </g>
      <g id="text_12">
       <!-- 100 -->
-      <g transform="translate(30.394242 81.118022) scale(0.08 -0.08)">
+      <g transform="translate(30.394242 78.07168) scale(0.08 -0.08)">
        <use xlink:href="#HiraginoSansGB-W3-12"/>
        <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(65.703125 0)"/>
        <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(131.40625 0)"/>
@@ -949,18 +949,18 @@ L 401.44252 77.598022
     </g>
     <g id="ytick_6">
      <g id="line2d_23">
-      <path d="M 49.662992 54.585484 
-L 401.44252 54.585484 
+      <path d="M 49.662992 53.101043 
+L 401.44252 53.101043 
 " clip-path="url(#pe037c32ae8)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.26; stroke-width: 0.45; stroke-linecap: square"/>
      </g>
      <g id="line2d_24">
       <g>
-       <use xlink:href="#mecb1e51d98" x="49.662992" y="54.585484" style="stroke: #000000; stroke-width: 0.7"/>
+       <use xlink:href="#mecb1e51d98" x="49.662992" y="53.101043" style="stroke: #000000; stroke-width: 0.7"/>
       </g>
      </g>
      <g id="text_13">
       <!-- 102 -->
-      <g transform="translate(30.394242 58.105484) scale(0.08 -0.08)">
+      <g transform="translate(30.394242 56.621043) scale(0.08 -0.08)">
        <use xlink:href="#HiraginoSansGB-W3-12"/>
        <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(65.703125 0)"/>
        <use xlink:href="#HiraginoSansGB-W3-13" transform="translate(131.40625 0)"/>
@@ -1090,8 +1090,8 @@ z
    </g>
    <g id="line2d_25">
     <path d="M 65.652971 54.471582 
-L 97.632928 58.369364 
-L 225.552756 114.657033 
+L 97.632928 60.018918 
+L 225.552756 117.522445 
 L 385.452541 171.052827 
 " clip-path="url(#pe037c32ae8)" style="fill: none; stroke: #0072b2; stroke-linecap: square"/>
     <defs>
@@ -1109,8 +1109,8 @@ z
     </defs>
     <g clip-path="url(#pe037c32ae8)">
      <use xlink:href="#mce8b1de94f" x="65.652971" y="54.471582" style="fill: #0072b2; stroke: #0072b2"/>
-     <use xlink:href="#mce8b1de94f" x="97.632928" y="58.369364" style="fill: #0072b2; stroke: #0072b2"/>
-     <use xlink:href="#mce8b1de94f" x="225.552756" y="114.657033" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#mce8b1de94f" x="97.632928" y="60.018918" style="fill: #0072b2; stroke: #0072b2"/>
+     <use xlink:href="#mce8b1de94f" x="225.552756" y="117.522445" style="fill: #0072b2; stroke: #0072b2"/>
      <use xlink:href="#mce8b1de94f" x="385.452541" y="171.052827" style="fill: #0072b2; stroke: #0072b2"/>
     </g>
    </g>
@@ -1137,7 +1137,7 @@ L 401.44252 48.64252
   </g>
   <g id="text_15">
    <!-- 增益失配：50 ppm 就掉 6 dB -->
-   <g transform="translate(45.524409 14.767559) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-1139" d="M 1542 3731 
 L 1542 4595 
@@ -1863,7 +1863,7 @@ z
   </g>
   <g id="text_16">
    <!-- 每片增益校准必须打到 ≤10 ppm，否则交织没有意义 -->
-   <g transform="translate(45.524409 22.165165) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-ac4" d="M 5094 4333 
 C 5440 4333 5651 4320 5901 4294 
@@ -2862,7 +2862,7 @@ z
   </g>
   <g id="text_17">
    <!-- 模型值；失配为随机、8 片平均。 -->
-   <g transform="translate(45.524409 216.956014) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 217.437904) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-b06" d="M 5472 966 
 C 5741 966 5901 954 6093 928 

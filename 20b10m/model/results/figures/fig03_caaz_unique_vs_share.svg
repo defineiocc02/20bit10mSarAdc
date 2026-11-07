@@ -2184,7 +2184,7 @@ z
   </g>
   <g id="text_20">
    <!-- CAAZ 独家增益 = AZ 份额的函数 -->
-   <g transform="translate(45.524409 14.625827) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-24" d="M 3891 1638 
 C 3840 1344 3789 1210 3680 1050 
@@ -3002,7 +3002,7 @@ z
   </g>
   <g id="text_21">
    <!-- 10log10(1/(1−s))；我们 AZ 只占 13–18%，所以只有 0.6–0.9 dB -->
-   <g transform="translate(45.524409 21.768315) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-4d" d="M 454 4902 
 C 486 4672 499 4499 499 4186 
@@ -3075,439 +3075,11 @@ L 2906 4902
 L 2432 4902 
 z
 " transform="scale(0.015625)"/>
-     <path id="LastResortHE-Regular-51" d="M 6734 -747 
-L 6734 4250 
-Q 6734 4409 6659 4534 
-Q 6584 4663 6456 4738 
-Q 6328 4813 6172 4813 
-L 1175 4813 
-Q 1019 4813 891 4738 
-Q 763 4663 688 4534 
-Q 613 4406 613 4250 
-L 613 -747 
-Q 613 -903 688 -1031 
-Q 763 -1159 891 -1234 
-Q 1019 -1309 1175 -1309 
-L 6172 -1309 
-Q 6331 -1309 6456 -1234 
-Q 6584 -1159 6659 -1031 
-Q 6734 -903 6734 -747 
-z
-M 4453 4266 
-L 4453 4469 
-L 4366 4469 
-L 4366 4266 
-L 4253 4266 
-L 4253 4738 
-L 4366 4738 
-L 4366 4534 
-L 4453 4534 
-L 4453 4738 
-L 4566 4738 
-L 4566 4266 
-L 4453 4266 
-z
-M 4034 4669 
-L 4034 4266 
-L 3919 4266 
-L 3919 4669 
-L 3819 4669 
-L 3819 4738 
-L 4131 4738 
-L 4131 4669 
-L 4034 4669 
-z
-M 3594 4266 
-L 3594 4469 
-L 3506 4469 
-L 3506 4266 
-L 3394 4266 
-L 3394 4631 
-Q 3394 4738 3494 4738 
-L 3606 4738 
-Q 3706 4738 3706 4628 
-L 3706 4266 
-L 3594 4266 
-z
-M 3184 4266 
-L 3184 4534 
-L 3013 4363 
-L 2844 4534 
-L 2844 4266 
-L 2778 4266 
-L 2778 4738 
-L 2813 4738 
-L 3025 4522 
-L 3238 4738 
-L 3300 4738 
-L 3300 4266 
-L 3184 4266 
-z
-M 3594 4625 
-L 3578 4656 
-L 3550 4669 
-L 3522 4656 
-L 3506 4625 
-L 3506 4534 
-L 3594 4534 
-L 3594 4625 
-z
-M 6122 3750 
-L 6122 -247 
-Q 6122 -375 6063 -472 
-Q 6003 -575 5900 -636 
-Q 5797 -697 5672 -697 
-L 1672 -697 
-Q 1547 -697 1447 -634 
-Q 1344 -572 1283 -472 
-Q 1222 -372 1222 -247 
-L 1222 3750 
-Q 1222 3872 1284 3978 
-Q 1347 4078 1447 4139 
-Q 1547 4200 1672 4200 
-L 5672 4200 
-Q 5800 4200 5900 4141 
-Q 6000 4081 6061 3978 
-Q 6122 3875 6122 3750 
-z
-M 5281 4103 
-L 3822 -119 
-L 2638 2056 
-L 1841 1594 
-L 1947 1406 
-L 2438 1678 
-L 3622 -500 
-L 3916 -500 
-L 5503 4103 
-L 5281 4103 
-z
-M 6269 2431 
-L 6269 2491 
-Q 6269 2531 6369 2641 
-Q 6469 2741 6469 2800 
-L 6456 2834 
-L 6425 2847 
-L 6375 2847 
-Q 6334 2847 6334 2794 
-L 6269 2794 
-Q 6284 2916 6375 2916 
-L 6475 2916 
-Q 6584 2916 6584 2775 
-Q 6584 2731 6488 2634 
-Q 6388 2534 6384 2500 
-L 6584 2500 
-L 6584 2431 
-L 6269 2431 
-z
-M 759 2431 
-L 759 2491 
-Q 759 2531 859 2641 
-Q 959 2741 959 2800 
-L 947 2834 
-L 916 2847 
-L 869 2847 
-Q 831 2847 825 2794 
-L 759 2794 
-Q 775 2916 869 2916 
-L 969 2916 
-Q 1075 2916 1075 2775 
-Q 1075 2731 978 2634 
-Q 878 2534 875 2500 
-L 1075 2500 
-L 1075 2431 
-L 759 2431 
-z
-M 759 1822 
-L 759 1881 
-Q 759 1922 859 2031 
-Q 959 2131 959 2194 
-L 947 2225 
-L 916 2238 
-L 869 2238 
-Q 828 2238 825 2188 
-L 759 2188 
-Q 775 2306 869 2306 
-L 969 2306 
-Q 1075 2306 1075 2169 
-Q 1075 2122 978 2025 
-Q 878 1925 875 1891 
-L 1075 1891 
-L 1075 1822 
-L 759 1822 
-z
-M 6269 1822 
-L 6269 1881 
-Q 6269 1922 6369 2031 
-Q 6469 2131 6469 2194 
-L 6456 2225 
-L 6425 2238 
-L 6375 2238 
-Q 6334 2238 6334 2188 
-L 6269 2188 
-Q 6284 2306 6375 2306 
-L 6475 2306 
-Q 6584 2306 6584 2169 
-Q 6584 2122 6488 2025 
-Q 6388 1925 6384 1891 
-L 6584 1891 
-L 6584 1822 
-L 6269 1822 
-z
-M 1091 1581 
-L 1091 1316 
-Q 1091 1203 978 1203 
-L 856 1203 
-Q 744 1203 744 1313 
-L 744 1584 
-Q 744 1694 856 1694 
-L 978 1694 
-Q 1091 1694 1091 1581 
-z
-M 6406 1628 
-L 6406 1488 
-L 6506 1488 
-L 6506 1419 
-L 6406 1419 
-L 6406 1213 
-L 6294 1213 
-L 6294 1694 
-L 6556 1694 
-L 6556 1628 
-L 6406 1628 
-z
-M 966 1578 
-L 950 1613 
-L 919 1625 
-L 884 1613 
-L 872 1578 
-L 872 1319 
-L 884 1288 
-L 919 1272 
-L 950 1288 
-L 966 1319 
-L 966 1578 
-z
-M 6391 991 
-L 6391 881 
-L 6538 881 
-L 6538 794 
-L 6391 794 
-L 6391 588 
-L 6263 588 
-L 6263 1078 
-L 6581 1078 
-L 6581 991 
-L 6391 991 
-z
-M 1091 963 
-L 1091 700 
-Q 1091 588 978 588 
-L 856 588 
-Q 744 588 744 694 
-L 744 969 
-Q 744 1075 856 1075 
-L 978 1075 
-Q 1091 1075 1091 963 
-z
-M 966 963 
-L 950 994 
-L 919 1006 
-L 884 994 
-L 872 963 
-L 872 703 
-L 884 669 
-L 919 656 
-L 950 669 
-L 966 703 
-L 966 963 
-z
-M 4141 -831 
-L 4141 -1234 
-L 4025 -1234 
-L 4025 -831 
-L 3925 -831 
-L 3925 -763 
-L 4241 -763 
-L 4241 -831 
-L 4141 -831 
-z
-M 4909 -1234 
-L 4909 -1078 
-L 4894 -1044 
-L 4863 -1031 
-L 4822 -1031 
-L 4822 -1234 
-L 4709 -1234 
-L 4709 -763 
-L 4922 -763 
-Q 5022 -763 5022 -900 
-Q 5022 -969 4972 -991 
-L 5006 -1006 
-L 5022 -1047 
-L 5022 -1234 
-L 4909 -1234 
-z
-M 3347 -1234 
-L 3347 -1078 
-L 3331 -1044 
-L 3300 -1031 
-L 3259 -1031 
-L 3259 -1234 
-L 3147 -1234 
-L 3147 -763 
-L 3359 -763 
-Q 3459 -763 3459 -900 
-Q 3459 -969 3409 -991 
-L 3444 -1006 
-L 3459 -1047 
-L 3459 -1234 
-L 3347 -1234 
-z
-M 5366 -1125 
-Q 5366 -1234 5266 -1234 
-L 5206 -1234 
-Q 5106 -1234 5106 -1119 
-L 5169 -1119 
-L 5169 -1131 
-L 5181 -1159 
-L 5197 -1166 
-Q 5200 -1169 5213 -1169 
-Q 5225 -1169 5237 -1158 
-Q 5250 -1147 5250 -1134 
-Q 5250 -1106 5206 -1053 
-L 5181 -1025 
-Q 5106 -941 5106 -872 
-Q 5106 -763 5206 -763 
-L 5266 -763 
-Q 5359 -763 5366 -881 
-L 5303 -881 
-Q 5297 -828 5263 -828 
-Q 5250 -828 5228 -841 
-Q 5225 -847 5223 -853 
-Q 5222 -859 5222 -866 
-Q 5222 -903 5266 -947 
-L 5291 -972 
-Q 5366 -1047 5366 -1125 
-z
-M 2797 -1234 
-L 2797 -763 
-L 3056 -763 
-L 3056 -831 
-L 2909 -831 
-L 2909 -966 
-L 3009 -966 
-L 3009 -1031 
-L 2909 -1031 
-L 2909 -1169 
-L 3056 -1169 
-L 3056 -1234 
-L 2797 -1234 
-z
-M 3753 -1234 
-L 3753 -1031 
-L 3666 -1031 
-L 3666 -1234 
-L 3553 -1234 
-L 3553 -869 
-Q 3553 -763 3653 -763 
-L 3766 -763 
-Q 3866 -763 3866 -872 
-L 3866 -1234 
-L 3753 -1234 
-z
-M 2709 -872 
-L 2709 -928 
-Q 2709 -975 2675 -1000 
-Q 2641 -1022 2594 -1026 
-Q 2547 -1031 2509 -1031 
-L 2509 -1234 
-L 2397 -1234 
-L 2397 -763 
-L 2609 -763 
-Q 2709 -763 2709 -872 
-z
-M 2291 -872 
-L 2291 -1125 
-Q 2291 -1234 2188 -1234 
-L 2078 -1234 
-Q 1978 -1234 1978 -1131 
-L 1978 -869 
-Q 1978 -766 2078 -766 
-L 2188 -766 
-Q 2291 -766 2291 -872 
-z
-M 4622 -872 
-L 4622 -1125 
-Q 4622 -1234 4519 -1234 
-L 4409 -1234 
-Q 4309 -1234 4309 -1131 
-L 4309 -869 
-Q 4309 -766 4409 -766 
-L 4519 -766 
-Q 4622 -766 4622 -872 
-z
-M 4909 -875 
-L 4894 -844 
-L 4863 -831 
-L 4822 -831 
-L 4822 -966 
-L 4863 -966 
-L 4894 -953 
-L 4909 -922 
-L 4909 -875 
-z
-M 4506 -875 
-L 4494 -844 
-L 4466 -831 
-L 4434 -844 
-L 4422 -875 
-L 4422 -1125 
-L 4434 -1156 
-L 4466 -1169 
-L 4494 -1156 
-L 4506 -1125 
-L 4506 -875 
-z
-M 3753 -875 
-L 3738 -844 
-L 3709 -831 
-L 3681 -844 
-L 3666 -875 
-L 3666 -966 
-L 3753 -966 
-L 3753 -875 
-z
-M 3347 -875 
-L 3331 -844 
-L 3300 -831 
-L 3259 -831 
-L 3259 -966 
-L 3300 -966 
-L 3331 -953 
-L 3347 -922 
-L 3347 -875 
-z
-M 2597 -875 
-L 2581 -844 
-L 2550 -831 
-L 2509 -831 
-L 2509 -966 
-L 2550 -966 
-L 2581 -953 
-L 2597 -922 
-L 2597 -875 
-z
-M 2175 -875 
-L 2163 -844 
-L 2134 -831 
-L 2103 -844 
-L 2091 -875 
-L 2091 -1125 
-L 2103 -1156 
-L 2134 -1169 
-L 2163 -1156 
-L 2175 -1125 
-L 2175 -875 
+     <path id="ArialMT-ed" d="M 3381 1997 
+L 356 1997 
+L 356 2522 
+L 3381 2522 
+L 3381 1997 
 z
 " transform="scale(0.015625)"/>
      <path id="HiraginoSansGB-W3-54" d="M 269 973 
@@ -3804,47 +3376,47 @@ z
     <use xlink:href="#HiraginoSansGB-W3-10" transform="translate(513.90625 0)"/>
     <use xlink:href="#HiraginoSansGB-W3-9" transform="translate(561.3125 0)"/>
     <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(596.90625 0)"/>
-    <use xlink:href="#LastResortHE-Regular-51" transform="translate(662.609375 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-54" transform="translate(777.359375 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-a" transform="translate(831.0625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-a" transform="translate(866.65625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-120" transform="translate(902.25 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-ee1" transform="translate(1002.25 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-acc" transform="translate(1102.25 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-1" transform="translate(1202.25 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-22" transform="translate(1235.546875 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-3b" transform="translate(1310.546875 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-1" transform="translate(1377.453125 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-11ba" transform="translate(1410.75 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-115d" transform="translate(1510.75 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-1" transform="translate(1610.75 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(1644.046875 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-14" transform="translate(1709.75 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-26b6" transform="translate(1775.453125 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(1875.453125 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-19" transform="translate(1941.15625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-6" transform="translate(2006.859375 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-111" transform="translate(2094.765625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-dee" transform="translate(2194.765625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-105b" transform="translate(2294.765625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-11ba" transform="translate(2394.765625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-10b5" transform="translate(2494.765625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-1" transform="translate(2594.765625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(2628.0625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-f" transform="translate(2693.765625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-17" transform="translate(2717.765625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-26b6" transform="translate(2783.46875 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(2883.46875 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-f" transform="translate(2949.171875 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-1a" transform="translate(2973.171875 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-1" transform="translate(3038.875 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-45" transform="translate(3072.171875 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-23" transform="translate(3136.765625 0)"/>
+    <use xlink:href="#ArialMT-ed" transform="translate(662.609375 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-54" transform="translate(721.015625 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-a" transform="translate(774.71875 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-a" transform="translate(810.3125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-120" transform="translate(845.90625 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-ee1" transform="translate(945.90625 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-acc" transform="translate(1045.90625 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-1" transform="translate(1145.90625 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-22" transform="translate(1179.203125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-3b" transform="translate(1254.203125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-1" transform="translate(1321.109375 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-11ba" transform="translate(1354.40625 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-115d" transform="translate(1454.40625 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-1" transform="translate(1554.40625 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(1587.703125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-14" transform="translate(1653.40625 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-26b6" transform="translate(1719.109375 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(1819.109375 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-19" transform="translate(1884.8125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-6" transform="translate(1950.515625 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-111" transform="translate(2038.421875 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-dee" transform="translate(2138.421875 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-105b" transform="translate(2238.421875 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-11ba" transform="translate(2338.421875 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-10b5" transform="translate(2438.421875 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-1" transform="translate(2538.421875 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(2571.71875 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-f" transform="translate(2637.421875 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-17" transform="translate(2661.421875 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-26b6" transform="translate(2727.125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(2827.125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-f" transform="translate(2892.828125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-1a" transform="translate(2916.828125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-1" transform="translate(2982.53125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-45" transform="translate(3015.828125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-23" transform="translate(3080.421875 0)"/>
    </g>
   </g>
   <g id="text_22">
    <!-- 解析式；论文 26% 对应 1.3 dB。 -->
-   <g transform="translate(45.524409 211.371762) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 211.768613) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-8b3" d="M 2150 3744 
 C 2266 3936 2368 4115 2451 4282 

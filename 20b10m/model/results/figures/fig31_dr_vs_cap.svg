@@ -1007,7 +1007,7 @@ L 401.44252 47.395276
   </g>
   <g id="text_12">
    <!-- 加大采样电容的边际收益：28→56 pF 只 +0.6 dB -->
-   <g transform="translate(45.524409 14.625827) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-846" d="M 2566 3610 
 C 2554 2682 2554 2682 2528 2112 
@@ -2014,7 +2014,7 @@ z
   </g>
   <g id="text_13">
    <!-- kT/C 已只占 27%；翻倍电容救不了 DR，反而加输入电流 -->
-   <g transform="translate(45.524409 21.768315) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-4c" d="M 454 4902 
 C 486 4672 499 4499 499 4179 
@@ -3005,7 +3005,7 @@ z
   </g>
   <g id="text_14">
    <!-- 解析式；其他噪声取固定值。 -->
-   <g transform="translate(45.524409 211.371762) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 211.768613) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-8b3" d="M 2150 3744 
 C 2266 3936 2368 4115 2451 4282 

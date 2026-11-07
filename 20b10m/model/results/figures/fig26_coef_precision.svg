@@ -766,47 +766,20 @@ L 3.5 0
       </g>
      </g>
      <g id="text_9">
-      <!-- $\mathdefault{10^{-1}}$ -->
-      <g transform="translate(28.802992 163.440458) scale(0.08 -0.08)">
+      <!-- 0.1 -->
+      <g transform="translate(33.730492 163.120458) scale(0.08 -0.08)">
        <defs>
-        <path id="STIXGeneral-Regular-66" d="M 3341 256 
-L 3034 -64 
-L 2406 563 
-Q 2029 301 1606 301 
-Q 1171 301 794 563 
-L 179 -64 
-L -141 256 
-L 486 870 
-Q 224 1248 224 1677 
-Q 224 2118 486 2483 
-L -141 3110 
-L 179 3418 
-L 794 2803 
-Q 1184 3053 1606 3053 
-Q 2048 3053 2406 2803 
-L 3034 3418 
-L 3341 3110 
-L 2726 2483 
-Q 2976 2112 2976 1683 
-Q 2976 1261 2726 870 
-L 3341 256 
-z
-M 2541 1690 
-Q 2541 2086 2265 2364 
-Q 1990 2643 1594 2643 
-Q 1210 2643 934 2361 
-Q 659 2080 659 1683 
-Q 659 1280 937 995 
-Q 1216 710 1606 710 
-Q 2003 710 2272 995 
-Q 2541 1280 2541 1690 
+        <path id="HiraginoSansGB-W3-f" d="M 448 672 
+L 448 38 
+L 1082 38 
+L 1082 672 
+L 448 672 
 z
 " transform="scale(0.015625)"/>
        </defs>
-       <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(0 0.734375)"/>
-       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(65.699936 0.734375)"/>
-       <use xlink:href="#STIXGeneral-Regular-66" transform="translate(132.356903 42.034375) scale(0.7)"/>
-       <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(167.356871 42.034375) scale(0.7)"/>
+       <use xlink:href="#HiraginoSansGB-W3-11"/>
+       <use xlink:href="#HiraginoSansGB-W3-f" transform="translate(65.703125 0)"/>
+       <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(89.703125 0)"/>
       </g>
      </g>
     </g>
@@ -822,11 +795,9 @@ L 401.44252 128.155091
       </g>
      </g>
      <g id="text_10">
-      <!-- $\mathdefault{10^{0}}$ -->
-      <g transform="translate(31.602992 131.995091) scale(0.08 -0.08)">
-       <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(0 0.1)"/>
-       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(65.699936 0.1)"/>
-       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(132.356903 41.4) scale(0.7)"/>
+      <!-- 1 -->
+      <g transform="translate(40.906742 131.675091) scale(0.08 -0.08)">
+       <use xlink:href="#HiraginoSansGB-W3-12"/>
       </g>
      </g>
     </g>
@@ -842,11 +813,10 @@ L 401.44252 96.709725
       </g>
      </g>
      <g id="text_11">
-      <!-- $\mathdefault{10^{1}}$ -->
-      <g transform="translate(31.602992 100.549725) scale(0.08 -0.08)">
-       <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(0 0.734375)"/>
-       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(65.699936 0.734375)"/>
-       <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(132.356903 42.034375) scale(0.7)"/>
+      <!-- 10 -->
+      <g transform="translate(35.650492 100.229725) scale(0.08 -0.08)">
+       <use xlink:href="#HiraginoSansGB-W3-12"/>
+       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(65.703125 0)"/>
       </g>
      </g>
     </g>
@@ -862,11 +832,11 @@ L 401.44252 65.264358
       </g>
      </g>
      <g id="text_12">
-      <!-- $\mathdefault{10^{2}}$ -->
-      <g transform="translate(31.602992 69.104358) scale(0.08 -0.08)">
-       <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(0 0.034375)"/>
-       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(65.699936 0.034375)"/>
-       <use xlink:href="#HiraginoSansGB-W3-13" transform="translate(132.356903 41.334375) scale(0.7)"/>
+      <!-- 100 -->
+      <g transform="translate(30.394242 68.784358) scale(0.08 -0.08)">
+       <use xlink:href="#HiraginoSansGB-W3-12"/>
+       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(65.703125 0)"/>
+       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(131.40625 0)"/>
       </g>
      </g>
     </g>
@@ -1261,7 +1231,7 @@ L 401.44252 50.261106
     </g>
     <g id="text_13">
      <!-- 校准残差上界（ppm） -->
-     <g transform="translate(23.170492 150.770866) rotate(-90) scale(0.08 -0.08)">
+     <g transform="translate(24.761742 150.770866) rotate(-90) scale(0.08 -0.08)">
       <defs>
        <path id="HiraginoSansGB-W3-f6e" d="M 4723 2650 
 C 4595 2182 4410 1798 4102 1357 
@@ -1892,13 +1862,6 @@ L 4358 3853
 z
 " transform="scale(0.015625)"/>
       <path id="HiraginoSansGB-W3-1" transform="scale(0.015625)"/>
-      <path id="HiraginoSansGB-W3-f" d="M 448 672 
-L 448 38 
-L 1082 38 
-L 1082 672 
-L 448 672 
-z
-" transform="scale(0.015625)"/>
       <path id="HiraginoSansGB-W3-16" d="M 1261 4461 
 L 2765 4461 
 C 3066 4461 3270 4448 3514 4410 
@@ -1944,7 +1907,7 @@ z
   </g>
   <g id="text_15">
    <!-- 系数位宽够不够：14 bit 就溢出 -->
-   <g transform="translate(45.524409 14.625827) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-f22" d="M 755 1670 
 C 1293 1690 1293 1690 2880 1728 
@@ -2742,7 +2705,7 @@ z
   </g>
   <g id="text_16">
    <!-- 14 bit 有符号只到 ±8191，MSB 半组 Q4 要 ±8192；24 bit 残差 0.06 ppm -->
-   <g transform="translate(45.524409 21.768315) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-10b5" d="M 2195 4134 
 C 1978 3731 1766 3418 1472 3091 
@@ -3471,7 +3434,7 @@ z
   </g>
   <g id="text_17">
    <!-- 按权重满量程估算，不是 LMS 仿真。 -->
-   <g transform="translate(45.524409 211.385575) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 211.782425) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-3bf" d="M 5965 -38 
 C 5370 346 4902 614 4461 845 

@@ -5109,7 +5109,7 @@ L 401.44252 52.384252
   </g>
   <g id="text_14">
    <!-- INL：校准后 ±1.5 ppm 量级 -->
-   <g transform="translate(45.524409 15.192756) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-2a" d="M 454 5018 
 C 493 4762 506 4589 506 4192 
@@ -5690,7 +5690,7 @@ z
   </g>
   <g id="text_15">
    <!-- 模型合成的 20 位 INL（位权+非位权残差）；不是 10 bit DAC1 逐码 -->
-   <g transform="translate(45.524409 23.355717) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-b06" d="M 5472 966 
 C 5741 966 5901 954 6093 928 
@@ -6705,7 +6705,7 @@ z
   </g>
   <g id="text_16">
    <!-- 示意/模型曲线；真实 INL 需硅测码密度。 -->
-   <g transform="translate(45.524409 233.524958) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 234.261966) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-d55" d="M 3046 3053 
 L 3046 230 

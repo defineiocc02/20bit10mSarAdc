@@ -5,7 +5,7 @@
 # 注意：这是行为级输入折算模型，不含 settling/参考纹波/抖动/亚稳态。
 """动态时域模型：CAAZ、8× 重复、部分交织。"""
 import numpy as np
-from .params import P, LSB_TOTAL
+from .params import P, LSB_TOTAL, LSB2
 from .sources import ar1, tracking_noise, slice_errors
 
 def quantize(x, bits=22, fs_diff=P.fs_diff):
@@ -14,8 +14,12 @@ def quantize(x, bits=22, fs_diff=P.fs_diff):
     return (code / 2**bits - 0.5) * fs_diff
 
 def simulate(fin, fs=None, n=None, *, caaz=False, M=None, rho=None,
-             interleave=None, az_share=1.0, seed=1):
-    """返回输出码（伏特）。interleave=None 或 dict。"""
+             interleave=None, az_share=1.0, seed=1, dac_inl=None):
+    """返回输出码（伏特）。interleave=None 或 dict。
+
+    dac_inl: None|"raw"|"cal"|(codes, volts) —— DAC1 静态 INL 折算到输入端的加性误差。
+             一阶模型：一阶粗量化码决定落在哪一段 INL 上，二阶以后不再复现（够用于 SFDR 量级）。
+    """
     fs = P.fs if fs is None else fs
     n = P.n if n is None else n
     M = P.M if M is None else M
@@ -26,11 +30,26 @@ def simulate(fin, fs=None, n=None, *, caaz=False, M=None, rho=None,
     t = np.arange(nr) / (fs*raw)
     vin = P.amp * np.sin(2*np.pi*fin*t)
 
+    if dac_inl is not None:
+        if isinstance(dac_inl, str):
+            from .charge_model import inl_profile
+            _c, prof = inl_profile(dac_inl)
+        else:
+            _c, prof = dac_inl
+        code1 = np.clip(np.round((vin/P.fs_diff + 0.5) * 1024).astype(int), 0, 1023)
+        inl_err = prof[code1]
+    else:
+        inl_err = np.zeros(nr)
+
     # 噪声
     ktc = rng.normal(0, P.ktc, nr)
     cmp_n = rng.normal(0, P.cmp, nr)
     ref_n = rng.normal(0, P.ref, nr)
     az = rng.normal(0, P.ra_az, nr)          # CAAZ 时两笔共享（见下）
+    # 在环二级量化：残差进 CT2 之前就已经被 ADC2 量化，不能当无限精度。
+    # 参考实现用 12 bit / ±0.1 V（LSB 48.8 µV）；我们用本通道 LSB2=19.07 µV，
+    # 量化噪声按均匀分布取 LSB/√12 = 5.5 µV（审计 REFERENCE_AUDIT.md §1-7）。
+    q2 = rng.uniform(-LSB2/2, LSB2/2, nr)
     ra = tracking_noise(nr, M, rho, P.ra_broad, rng)
 
     # 交织误差
@@ -58,13 +77,16 @@ def simulate(fin, fs=None, n=None, *, caaz=False, M=None, rho=None,
         az_o = az[1::2]
         # az_share=1：两笔共享同一 AZ 代（完全抵消）；=0：各自独立 AZ（只剩平均）
         az_odd = az_share*az_e + np.sqrt(max(0.0, 1.0-az_share*az_share))*az_o
-        xe = base[0::2] + ktc[0::2] + cmp_n[0::2] + ref_n[0::2] + ra[0::2] + az_e
-        xo = -base[1::2] + ktc[1::2] + cmp_n[1::2] + ref_n[1::2] + ra[1::2] + az_odd
+        # DAC 静态误差不随斩波换号：奇偶两笔的 INL 被 (even+odd)/2 平均
+        xe = (base[0::2] + ktc[0::2] + cmp_n[0::2] + ref_n[0::2] + ra[0::2]
+              + az_e + inl_err[0::2] + q2[0::2])
+        xo = (-base[1::2] + ktc[1::2] + cmp_n[1::2] + ref_n[1::2] + ra[1::2]
+              + az_odd + inl_err[1::2] + q2[1::2])
         out = (xe - xo) / 2.0
         # 两点平均的 sinc 衰落
         out *= np.cos(np.pi*fin/(2*fs))
     else:
-        out = base + ktc + cmp_n + ref_n + ra + az
+        out = base + ktc + cmp_n + ref_n + ra + az + inl_err + q2
 
     return quantize(out), t
 

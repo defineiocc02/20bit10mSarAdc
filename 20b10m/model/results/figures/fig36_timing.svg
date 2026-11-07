@@ -1135,7 +1135,7 @@ z
   </g>
   <g id="text_18">
    <!-- 90 ns 单相帧：ΦC2 是硬核 -->
-   <g transform="translate(45.524409 14.20063) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-1a" d="M 390 928 
 C 576 557 698 390 915 218 
@@ -1790,7 +1790,7 @@ z
   </g>
   <g id="text_19">
    <!-- 7.5 + 15 + 25 + 27.5 + 10 + 5 = 90 ns；部分交织每 100 ns 重复一次 -->
-   <g transform="translate(45.524409 20.577764) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-1" transform="scale(0.015625)"/>
      <path id="HiraginoSansGB-W3-c" d="M 2323 1549 
@@ -2422,7 +2422,7 @@ z
   </g>
   <g id="text_20">
    <!-- 标称值；ss 角余量见时序表。 -->
-   <g transform="translate(45.524409 194.619006) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 194.760739) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-453" d="M 4083 3085 
 L 4083 186 

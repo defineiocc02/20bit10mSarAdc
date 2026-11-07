@@ -4,9 +4,20 @@
 """FFT 指标：DR / SNDR / SFDR / THD。相干采样 + 矩形窗。"""
 import numpy as np
 
-def fft_metrics(x, fs, fin, n_harm=10):
+def fft_metrics(x, fs, fin, n_harm=10, strict=True):
+    """矩形窗 FFT 指标。strict=True 时强制 fin 落在整数 bin。
+
+    矩形窗没有旁瓣抑制：fin 偏 0.25 bin 时 SNDR 会从 102 dB 掉到十几 dB
+    （审计实测 13.76 dB），所以相干性是硬前置条件，不能靠调用方自觉。
+    """
     x = np.asarray(x, float)
     n = len(x)
+    k_exact = fin * n / fs
+    if abs(k_exact - round(k_exact)) > 1e-9:
+        if strict:
+            raise ValueError(
+                f"fin={fin:.6g} Hz 不在整数 bin（{k_exact:.4f} bin）：矩形窗会泄漏，"
+                f"请先吸附到 {round(k_exact)*fs/n:.6g} Hz")
     x = x - x.mean()
     w = np.ones(n)
     spec = np.abs(np.fft.rfft(w * x)) / (n / 2)

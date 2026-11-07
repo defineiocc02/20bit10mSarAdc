@@ -1332,7 +1332,7 @@ z
   </g>
   <g id="text_17">
    <!-- core 功耗分配：约 3.3 mW -->
-   <g transform="translate(45.524409 14.484094) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-44" d="M 3731 2554 
 C 3642 2790 3590 2893 3507 3021 
@@ -1887,7 +1887,7 @@ z
   </g>
   <g id="text_18">
    <!-- RA 0.8 + 参考 1.0 + 数字 1.15 + 其他 0.35；不含 I/O -->
-   <g transform="translate(45.524409 21.371465) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-c" d="M 2323 1549 
 L 3866 1549 
@@ -2085,7 +2085,7 @@ z
   </g>
   <g id="text_19">
    <!-- 估算值；与论文 3.57 mW 同口径。 -->
-   <g transform="translate(45.524409 205.78751) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 206.099321) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-719" d="M 3667 2234 
 L 2739 2234 

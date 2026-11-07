@@ -39,32 +39,32 @@ z
    <g id="patch_3">
     <path d="M 65.652971 363.411883 
 L 129.612885 363.411883 
-L 129.612885 133.613653 
-L 65.652971 133.613653 
+L 129.612885 138.087592 
+L 65.652971 138.087592 
 z
 " clip-path="url(#pe037c32ae8)" style="fill: #0072b2"/>
    </g>
    <g id="patch_4">
     <path d="M 253.770365 363.411883 
 L 317.730279 363.411883 
-L 317.730279 138.469994 
-L 253.770365 138.469994 
+L 317.730279 140.34132 
+L 253.770365 140.34132 
 z
 " clip-path="url(#pe037c32ae8)" style="fill: #0072b2"/>
    </g>
    <g id="patch_5">
     <path d="M 133.375233 363.411883 
 L 197.335147 363.411883 
-L 197.335147 112.793272 
-L 133.375233 112.793272 
+L 197.335147 121.547461 
+L 133.375233 121.547461 
 z
 " clip-path="url(#pe037c32ae8)" style="fill: #d55e00"/>
    </g>
    <g id="patch_6">
     <path d="M 321.492627 363.411883 
 L 385.452541 363.411883 
-L 385.452541 68.937563 
-L 321.492627 68.937563 
+L 385.452541 72.231306 
+L 321.492627 72.231306 
 z
 " clip-path="url(#pe037c32ae8)" style="fill: #d55e00"/>
    </g>
@@ -808,7 +808,7 @@ z
   </g>
   <g id="text_12">
    <!-- 洗牌把杂散换成噪声：SFDR 106→126 -->
-   <g transform="translate(45.524409 14.767559) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-f21" d="M 4262 3802 
 L 5139 3802 
@@ -1767,7 +1767,7 @@ z
   </g>
   <g id="text_13">
    <!-- 不洗牌 DR 98.6 / SFDR 107.5；洗牌 DR 96.5 / SFDR 126.3 -->
-   <g transform="translate(45.524409 22.165165) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-1" transform="scale(0.015625)"/>
      <path id="HiraginoSansGB-W3-f" d="M 448 672 
@@ -1924,7 +1924,7 @@ z
   </g>
   <g id="text_14">
    <!-- 100 kHz、失配 50 ppm + 50 μV + 1 ps。 -->
-   <g transform="translate(45.524409 216.398202) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 216.880092) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-4c" d="M 454 4902 
 C 486 4672 499 4499 499 4179 

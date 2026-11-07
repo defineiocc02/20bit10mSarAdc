@@ -1232,7 +1232,7 @@ L 401.44252 46.148031
   </g>
   <g id="text_16">
    <!-- 参考 droop 直接变成码相关 INL -->
-   <g transform="translate(45.524409 14.484094) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-495" d="M 5722 4051 
 C 5152 4627 4819 4915 4288 5299 
@@ -1997,7 +1997,7 @@ z
   </g>
   <g id="text_17">
    <!-- droop 1 LSB1 约 0.3 ppm；要守 1.5 ppm，droop 必须 &lt;5 LSB1 -->
-   <g transform="translate(45.524409 21.371465) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-10ff" d="M 5478 3872 
 C 5472 2445 5427 1549 5325 864 
@@ -2401,7 +2401,7 @@ z
   </g>
   <g id="text_18">
    <!-- 线性近似；实际与码型/回流有关。 -->
-   <g transform="translate(45.524409 205.603698) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 205.915509) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-f4c" d="M 5434 2131 
 C 5325 1882 5005 1504 4608 1158 

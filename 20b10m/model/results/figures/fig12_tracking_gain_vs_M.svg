@@ -1251,7 +1251,7 @@ z
   </g>
   <g id="text_14">
    <!-- M 的边际收益：越往后越小 -->
-   <g transform="translate(45.524409 14.625827) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-2e" d="M 3533 -77 
 C 3571 115 3686 474 3814 774 
@@ -1846,7 +1846,7 @@ z
   </g>
   <g id="text_15">
    <!-- ρ=0.61 时 M=1→8 只有 4.05 dB，M=8→16 只多 1.4 dB -->
-   <g transform="translate(45.524409 21.768315) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-d48" d="M 5254 3418 
 L 5466 3418 
@@ -2140,7 +2140,7 @@ z
   </g>
   <g id="text_16">
    <!-- 解析式；整机 DR 还要被不可平均项稀释。 -->
-   <g transform="translate(45.524409 211.371762) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 211.768613) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-8b3" d="M 2150 3744 
 C 2266 3936 2368 4115 2451 4282 

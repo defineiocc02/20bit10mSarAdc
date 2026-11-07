@@ -889,7 +889,7 @@ L 401.44252 49.889764
   </g>
   <g id="text_14">
    <!-- 误差瀑布：五项 RSS 到 26.5 μV -->
-   <g transform="translate(45.524409 14.909291) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-f02" d="M 1754 2726 
 C 1754 3027 1760 3162 1779 3354 
@@ -1624,7 +1624,7 @@ z
   </g>
   <g id="text_15">
    <!-- 不是线性相加；合计 26.5 μV 到 DR 102.5 dB -->
-   <g transform="translate(45.524409 22.562016) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-482" d="M 3219 4493 
 C 2976 3987 2656 3539 2208 3066 
@@ -2221,7 +2221,7 @@ z
   </g>
   <g id="text_16">
    <!-- 按参数表；未含参考 droop/抖动。 -->
-   <g transform="translate(45.524409 221.982454) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 222.549383) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-3bf" d="M 5965 -38 
 C 5370 346 4902 614 4461 845 

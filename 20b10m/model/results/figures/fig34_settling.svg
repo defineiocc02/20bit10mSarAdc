@@ -539,47 +539,46 @@ L 3.5 0
       </g>
      </g>
      <g id="text_8">
-      <!-- $\mathdefault{10^{-4}}$ -->
-      <g transform="translate(28.802992 176.146457) scale(0.08 -0.08)">
+      <!-- 1e-4 -->
+      <g transform="translate(28.051742 175.866457) scale(0.08 -0.08)">
        <defs>
-        <path id="STIXGeneral-Regular-66" d="M 3341 256 
-L 3034 -64 
-L 2406 563 
-Q 2029 301 1606 301 
-Q 1171 301 794 563 
-L 179 -64 
-L -141 256 
-L 486 870 
-Q 224 1248 224 1677 
-Q 224 2118 486 2483 
-L -141 3110 
-L 179 3418 
-L 794 2803 
-Q 1184 3053 1606 3053 
-Q 2048 3053 2406 2803 
-L 3034 3418 
-L 3341 3110 
-L 2726 2483 
-Q 2976 2112 2976 1683 
-Q 2976 1261 2726 870 
-L 3341 256 
+        <path id="HiraginoSansGB-W3-46" d="M 3475 1690 
+C 3462 1862 3437 2112 3430 2182 
+C 3302 3040 2707 3571 1882 3571 
+C 922 3571 294 2854 294 1760 
+C 294 653 928 -51 1933 -51 
+C 2400 -51 2790 102 3091 397 
+C 3238 544 3322 659 3443 928 
+L 2995 1107 
+C 2816 614 2458 358 1939 358 
+C 1555 358 1242 512 1037 794 
+C 864 1024 800 1261 781 1690 
+L 3475 1690 
 z
-M 2541 1690 
-Q 2541 2086 2265 2364 
-Q 1990 2643 1594 2643 
-Q 1210 2643 934 2361 
-Q 659 2080 659 1683 
-Q 659 1280 937 995 
-Q 1216 710 1606 710 
-Q 2003 710 2272 995 
-Q 2541 1280 2541 1690 
+M 800 2093 
+C 838 2336 870 2451 960 2611 
+C 1152 2970 1478 3168 1869 3168 
+C 2176 3168 2426 3072 2624 2880 
+C 2829 2682 2925 2451 2963 2093 
+L 800 2093 
+z
+" transform="scale(0.015625)"/>
+        <path id="HiraginoSansGB-W3-e" d="M 179 1632 
+C 358 1658 506 1664 762 1664 
+L 1523 1664 
+C 1792 1664 1933 1658 2112 1632 
+L 2112 2170 
+C 1933 2144 1798 2138 1523 2138 
+L 762 2138 
+C 493 2138 358 2144 179 2170 
+L 179 1632 
 z
 " transform="scale(0.015625)"/>
        </defs>
-       <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(0 0.084375)"/>
-       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(65.699936 0.084375)"/>
-       <use xlink:href="#STIXGeneral-Regular-66" transform="translate(132.356903 41.384375) scale(0.7)"/>
-       <use xlink:href="#HiraginoSansGB-W3-15" transform="translate(167.356871 41.384375) scale(0.7)"/>
+       <use xlink:href="#HiraginoSansGB-W3-12"/>
+       <use xlink:href="#HiraginoSansGB-W3-46" transform="translate(65.703125 0)"/>
+       <use xlink:href="#HiraginoSansGB-W3-e" transform="translate(124.5 0)"/>
+       <use xlink:href="#HiraginoSansGB-W3-15" transform="translate(160.296875 0)"/>
       </g>
      </g>
     </g>
@@ -595,12 +594,21 @@ L 401.44252 136.646119
       </g>
      </g>
      <g id="text_9">
-      <!-- $\mathdefault{10^{-2}}$ -->
-      <g transform="translate(28.802992 140.486119) scale(0.08 -0.08)">
-       <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(0 0.034375)"/>
-       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(65.699936 0.034375)"/>
-       <use xlink:href="#STIXGeneral-Regular-66" transform="translate(132.356903 41.334375) scale(0.7)"/>
-       <use xlink:href="#HiraginoSansGB-W3-13" transform="translate(167.356871 41.334375) scale(0.7)"/>
+      <!-- 0.01 -->
+      <g transform="translate(28.474242 140.166119) scale(0.08 -0.08)">
+       <defs>
+        <path id="HiraginoSansGB-W3-f" d="M 448 672 
+L 448 38 
+L 1082 38 
+L 1082 672 
+L 448 672 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#HiraginoSansGB-W3-11"/>
+       <use xlink:href="#HiraginoSansGB-W3-f" transform="translate(65.703125 0)"/>
+       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(89.703125 0)"/>
+       <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(155.40625 0)"/>
       </g>
      </g>
     </g>
@@ -616,11 +624,9 @@ L 401.44252 100.945782
       </g>
      </g>
      <g id="text_10">
-      <!-- $\mathdefault{10^{0}}$ -->
-      <g transform="translate(31.602992 104.785782) scale(0.08 -0.08)">
-       <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(0 0.1)"/>
-       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(65.699936 0.1)"/>
-       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(132.356903 41.4) scale(0.7)"/>
+      <!-- 1 -->
+      <g transform="translate(40.906742 104.465782) scale(0.08 -0.08)">
+       <use xlink:href="#HiraginoSansGB-W3-12"/>
       </g>
      </g>
     </g>
@@ -636,17 +642,17 @@ L 401.44252 65.245444
       </g>
      </g>
      <g id="text_11">
-      <!-- $\mathdefault{10^{2}}$ -->
-      <g transform="translate(31.602992 69.085444) scale(0.08 -0.08)">
-       <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(0 0.034375)"/>
-       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(65.699936 0.034375)"/>
-       <use xlink:href="#HiraginoSansGB-W3-13" transform="translate(132.356903 41.334375) scale(0.7)"/>
+      <!-- 100 -->
+      <g transform="translate(30.394242 68.765444) scale(0.08 -0.08)">
+       <use xlink:href="#HiraginoSansGB-W3-12"/>
+       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(65.703125 0)"/>
+       <use xlink:href="#HiraginoSansGB-W3-11" transform="translate(131.40625 0)"/>
       </g>
      </g>
     </g>
     <g id="text_12">
      <!-- DAC1 建立误差（mV） -->
-     <g transform="translate(23.842992 153.478366) rotate(-90) scale(0.08 -0.08)">
+     <g transform="translate(23.091742 153.478366) rotate(-90) scale(0.08 -0.08)">
       <defs>
        <path id="HiraginoSansGB-W3-25" d="M 544 781 
 C 544 461 531 269 493 19 
@@ -2619,13 +2625,6 @@ L 401.44252 47.395276
     <!-- 0.5 LSB1 -->
     <g transform="translate(68.850966 143.040077) scale(0.062 -0.062)">
      <defs>
-      <path id="HiraginoSansGB-W3-f" d="M 448 672 
-L 448 38 
-L 1082 38 
-L 1082 672 
-L 448 672 
-z
-" transform="scale(0.015625)"/>
       <path id="HiraginoSansGB-W3-2d" d="M 3059 38 
 C 3418 38 3597 26 3802 -6 
 L 3802 538 
@@ -2855,7 +2854,7 @@ L 67.642992 119.356866
   </g>
   <g id="text_17">
    <!-- DAC1 粗装载：Ron 32 Ω 是硬上限 -->
-   <g transform="translate(45.524409 14.625827) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-25" d="M 506 749 
 C 506 365 493 166 454 -96 
@@ -3659,7 +3658,7 @@ z
   </g>
   <g id="text_18">
    <!-- 52 Ω 在 ss 角 9.5 ns，超 ΦC0；32 Ω 留 0.5 ns -->
-   <g transform="translate(45.524409 21.768315) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-111d" d="M 2758 4416 
 C 2816 4544 2938 4838 3002 4992 
@@ -4095,7 +4094,7 @@ z
   </g>
   <g id="text_19">
    <!-- τ=Ron·C_eq 的简化；实际 C_eq 随码变。 -->
-   <g transform="translate(45.524409 210.81395) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 211.2108) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-237" d="M 5056 3494 
 C 4838 3462 4659 3450 4320 3450 
@@ -4132,27 +4131,6 @@ L 0 -845
 L 3206 -845 
 L 3206 -582 
 L 0 -582 
-z
-" transform="scale(0.015625)"/>
-     <path id="HiraginoSansGB-W3-46" d="M 3475 1690 
-C 3462 1862 3437 2112 3430 2182 
-C 3302 3040 2707 3571 1882 3571 
-C 922 3571 294 2854 294 1760 
-C 294 653 928 -51 1933 -51 
-C 2400 -51 2790 102 3091 397 
-C 3238 544 3322 659 3443 928 
-L 2995 1107 
-C 2816 614 2458 358 1939 358 
-C 1555 358 1242 512 1037 794 
-C 864 1024 800 1261 781 1690 
-L 3475 1690 
-z
-M 800 2093 
-C 838 2336 870 2451 960 2611 
-C 1152 2970 1478 3168 1869 3168 
-C 2176 3168 2426 3072 2624 2880 
-C 2829 2682 2925 2451 2963 2093 
-L 800 2093 
 z
 " transform="scale(0.015625)"/>
      <path id="HiraginoSansGB-W3-52" d="M 3680 -1306 

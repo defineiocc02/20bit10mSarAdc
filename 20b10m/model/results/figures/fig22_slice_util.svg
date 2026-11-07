@@ -1750,7 +1750,7 @@ z
   </g>
   <g id="text_19">
    <!-- 每片的使用次数：轮换是否公平 -->
-   <g transform="translate(45.524409 14.625827) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-ac4" d="M 5523 1792 
 C 5805 1792 5971 1786 6150 1766 
@@ -2593,7 +2593,7 @@ z
   </g>
   <g id="text_20">
    <!-- base+8 mod 18 的 9 次循环让每片转换/采样次数接近相等 -->
-   <g transform="translate(45.524409 21.768315) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-43" d="M 966 38 
 L 966 397 
@@ -3418,7 +3418,7 @@ z
   </g>
   <g id="text_21">
    <!-- 模型调度；未含备用片替换。 -->
-   <g transform="translate(45.524409 211.371762) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 211.768613) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-b06" d="M 5472 966 
 C 5741 966 5901 954 6093 928 

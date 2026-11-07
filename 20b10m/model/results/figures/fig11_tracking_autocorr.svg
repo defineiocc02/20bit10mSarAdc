@@ -1584,7 +1584,7 @@ z
   </g>
   <g id="text_21">
    <!-- 重复读之间的相关：AR(1) 假设 -->
-   <g transform="translate(45.524409 14.484094) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-11d7" d="M 3488 4640 
 C 3866 4666 4314 4704 4512 4730 
@@ -2396,7 +2396,7 @@ z
   </g>
   <g id="text_22">
    <!-- ρ=0.61 时第 2 次读仍有 0.37 相关；这就是平均拿不满的原因 -->
-   <g transform="translate(45.524409 21.371465) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-1" transform="scale(0.015625)"/>
      <path id="HiraginoSansGB-W3-d48" d="M 5254 3418 
@@ -3573,7 +3573,7 @@ z
   </g>
   <g id="text_23">
    <!-- 模型假设；实际 PSD 可能双极点。 -->
-   <g transform="translate(45.524409 205.78751) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 206.099321) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-b06" d="M 5472 966 
 C 5741 966 5901 954 6093 928 

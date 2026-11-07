@@ -1475,7 +1475,7 @@ z
   </g>
   <g id="text_17">
    <!-- FoM 对标：本工作的位置 -->
-   <g transform="translate(45.524409 14.767559) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-27" d="M 1357 2125 
 L 2726 2125 
@@ -2026,7 +2026,7 @@ z
   </g>
   <g id="text_18">
    <!-- 187.8 dB @100 kHz；比 Bannon 高 10 dB，比 Steensgaard 高 3.7 dB -->
-   <g transform="translate(45.524409 22.165165) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-1" transform="scale(0.015625)"/>
      <path id="HiraginoSansGB-W3-21" d="M 4608 832 
@@ -2352,7 +2352,7 @@ z
   </g>
   <g id="text_19">
    <!-- 论文 Table I；本工作为目标值，不是实测。 -->
-   <g transform="translate(45.524409 216.956014) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 217.437904) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-a82" d="M 4384 5210 
 L 3962 5350 

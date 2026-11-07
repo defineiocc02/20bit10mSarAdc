@@ -1186,7 +1186,7 @@ L 401.44252 62.588976
   </g>
   <g id="text_21">
    <!-- 18 片池的角色调度：8 转换 + 8 采样 + 2 备 -->
-   <g transform="translate(45.524409 15.759685) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-12" d="M 2867 -77 
 C 2829 186 2816 416 2816 755 
@@ -2171,7 +2171,7 @@ z
   </g>
   <g id="text_22">
    <!-- 深色=转换、浅色=采样、灰=备用；base 每次 +8 mod 18，9 次覆盖全部 -->
-   <g transform="translate(45.524409 24.943118) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-d27" d="M 5446 1952 
 C 5664 1952 5894 1939 6067 1920 
@@ -3455,7 +3455,7 @@ z
   </g>
   <g id="text_23">
    <!-- 调度为轮换，不是 LFSR/DEM；实际洗牌另加。 -->
-   <g transform="translate(45.524409 255.861966) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 256.939131) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-5d8" d="M 4262 3571 
 L 4634 3571 

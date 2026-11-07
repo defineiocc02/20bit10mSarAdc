@@ -69,26 +69,63 @@ def chinese_style() -> str:
         if ord("码") not in font_manager.get_font(path).get_charmap():
             continue
         mpl.rcParams.update({
-            "font.family": family,
+            # 字体回退链：中文字形来自 Hiragino/PingFang，µ、−、± 等拉丁符号回退到 Arial。
+            # 只写单一 family 时 matplotlib 不会逐字回退，µ 会变成方框（实测踩过）。
+            "font.family": [family, "Arial", "Helvetica", "DejaVu Sans"],
             "font.weight": weight,
             "axes.labelweight": weight,
             "axes.titleweight": weight,
             "axes.unicode_minus": False,
+            "mathtext.fontset": "dejavusans",
         })
         return family
     raise RuntimeError("需要 Hiragino Sans GB 或 PingFang SC 才能画中文图")
 
 
 def annotate(fig, title: str, subtitle: str, note: str) -> None:
-    fig.text(0.11, 0.975, title, fontsize=10.5, fontweight=600, va="top")
-    fig.text(0.11, 0.930, subtitle, fontsize=7.6, va="top")
-    fig.text(0.11, 0.015, note, fontsize=6.8, va="bottom")
+    """标题/副标题/脚注按「毫米」定位，而不是图高百分比。
+
+    百分比定位在矮图（74 mm）上会让标题压在副标题上；改成 mm 后各尺寸通用。
+    """
+    h_mm = fig.get_figheight() * 25.4
+    fig.text(0.11, 1 - 1.6/h_mm, title, fontsize=10.5, fontweight=600, va="top")
+    fig.text(0.11, 1 - 6.0/h_mm, subtitle, fontsize=7.6, va="top")
+    fig.text(0.11, 1.0/h_mm, note, fontsize=6.8, va="bottom")
+
+
+def _plain_log_axes(fig) -> None:
+    """把对数轴的 LogFormatter 换成纯文本刻度。
+
+    LogFormatter 用 mathtext 排 10^{-1}，而 mathtext 的 \\mathdefault 解析不到
+    font.family 列表，会打成 dummy glyph（实测一条告警一个方框）。这里统一改成
+    「0.01 / 0.1 / 1 / 10 / 1e-3」这种纯文本。
+    """
+    from matplotlib.ticker import FuncFormatter
+
+    def _fmt(v, _pos):
+        if v <= 0:
+            return ""
+        e = np.log10(v)
+        if abs(e - round(e)) > 1e-9:
+            return ""
+        ee = int(round(e))
+        return f"{v:g}" if -2 <= ee <= 3 else f"1e{ee}"
+
+    for ax in fig.axes:
+        for axis, scale in ((ax.xaxis, ax.get_xscale()), (ax.yaxis, ax.get_yscale())):
+            if scale != "log":
+                continue
+            if "Log" not in type(axis.get_major_formatter()).__name__:
+                continue
+            axis.set_major_formatter(FuncFormatter(_fmt))
+            axis.set_minor_formatter(FuncFormatter(lambda v, p: ""))
 
 
 def save(fig, stem: Path, *, pdf: bool = True) -> list[Path]:
     stem = Path(stem)
     stem.parent.mkdir(parents=True, exist_ok=True)
     outs = []
+    _plain_log_axes(fig)
     png = stem.with_suffix(".png")
     svg = stem.with_suffix(".svg")
     fig.savefig(png, dpi=300)

@@ -1209,7 +1209,7 @@ L 401.44252 46.148031
   </g>
   <g id="text_15">
    <!-- 热梯度不是主风险，但会毁校准 -->
-   <g transform="translate(45.524409 14.484094) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-ca3" d="M 870 -531 
 C 1299 -90 1434 96 1715 659 
@@ -2104,7 +2104,7 @@ z
   </g>
   <g id="text_16">
    <!-- 1 K/mm 约 0.5 ppm；3 K/mm 到 4.5 ppm，已超预算 -->
-   <g transform="translate(45.524409 21.371465) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-10ff" d="M 5478 3872 
 C 5472 2445 5427 1549 5325 864 
@@ -2623,7 +2623,7 @@ z
   </g>
   <g id="text_17">
    <!-- 二次近似，系数为估算；需版图质心重合。 -->
-   <g transform="translate(45.524409 205.78751) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 206.099321) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-63d" d="M 1024 4051 
 C 1235 4077 1478 4090 1850 4090 

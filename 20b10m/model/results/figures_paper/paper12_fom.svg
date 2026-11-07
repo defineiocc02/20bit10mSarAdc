@@ -1129,7 +1129,7 @@ z
   </g>
   <g id="text_17">
    <!-- FoM 对标（论文 Table I） -->
-   <g transform="translate(45.524409 14.909291) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-27" d="M 1357 2125 
 L 2726 2125 
@@ -1584,7 +1584,7 @@ z
   </g>
   <g id="text_18">
    <!-- 本工作目标 187.8 dB @100 kHz；不是实测 -->
-   <g transform="translate(45.524409 22.562016) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-427" d="M 2938 4186 
 L 1146 4186 
@@ -2155,7 +2155,7 @@ z
   </g>
   <g id="text_19">
    <!-- 论文值/目标值。 -->
-   <g transform="translate(45.524409 222.356454) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 222.923383) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-a82" d="M 4384 5210 
 L 3962 5350 

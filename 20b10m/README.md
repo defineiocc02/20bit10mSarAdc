@@ -35,6 +35,7 @@ VIN → 18 片 DAC1 池（8 转换 + 8 采样 + 2 备）
 20b10m/
 ├── README.md              本文件
 ├── CODE_INDEX.md          代码索引（先看这个）
+├── TECH_EFFECTIVENESS.md  各技术有效性对比（结论总表，先看这个）
 ├── FILE_LAYOUT.md         文件存放规范
 ├── plan/                  规划、架构裁决、面积/floorplan、SPEC 主文档
 ├── spec/                  层次、端口、位分配、时序、10M 规格表
@@ -45,7 +46,8 @@ VIN → 18 片 DAC1 池（8 转换 + 8 采样 + 2 备）
 ├── model/                 Python 行为模型（CAAZ / tracking / 交织 / 静态 / 出图）
 │   ├── results/           results.json、report.md
 │   ├── results/figures/   41 张诊断图 + manifest.json
-│   └── results/figures_paper/ 14 张论文测试风格图 + manifest.json
+│   ├── results/figures_paper/   14 张论文测试风格图 + manifest.json
+│   └── results/figures_measured/ 9 张实测风格图（频谱/INL-DNL/DR/技术排序）
 ├── verilog/               端口桩
 ├── skill/                 建库脚本
 └── docs/                  导入步骤、流程模板
@@ -61,7 +63,9 @@ VIN → 18 片 DAC1 池（8 转换 + 8 采样 + 2 备）
 | 面积对标成电 | `analog/area_vs_cicc.md` |
 | 内部 floorplan | `analog/floorplan_4mm.md`、`floorplan_4mm.png` |
 | 走线规则 | `analog/routing_plan.md` |
-| 模型可信度 | `model/AUDIT.md` |
+| 各技术到底值多少 dB | `TECH_EFFECTIVENESS.md` |
+| 模型可信度 | `model/AUDIT.md`、`model/REFERENCE_AUDIT.md` |
+| 校准链路缺口 | `digital/CALIBRATION_GAP.md` |
 | 出图规范 | `model/PLOT_DESIGN.md` |
 | 引脚/输出接口 | `interface/PINOUT_QFN48.md`、`interface/OUTPUT_IF_10M.md` |
 
@@ -69,13 +73,15 @@ VIN → 18 片 DAC1 池（8 转换 + 8 采样 + 2 备）
 
 | 问题 | 结论 | 图 |
 |:---|:---|:---|
-| CAAZ 有用吗 | 10 MS/s 输出：100 kHz **+3.58 dB**，2 MHz +3.14；其中 3 dB 是通用两点平均，AZ 抵消只 0.6 dB | `fig01/02/03/07` |
-| 交织能提速吗 | 理想 10 MS/s 与 5 MS/s 同 DR（102.1 dB）；2 MHz、2 ps skew 掉到 98.7；增益 50 ppm 掉 6 dB | `fig14–20` |
-| 8× 平均有多少 | M=1→8 只有 **+1.71 dB**（ρ=0.61），不是 4 dB | `fig08–13` |
-| 校准有用吗 | DAC1 σu=0.2%：38.6 ppm → **1.8 ppm**（只扣位权项） | `fig23–27` |
+| DAC1 校准有用吗 | 不校准 SNDR **94.5 dB / SFDR 103.5 dBc**，校准后回到噪声底 **101.8 dB**（+7.3 dB）；残余 INL 0.3 ppm | `measured01/02/09`、`fig23–27` |
+| 交织能提速吗 | 理想 10 MS/s 与 5 MS/s 同 DR（101.87 dB）→ 交织只换速率；2 MHz、2 ps skew 掉 1.5 dB；增益 50 ppm 掉 5.4 dB | `fig14–20` |
+| CAAZ 有用吗 | 100 kHz **+3.62 dB**、2 MHz +3.18；其中 3.04 dB 是通用两点平均，AZ 抵消只 **+0.58 dB** | `measured08`、`fig01/02/03/07` |
+| 8× 平均有多少 | M=1→8 只有 **+1.67 dB**（ρ=0.61），不是 4.5 dB | `fig08–13` |
+| 洗牌值不值 | DR −1.0 dB，SFDR **+21.2 dBc**（103.7→124.9） | `fig17–19` |
 | 面积该多大 | 对标成电 core **0.70–1.0**、die 0.95–1.25；4 mm² 是宽松版 | `fig38`、`area_vs_cicc.md` |
 
-**注意**：绝对 DR/SNDR/INL 为模型值，未标定，不能当签核；详见 `model/AUDIT.md`。
+**注意**：绝对 DR/SNDR/INL 为模型值，未标定，不能当签核；模型缺参考建立/抖动/亚稳态/DAC 建立，实测 SFDR 预期 100–110 dBc。
+详见 `TECH_EFFECTIVENESS.md`（含"能声称/不能声称"清单）与 `model/REFERENCE_AUDIT.md`（与参考实现的逐点对照）。
 
 ## 6. 快速运行
 

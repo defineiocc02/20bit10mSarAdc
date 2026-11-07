@@ -1780,7 +1780,7 @@ z
   </g>
   <g id="text_18">
    <!-- 2 MHz 的抖动天花板：1 ps 就是 95.7 dB -->
-   <g transform="translate(45.524409 14.625827) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-13" d="M 3226 -77 
 C 3635 -77 3891 -90 4192 -115 
@@ -2662,7 +2662,7 @@ z
   </g>
   <g id="text_19">
    <!-- σt=1 ps 时抖动 44.4 μV；0.5 ps 才能到 97.5 dB -->
-   <g transform="translate(45.524409 21.768315) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-1e" d="M 339 2656 
 L 339 2221 
@@ -2985,7 +2985,7 @@ z
   </g>
   <g id="text_20">
    <!-- 解析式；未含开关非线性。 -->
-   <g transform="translate(45.524409 211.371762) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 211.768613) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-8b3" d="M 2150 3744 
 C 2266 3936 2368 4115 2451 4282 

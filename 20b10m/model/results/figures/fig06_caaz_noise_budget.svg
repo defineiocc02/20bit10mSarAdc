@@ -1698,7 +1698,7 @@ z
   </g>
   <g id="text_16">
    <!-- CAAZ 到底消哪一项：噪声预算分解 -->
-   <g transform="translate(45.524409 14.909291) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-24" d="M 3891 1638 
 C 3840 1344 3789 1210 3680 1050 
@@ -2725,7 +2725,7 @@ z
   </g>
   <g id="text_17">
    <!-- AZ 项归零；其余独立项只按 √2 平均（3 dB） -->
-   <g transform="translate(45.524409 22.562016) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-f5b" d="M 1133 4288 
 L 1133 1312 
@@ -3527,7 +3527,7 @@ z
   </g>
   <g id="text_18">
    <!-- 按参数表 RSS 近似；不是逐源仿真分解。 -->
-   <g transform="translate(45.524409 222.540266) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 223.107195) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-495" d="M 1069 3398 
 C 742 3398 531 3411 371 3437 

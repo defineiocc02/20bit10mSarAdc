@@ -1638,7 +1638,7 @@ z
   </g>
   <g id="text_13">
    <!-- 为什么必须是“部分交织”而不是全通道 -->
-   <g transform="translate(45.524409 14.767559) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-eb9" d="M 3482 3859 
 C 3552 4627 3610 5056 3667 5382 
@@ -2524,7 +2524,7 @@ z
   </g>
   <g id="text_14">
    <!-- 全通道 10 MS/s 每通道只剩 10 ns 采样窗，且面积/功耗翻倍；部分交织只复制 DAC，仍保 100 ns -->
-   <g transform="translate(45.524409 22.165165) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-ac4" d="M 5094 4333 
 C 5440 4333 5651 4320 5901 4294 
@@ -3544,7 +3544,7 @@ z
   </g>
   <g id="text_15">
    <!-- 面积按 DAC/RA/CT2 估算；采样窗为架构值。 -->
-   <g transform="translate(45.524409 216.772202) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 217.254092) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-3bf" d="M 5965 -38 
 C 5370 346 4902 614 4461 845 

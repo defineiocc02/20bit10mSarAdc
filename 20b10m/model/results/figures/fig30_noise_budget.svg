@@ -1544,7 +1544,7 @@ L 401.44252 48.64252
   </g>
   <g id="text_15">
    <!-- 整机噪声预算：RA 宽带仍是最大项 -->
-   <g transform="translate(45.524409 14.767559) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-119c" d="M 6093 4826 
 C 5888 4800 5696 4787 5466 4787 
@@ -2634,7 +2634,7 @@ z
   </g>
   <g id="text_16">
    <!-- kT/C 17.3、RA 平均后约 15、AZ 9.7、Cmp 9.7、Ref 2.9 -->
-   <g transform="translate(45.524409 22.165165) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-14" d="M 288 1088 
 C 403 762 480 621 614 467 
@@ -2950,7 +2950,7 @@ z
   </g>
   <g id="text_17">
    <!-- 按参数表；RSS 约 26.5 μV，对应 DR 102.5。 -->
-   <g transform="translate(45.524409 216.956014) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 217.437904) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-3bf" d="M 5965 -38 
 C 5370 346 4902 614 4461 845 

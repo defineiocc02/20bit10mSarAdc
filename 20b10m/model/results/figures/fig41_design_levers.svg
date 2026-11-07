@@ -1513,7 +1513,7 @@ L 401.44252 47.395276
   </g>
   <g id="text_16">
    <!-- 设计杠杆的性价比：先做哪个 -->
-   <g transform="translate(45.524409 14.625827) scale(0.105 -0.105)">
+   <g transform="translate(45.524409 13.775433) scale(0.105 -0.105)">
     <defs>
      <path id="HiraginoSansGB-W6-d21" d="M 1792 2707 
 C 1792 3136 1792 3187 1818 3437 
@@ -2239,7 +2239,7 @@ z
   </g>
   <g id="text_17">
    <!-- M=8 与 skew/校准最值钱；CAAZ 只有 0.6 dB，加大电容只有 0.6 dB -->
-   <g transform="translate(45.524409 21.768315) scale(0.076 -0.076)">
+   <g transform="translate(45.524409 23.695874) scale(0.076 -0.076)">
     <defs>
      <path id="HiraginoSansGB-W3-10d0" d="M 1837 4429 
 C 1907 5210 1907 5210 1933 5363 
@@ -3006,7 +3006,7 @@ z
   </g>
   <g id="text_18">
    <!-- 估算/模型；杠杆之间不完全独立。 -->
-   <g transform="translate(45.524409 211.18795) scale(0.068 -0.068)">
+   <g transform="translate(45.524409 211.5848) scale(0.068 -0.068)">
     <defs>
      <path id="HiraginoSansGB-W3-b06" d="M 5472 966 
 C 5741 966 5901 954 6093 928 

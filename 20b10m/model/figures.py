@@ -288,7 +288,7 @@ def f23(D):
     c = D["curves"]; code = c["code"]; fig, ax = canvas(86)
     ax.step(code, c["inl_raw"], where="post", color=BASE, lw=.8, label="校准前"); ax.step(code, c["inl_cal"], where="post", color=CAAZ, lw=.9, label="位权校准后")
     ax.set(xlabel="DAC1 码（10 bit）", ylabel="INL（LSB1）"); ax.grid(alpha=.26); ax.legend(frameon=False, fontsize=6.6, loc="upper right")
-    viz.annotate(fig, "DAC1 INL：校准前 38.6 ppm → 1.8 ppm", "σu=0.2%，含 1.5 ppm 非位权残差；校准只扣位权项", "1024 码逐码；不是 20.5 bit 系统 INL。")
+    viz.annotate(fig, "DAC1 INL：校准前 16.4 ppm → 0.3 ppm", "σu=0.2%，8 unary 片 × 128 单位；校准只扣位权项", "1024 码逐码；不是 20.5 bit 系统 INL。残差由测量噪声决定（n=16）。")
     return fig, (W, 86)
 
 
@@ -296,7 +296,7 @@ def f24(D):
     c = D["curves"]; code = c["code"][1:]; fig, ax = canvas(82)
     ax.step(code, c["dnl_raw"], where="post", color=BASE, lw=.7, label="校准前"); ax.step(code, c["dnl_cal"], where="post", color=CAAZ, lw=.8, label="位权校准后")
     ax.set(xlabel="DAC1 码（10 bit）", ylabel="DNL（LSB1）"); ax.grid(alpha=.26); ax.legend(frameon=False, fontsize=6.6, loc="upper right")
-    viz.annotate(fig, "DAC1 DNL：失配在进位处出尖峰", "校准后尖峰被位权项吸收；剩余为 1.5 ppm 非位权残差", "逐码 DNL；20.5 bit 下不可直接测。")
+    viz.annotate(fig, "DAC1 DNL：失配在进位处出尖峰", "校准后尖峰被位权项吸收；剩余为有限样本残差（±0.6 ppm）", "逐码 DNL；20.5 bit 下不可直接测。")
     return fig, (W, 82)
 
 
@@ -304,7 +304,7 @@ def f25(D):
     rows = D["res"]["static"]; x = np.arange(len(rows)); raw = [r["inl_raw_ppm"] for r in rows]; cal = [r["inl_cal_ppm"] for r in rows]
     fig, ax = canvas(78); ax.bar(x-.18, raw, .34, color=BASE, label="校准前"); ax.bar(x+.18, cal, .34, color=CAAZ, label="校准后")
     ax.set(xticks=x, xticklabels=[f"{r['unit_sigma']*100:.1f}%" for r in rows], xlabel="单位电容 σu", ylabel="INL（ppm FS）"); ax.grid(alpha=.26, axis="y"); ax.legend(frameon=False, fontsize=6.4)
-    viz.annotate(fig, "单位电容失配 vs 校准后 INL", "σu 0.1/0.2/0.4% 校准前 20/39/76 ppm，校准后都约 1.8 ppm", "模型值；校准残差由非位权项决定。")
+    viz.annotate(fig, "单位电容失配 vs 校准后 INL", "σu 0.1/0.2/0.4% 校准前 8/16/33 ppm，校准后都约 0.3 ppm", "模型值；校准后残差与 σu 无关——它由测量噪声（∝1/√n）决定。")
     return fig, (W, 78)
 
 
@@ -319,9 +319,9 @@ def f26(D):
 
 def f27(D):
     c = D["curves"]; fig, ax = canvas(76)
-    bins = np.linspace(-.12,.12,60); ax.hist(c["dnl_raw"], bins=bins, color=BASE, alpha=.55, label="校准前"); ax.hist(c["dnl_cal"], bins=bins, color=CAAZ, alpha=.55, label="校准后")
+    bins = np.linspace(-.018,.018,73); ax.hist(c["dnl_raw"], bins=bins, color=BASE, alpha=.55, label="校准前"); ax.hist(c["dnl_cal"], bins=bins, color=CAAZ, alpha=.55, label="校准后")
     ax.set(xlabel="DNL（LSB1）", ylabel="码数"); ax.grid(alpha=.26); ax.legend(frameon=False, fontsize=6.4)
-    viz.annotate(fig, "DNL 分布：校准把尖峰收回到 0 附近", "校准前尾部到 ±0.10 LSB1；校准后只剩非位权残差", "1024 码直方图。")
+    viz.annotate(fig, "DNL 分布：校准把尖峰收回到 0 附近", "校准前尾部到 ±0.0145 LSB1（14 ppm）；校准后只剩 ±0.0006 LSB1", "1024 码直方图。")
     return fig, (W, 76)
 
 
