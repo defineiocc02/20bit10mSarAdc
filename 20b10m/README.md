@@ -33,33 +33,50 @@
 | 面积 | core 0.93 / die 1.41 mm² | 面积模型（MIM 密度待 PDK） |
 | 功耗 | 3.73–4.03 mW | 估算 |
 
-## 3. 现状：哪些是真的
+## 3. 技术有效性：交叉验证后的结论
 
-| 层 | 状态 | 证据 |
-|:---|:---|:---|
-| 码域闭合 | ✅ **已验证** | `behavioral` `runs/smoke_ramp`：σu=0 → INL 0.000 LSB20 |
-| 理想动态 | ✅ **已验证** | `runs/smoke_tone`：SNDR 122.06 dB / ENOB 19.98 |
-| 失配→INL | ✅ **已验证** | 0.02%→4.6 LSB、0.2%→45.3 LSB（线性） |
-| 校准 | ✅ **已验证** | INL 45.3 → 0.65 LSB（27×） |
-| 8× 重复 | ✅ **已验证（Python）** | **+1.71 dB**（均匀权，`model/` f2）；+1.86 dB（三角权，`behavioral`）；论文 +1.9；差异来自权重与 ρ |
-| 网表层次 | ⚠️ 仅静态 | `check_hier.py`：28 文件 / **222 实例** / 端口一致 |
-| 模拟电路 | ❌ **零仿真** | PDK 空；DAC1 termination 仍接 VCM、三电平未接、replica 单套 |
-| 数字 RTL | ❌ **零编译** | 本机无 iverilog/verilator |
-| 版图 | ❌ **零** | 只有面积模型 |
+> 协议：**K=10 seeds（1000–1009）**，配对差值 + 95% CI；图另用 2000–2009 独立复现。
+> 原始数据：`model/results/crossval/{results.json,summary.csv}`；报告：`review/20261112_crossval.md`。
+
+| 技术 | 结论 | 判定 |
+|:---|:---|:---:|
+| 位账 | LSB2 = FS/2^20，相对差 <1e-12 | **PASS** |
+| 8× LSB 重复 | **+1.69 dB [1.66,1.72]** @100k；+1.70 @1M；解析预测 1.714 | **VALIDATED** |
+| CAAZ | **+3.65 dB** @100k；@1M +3.54；@2M +3.21；其中 AZ 只 **+0.60** | **VALIDATED** |
+| 片级 shuffle | SFDR **+22.3 dBc** @100k、+21.7 @2M；**DR 方向不稳**（+0.9 / −1.7 两段相反） | SFDR **VALIDATED**；DR **NOT VALIDATED** |
+| 静态校准 | raw **17.8±4.4 ppm** → 有限样本 **0.64±0.04**；out-of-sample **1.87 [1.47,2.28]** | **CONDITIONAL**（OOS 超 ±1.5） |
+| 交织 skew | 0.5→2 ps：**−1.44 dB [−1.73,−1.14]**，10/10 负 | **VALIDATED（退化）** |
+| 交织增益 | 10→50 ppm：**−5.58 dB [−6.11,−5.06]**，10/10 负 | **VALIDATED（退化）** |
+| DEM / dither | 只有 dither 字生成；**注入/扣除/DEM 均无** | **NOT IMPLEMENTED** |
+| 跨实现 INL | `model` 16.4 ppm vs `behavioral` 43.3 ppm（**2.64×**） | **DISCREPANT** |
+
+**不能声称**：8× 在硅上值 1.7 dB；shuffle 用 DR 换 SFDR；校准后 0.3 ppm 达 20 bit；INL=16.4 ppm 是绝对值；DEM/dither 有效。
 
 ### 效果图（每张带来源脚注）
 
-| 图 | 回答的问题 | 数据来源 | 等级 |
-|:---|:---|:---|:---:|
-| `docs/figures/f0_architecture.svg` | 结构 + 口径（target vs as-wired） | 网表逐行 + SSOT | L0 |
-| `f1_spectrum` | 100 kHz 的 SNDR/DR/SFDR | `model.adc.simulate` + FFT | L1 |
-| `f2_averaging` | 8× 重复值多少 dB | `model.adc.simulate`，M 扫描 | L1 |
-| `f3_shuffle` | 片级随机选片换到什么 | `model.adc.simulate`，interleave | L1 |
-| `f4_inl` | 0.2% 失配的 INL 与校准残差 | `model.static` → `charge_model` | L1 |
-| `f5_skew_gain` | 交织 skew/增益失配的代价 | `model.adc.simulate` + `slice_errors` | L1 |
+| 图 | 回答的问题 | 数据来源 | 等级 | 判定 |
+|:---|:---|:---|:---:|:---|
+| `docs/figures/f0_architecture.svg` | 结构 + 口径（target vs as-wired） | 网表逐行 + SSOT | L0 | 结构事实 |
+| `f1_spectrum` | 100 kHz 的 SNDR/DR/SFDR | `model.adc.simulate` + FFT | L1 | 单点示例 |
+| `f2_averaging` | 8× 重复值多少 dB | `model.adc.simulate`，10 seeds | L1 | VALIDATED |
+| `f3_shuffle` | 片级随机选片换到什么 | `model.adc.simulate`，10 seeds | L1 | SFDR VALIDATED / DR 不稳 |
+| `f4_inl` | 0.2% 失配的 INL 与校准残差 | `model.static`，seed 7 + 10 chips | L1 | CONDITIONAL |
+| `f5_skew_gain` | 交织 skew/增益失配的代价 | `model.adc.simulate`，10 seeds | L1 | VALIDATED（退化） |
+| `f6_crossval` | 哪些效果统计显著 | `model.crossval`，K=10 | L1 | 森林图 + INL 三口径 |
 
-> 规则：图上每个效果数字带 `[模型]` / `[论文]` / `[估算]`；脚注写脚本、N、seed、SSOT 口径、等级、日期。
-> 生成：`python3 -m model.figures_ssot`；清单：`docs/figures/manifest.json`。
+> 规则：图上每个效果数字带 `[模型]` / `[论文]` / `[估算]`；脚注写脚本、N、seeds、SSOT 口径、等级、日期。
+> 生成：`python3 -m model.crossval && python3 -m model.figures_ssot`；清单：`docs/figures/manifest.json`。
+
+### 其他层
+
+| 层 | 状态 | 证据 |
+|:---|:---|:---|
+| 码域闭合 | ✅ | `behavioral` `runs/smoke_ramp`：σu=0 → INL 0.000 LSB20 |
+| 理想动态（无噪声） | ✅ | `runs/smoke_tone`：SNDR 122.06 dB（无噪声，非 20 bit 系统指标） |
+| 网表层次 | ⚠️ 仅静态 | `check_hier.py`：28 文件 / **222 实例** / 端口一致 |
+| 模拟电路 | ❌ **零仿真** | PDK 空；DAC1 termination 接 VCM、三电平未接、replica 单套 |
+| 数字 RTL | ❌ **零编译** | 本机无 iverilog/verilator |
+| 版图 | ❌ **零** | 只有面积模型 |
 
 ## 4. 首要阻塞（按严重度）
 

@@ -129,10 +129,11 @@ flash 的 4 bit 落在「3 个 unary + 片内 64C 位」，SAR 的 6 次落在 3
 | 位账自洽 | ✅ | `NumericalContract.check()` |
 | 码域（理想） | ✅ | `behavioral` smoke：INL 0.000 LSB20 |
 | 失配→INL | ✅ | 0.2% → 16.4 ppm（旧模型）/ 45.3 LSB（behavioral） |
-| 校准 | ✅ | 16.4 ppm → 0.3 ppm |
+| 校准 | ⚠️ CONDITIONAL | 17.8±4.4 → 0.64±0.04 ppm（有限样本）；out-of-sample 1.87 ppm，未达 ±1.5 |
 | 模拟网表 | ⚠️ 仅结构 | `check_hier.py` 220 实例；零仿真、零 PDK |
 | 数字 RTL | ⚠️ 仅结构 | 本机无 iverilog；`DigitalTop` 是骨架 |
 | 版图/后仿/硅测 | ❌ | 无 |
+| 技术有效性 | ✅ 已交叉验证 | K=10 seeds、95% CI；见 `model/results/crossval/` 与 `review/20261112_crossval.md` |
 
 ---
 
@@ -154,6 +155,7 @@ flash 的 4 bit 落在「3 个 unary + 片内 64C 位」，SAR 的 6 次落在 3
 2. 网表/RTL 注释写数，必须带 `SSOT #n` 或 `AS-WIRED`。
 3. 历史文档（`plan/`、`review/`、`spec/ARCH_V2.md`、`spec/bit_allocation.md`）只能作为证据引用，**不得作为设计输入**。
 4. `tools/check_ssot.py` 每次提交前跑；失败即阻断。
+5. **任何"效果"数字必须来自 `model/results/crossval/summary.csv`**（K=10、95% CI）；单 seed 点估计只能当示例，不能当结论。
 
 ---
 

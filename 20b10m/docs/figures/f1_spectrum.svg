@@ -11037,7 +11037,7 @@ z
   </g>
   <g id="text_18">
    <!-- 相干采样 + 矩形窗；fin 吸附到整数 bin；噪声含 kT/C、RA、AZ、Cmp、参考、二级量化 -->
-   <g style="fill: #5f5e5a" transform="translate(6.207874 32.363969) scale(0.074 -0.074)">
+   <g style="fill: #5f5e5a" transform="translate(6.207874 32.187969) scale(0.072 -0.072)">
     <defs>
      <path id="HiraginoSansGB-W3-f4d" d="M 1786 2982 
 C 2042 2637 2234 2317 2413 1939 
@@ -13404,7 +13404,7 @@ z
    </g>
   </g>
   <g id="text_20">
-   <!-- model.metrics.fft_metrics · N=16384 · seed=11 -->
+   <!-- model.metrics.fft_metrics · N=16384 · seeds=seed=11 -->
    <g style="fill: #5f5e5a" transform="translate(6.207874 224.501721) scale(0.062 -0.062)">
     <defs>
      <path id="HiraginoSansGB-W3-1e" d="M 339 2656 
@@ -13515,9 +13515,15 @@ z
     <use xlink:href="#HiraginoSansGB-W3-46" transform="translate(2120.46875 0)"/>
     <use xlink:href="#HiraginoSansGB-W3-46" transform="translate(2179.265625 0)"/>
     <use xlink:href="#HiraginoSansGB-W3-45" transform="translate(2238.0625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-1e" transform="translate(2302.65625 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(2368.25 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(2433.953125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-54" transform="translate(2302.65625 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-1e" transform="translate(2356.359375 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-54" transform="translate(2421.953125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-46" transform="translate(2475.65625 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-46" transform="translate(2534.453125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-45" transform="translate(2593.25 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-1e" transform="translate(2657.84375 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(2723.4375 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(2789.140625 0)"/>
    </g>
   </g>
   <g id="text_21">
@@ -14295,7 +14301,7 @@ z
    </g>
   </g>
   <g id="text_22">
-   <!-- · 2026-11-11 -->
+   <!-- · 2026-11-12 -->
    <g style="fill: #5f5e5a" transform="translate(6.207874 239.81537) scale(0.062 -0.062)">
     <use xlink:href="#HiraginoSansGB-W3-63"/>
     <use xlink:href="#HiraginoSansGB-W3-1" transform="translate(100 0)"/>
@@ -14308,7 +14314,7 @@ z
     <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(497.609375 0)"/>
     <use xlink:href="#HiraginoSansGB-W3-e" transform="translate(563.3125 0)"/>
     <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(599.109375 0)"/>
-    <use xlink:href="#HiraginoSansGB-W3-12" transform="translate(664.8125 0)"/>
+    <use xlink:href="#HiraginoSansGB-W3-13" transform="translate(664.8125 0)"/>
    </g>
   </g>
   <g id="text_23">

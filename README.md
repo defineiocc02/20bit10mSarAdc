@@ -40,8 +40,23 @@ VIN → 18 片 DAC1 池（8 转换 + 8 采样 + 2 备）
 | [`f3_shuffle`](20b10m/docs/figures/f3_shuffle.png) | 片级随机选片换到什么 | `model.adc.simulate`，interleave | L1 |
 | [`f4_inl`](20b10m/docs/figures/f4_inl.png) | 0.2% 失配的 INL 与校准残差 | `model.static` → `charge_model` | L1 |
 | [`f5_skew_gain`](20b10m/docs/figures/f5_skew_gain.png) | 交织 skew / 增益失配的代价 | `model.adc.simulate` + `slice_errors` | L1 |
+| [`f6_crossval`](20b10m/docs/figures/f6_crossval.png) | 哪些效果统计显著（森林图） | `model.crossval`，K=10 | L1 |
 
-> 图上的 `[模型]` / `[论文]` / `[估算]` 是来源标签；脚注写脚本、N、seed、SSOT 口径、等级、日期。
+### 技术有效性（交叉验证后）
+
+| 技术 | 结论（K=10，95% CI） | 判定 |
+|:---|:---|:---:|
+| 8× LSB 重复 | +1.69 dB [1.66,1.72] @100k；解析预测 1.714 | **VALIDATED** |
+| CAAZ | +3.65 dB @100k；其中 AZ 只 +0.60 | **VALIDATED** |
+| 片级 shuffle | SFDR +22.3 dBc；**DR 方向不稳（+0.9 / −1.7）** | SFDR VALIDATED / DR **NOT VALIDATED** |
+| 静态校准 | 17.8±4.4 → 0.64±0.04 ppm；out-of-sample **1.87** | **CONDITIONAL**（超 ±1.5） |
+| 交织 skew / gain | −1.44 dB / −5.58 dB，10/10 | **VALIDATED（退化）** |
+| DEM / dither | 只有字生成，无注入/扣除 | **NOT IMPLEMENTED** |
+| 跨实现 INL | model 16.4 vs behavioral 43.3 ppm（2.64×） | **DISCREPANT** |
+
+报告：[`review/20261112_crossval.md`](20b10m/review/20261112_crossval.md)；数据：`model/results/crossval/summary.csv`。
+
+> 图上的 `[模型]` / `[论文]` / `[估算]` 是来源标签；脚注写脚本、N、seeds、SSOT 口径、等级、日期。
 > 旧图目录 `model/results/figures_measured/` 的 "measured" 是**图风格**，不是硅测；见 [`PROVENANCE.md`](20b10m/model/results/PROVENANCE.md)。
 
 ## 4. 快速复现
@@ -50,7 +65,8 @@ VIN → 18 片 DAC1 池（8 转换 + 8 采样 + 2 备）
 cd 20b10m
 python3 -m model.selftest          # 4 项自检
 python3 -m model.experiments       # 6 s，输出模型结论
-python3 -m model.figures_ssot      # 生成 docs/figures（带来源脚注）
+python3 -m model.crossval          # 10 seeds × 2 频率，出 95% CI
+python3 -m model.figures_ssot      # 生成 docs/figures（带来源脚注 + 误差棒）
 
 python3 tools/check_ssot.py        # 唯一口径闸门
 python3 tools/check_consistency.py # 位账 / 端口 / 引脚 / 引用
@@ -69,7 +85,7 @@ cd 20b10m/digital && make lint && make sim
 | 层 | 状态 | 证据 |
 |:---|:---|:---|
 | L0 结构 | ✅ | 网表 28 文件 / 222 实例；SSOT 检查 0 错 |
-| L1 行为 | ✅ | `model.selftest` 4/4；`behavioral` pytest 11 passed |
+| L1 行为 | ✅ | `model.selftest` 4/4；`behavioral` pytest 11 passed；crossval K=10 已过 |
 | L2 前仿 | ❌ | 无 PDK、DAC1 三电平未接、DAC2 无 12 bit 分段 |
 | L3 后仿 / L4 PVT / L5 硅测 | ❌ | 无版图、无流片 |
 

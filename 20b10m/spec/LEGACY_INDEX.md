@@ -60,3 +60,11 @@
 2. 任何新文档只引 `spec/SSOT.md`，不引 `ARCH_V2.md` / `bit_allocation.md`。
 3. `tools/check_ssot.py` 只扫活文件；历史文件不进闸门，但也不得被新文档引用为口径。
 4. 若要把某个历史文件"复活"，先改 `spec/SSOT.md` 并把它移出本索引。
+
+---
+
+## 4. 有效性结论（不是文件，是口径）
+
+- 技术有效性以 `model/results/crossval/summary.csv` 为准（K=10 seeds，95% CI）。
+- 报告：`review/20261112_crossval.md`；图：`docs/figures/f6_crossval.png`。
+- 单 seed / 2 seeds 的点估计只能当示例；与 crossval 冲突时以 crossval 为准。
