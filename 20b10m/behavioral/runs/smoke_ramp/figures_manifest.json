@@ -1,0 +1,8 @@
+{
+  "figures": [
+    "F04_inl.png"
+  ],
+  "source_metrics": "metrics.json",
+  "config": "config_resolved.json",
+  "manifest": "manifest.json"
+}

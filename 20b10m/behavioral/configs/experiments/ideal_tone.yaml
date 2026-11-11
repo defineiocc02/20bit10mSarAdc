@@ -1,0 +1,11 @@
+# 理想拓扑 + 无失配 + 无噪声：用于验证码域闭合（F01 前置）
+profile: ideal
+nonidealities:
+  sigma_u: 0.0
+  noise_enabled: false
+experiment:
+  kind: tone
+  n: 4096
+  bin: 41          # fin = 41*10e6/4096 = 100.1 kHz，gcd(41,4096)=1
+  amp: 4.8
+  seed: 1

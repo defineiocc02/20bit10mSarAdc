@@ -85,8 +85,11 @@ def simulate(fin, fs=None, n=None, *, caaz=False, M=None, rho=None,
         xo = (-base[1::2] + ktc[1::2] + cmp_n[1::2] + ref_n[1::2] + ra[1::2]
               + az_odd + inl_err[1::2] + q2[1::2])
         out = (xe - xo) / 2.0
-        # 两点平均的 sinc 衰落
-        out *= np.cos(np.pi*fin/(2*fs))
+        # ⚠️ 2026-11-08 修正：配对平均的 sinc 响应已经隐含在 (xe-xo)/2 里
+        # （xe/xo 是相邻样本，相隔 1/(fs*raw)），不能再显式乘 cos。
+        # 原实现多乘一次 cos(pi*f/(2fs))：2 MHz 下幅比 0.951^2 = 0.9045，
+        # 而配对本身的响应是 0.951。见 UA1R2 REPORT 4.3 的同源缺陷。
+        # out *= np.cos(np.pi*fin/(2*fs))     # <- 已删除
     else:
         out = base + ktc + cmp_n + ref_n + ra + az + inl_err + q2
 

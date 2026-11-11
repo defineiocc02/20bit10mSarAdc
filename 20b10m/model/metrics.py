@@ -44,11 +44,17 @@ def fft_metrics(x, fs, fin, n_harm=10, strict=True):
     q = p.copy(); q[:3] = 0; q[max(0,k0-2):k0+3] = 0
     kspur = int(np.argmax(q)); pspur = q[kspur]
     db = lambda a, b: 10*np.log10(max(a,1e-30)/max(b,1e-30))
+    # k0<16 时 2..10 次谐波互相重叠、且会落进 k0±2 的信号带 → THD/SFDR 无意义。
+    # 参考实现有同样的保护（metrics.py harmonics_reliable）。不可靠时显式返回 NaN，
+    # 不要让它静默通过（默认 fin≥100 kHz 时 k0≥164，不会触发）。
+    harm_ok = k0 >= 16
+    nan = float("nan")
     return {
         "DR_dB": db(psig, pnoise),
         "SNDR_dB": db(psig, pnoise + pharm),
-        "SFDR_dBc": db(psig, pspur),
-        "THD_dBc": db(pharm, psig),
+        "SFDR_dBc": db(psig, pspur) if harm_ok else nan,
+        "THD_dBc": db(pharm, psig) if harm_ok else nan,
+        "harmonics_reliable": harm_ok,
         "fin_actual": k0 * fs / n,
         "spur_bin": kspur,
         "psig": psig,

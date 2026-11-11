@@ -125,7 +125,7 @@ def fig_static():
     axes[0].legend(frameon=False, fontsize=6.8, loc="upper right")
     viz.annotate(fig, "DAC1 静态线性度：校准前后",
                  "σu=0.2%，位权失配 + 1.5 ppm 非位权残差；校准只扣位权项",
-                 "数据：model/static.py curves(10,0.002,7)；LSB1=9.766 mV。20.5 bit 逐码 INL 不可直接测。")
+                 "数据：model/static.py curves(10,0.002,7)；LSB1=9.766 mV。20 bit 系统逐码 INL 需 2^28 点码密度，模型不可直接测。")
     return fig, (146, 110)
 
 

@@ -1,0 +1,22 @@
+{
+  "cmd": "/Users/zhaoyi/WorkBuddy/pipelinedsar工作站/20b10m/behavioral/src/sar20b/cli.py run --config configs/experiments/mismatch_ramp.yaml --out runs/smoke_ramp",
+  "label": "ideal",
+  "profile": "ideal",
+  "git_head": "7a7b49b05a54e6133eb3362a8b4511c0ee842bd3",
+  "git_dirty": true,
+  "packages": {
+    "python": "3.13.12",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  },
+  "seed": 7,
+  "config_sha": "dd456e8110806d63",
+  "chip": {
+    "n_units": 1024,
+    "sigma_u": 0.002,
+    "seed": 7,
+    "rel_rms": 0.002061573091932644,
+    "rel_max": 0.007555128360195225
+  }
+}

@@ -34,7 +34,8 @@ def curves_binary(bits=10, unit_sigma=0.002, seed=1, other_ppm=1.5):
     v_cal = codes + inl_cal
     dnl_cal = np.diff(v_cal) - 1.0
     return {"code": codes, "inl_raw": inl_raw, "dnl_raw": dnl_raw,
-            "inl_cal": inl_cal, "dnl_cal": dnl_cal, "lsb": lsb}
+            "inl_cal": inl_cal, "dnl_cal": dnl_cal, "lsb": lsb,
+            "topology": "legacy_single_ended_binary"}
 
 
 def curves(bits=10, unit_sigma=0.002, seed=1, other_ppm=1.5, legacy=False):
@@ -54,7 +55,8 @@ def curves(bits=10, unit_sigma=0.002, seed=1, other_ppm=1.5, legacy=False):
     inl_cal -= inl_cal.mean()
     dnl_cal = np.diff(np.arange(1024) + inl_cal) - 1.0
     return {"code": c["code"], "inl_raw": c["inl_raw"], "dnl_raw": c["dnl_raw"],
-            "inl_cal": inl_cal, "dnl_cal": dnl_cal, "lsb": 1.0}
+            "inl_cal": inl_cal, "dnl_cal": dnl_cal, "lsb": 1.0,
+            "topology": "unary8x128_complementary_diff"}
 
 def run(bits=10, unit_sigma=0.002, seed=1):
     c = curves(bits, unit_sigma, seed)
@@ -66,6 +68,7 @@ def run(bits=10, unit_sigma=0.002, seed=1):
     to_ppm = 1e6/ (2**bits)
     return {
         "bits": bits,
+        "topology": c["topology"],
         "unit_sigma": unit_sigma,
         "dnl_raw_lsb": float(np.max(np.abs(dnl_raw))),
         "inl_raw_lsb": float(np.max(np.abs(inl_raw))),

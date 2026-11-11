@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 512" width="100%" role="img" aria-label="SAR20-10M 结构与口径">
+<title>SAR20-10M 结构与口径（target / as-wired 对照）</title>
+<desc>上半为模拟链：18 片 DAC1 池、SliceMux、Cmp1 与 G=32 RA、864 fF C_INC、5+6 分段 DAC2、Cmp2；下半为数字链与关键口径表。每个数字带 SSOT 编号或 as-wired 标记。</desc>
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<text x="14" y="22" font-family="sans-serif" font-size="14" font-weight="500" fill="#1F2937">SAR20-10M 结构与口径（target，括号内为 as-wired 差异）</text>
+<text x="14" y="39" font-family="sans-serif" font-size="10.5" fill="#5F5E5A">20.00 bit = 10 + 12 − 2 ｜ 10 MS/s ｜ 10 Vpp 差分 ｜ 180 nm BCD ｜ 2 相 × 18 片池</text>
+
+<rect x="12" y="50" width="656" height="168" rx="12" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="24" y="68" font-family="sans-serif" font-size="10.5" fill="#185FA5">模拟域（5 V 采样 / DAC1，1.8 V RA / CT2）</text>
+
+<rect x="22" y="78" width="58" height="42" rx="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text x="51" y="95" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#042C53">VIN</text>
+<text x="51" y="109" font-family="sans-serif" font-size="8.5" text-anchor="middle" fill="#185FA5">10 Vpp</text>
+
+<rect x="92" y="78" width="116" height="42" rx="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text x="150" y="95" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#042C53">DAC1 18 片池</text>
+<text x="150" y="109" font-family="sans-serif" font-size="8.5" text-anchor="middle" fill="#185FA5">8 转 + 8 采 + 2 备</text>
+
+<rect x="220" y="78" width="64" height="42" rx="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text x="252" y="95" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#042C53">SliceMux</text>
+<text x="252" y="109" font-family="sans-serif" font-size="8.5" text-anchor="middle" fill="#185FA5">8 片求和</text>
+
+<rect x="296" y="78" width="96" height="42" rx="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text x="344" y="95" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#042C53">Cmp1 + RA</text>
+<text x="344" y="109" font-family="sans-serif" font-size="8.5" text-anchor="middle" fill="#185FA5">G=32 → 1.25 Vpp</text>
+
+<rect x="404" y="78" width="86" height="42" rx="6" fill="#9FE1CB" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="447" y="95" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#04342C">C_INC 864 fF</text>
+<text x="447" y="109" font-family="sans-serif" font-size="8.5" text-anchor="middle" fill="#0F6E56">AC 耦合，不采样</text>
+
+<rect x="502" y="78" width="84" height="42" rx="6" fill="#9FE1CB" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="544" y="95" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#04342C">DAC2 5+6</text>
+<text x="544" y="109" font-family="sans-serif" font-size="8.5" text-anchor="middle" fill="#0F6E56">0.89 pF / 桥 28f</text>
+
+<rect x="598" y="78" width="58" height="42" rx="6" fill="#9FE1CB" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="627" y="95" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#04342C">Cmp2</text>
+<text x="627" y="109" font-family="sans-serif" font-size="8.5" text-anchor="middle" fill="#0F6E56">2.25 ns/拍</text>
+
+<line x1="80" y1="99" x2="90" y2="99" stroke="#185FA5" stroke-width="1.2" marker-end="url(#ar)"/>
+<line x1="208" y1="99" x2="218" y2="99" stroke="#185FA5" stroke-width="1.2" marker-end="url(#ar)"/>
+<line x1="284" y1="99" x2="294" y2="99" stroke="#185FA5" stroke-width="1.2" marker-end="url(#ar)"/>
+<line x1="392" y1="99" x2="402" y2="99" stroke="#185FA5" stroke-width="1.2" marker-end="url(#ar)"/>
+<line x1="490" y1="99" x2="500" y2="99" stroke="#185FA5" stroke-width="1.2" marker-end="url(#ar)"/>
+<line x1="586" y1="99" x2="596" y2="99" stroke="#185FA5" stroke-width="1.2" marker-end="url(#ar)"/>
+
+<rect x="22" y="130" width="300" height="78" rx="8" fill="#FFFFFF" stroke="#85B7EB" stroke-width="0.5"/>
+<text x="32" y="146" font-family="sans-serif" font-size="10" font-weight="500" fill="#0C447C">DAC1 单片：128 × 27 fF = 3.456 pF</text>
+<rect x="32" y="168" width="20" height="9" rx="2" fill="#B5D4F4" stroke="#378ADD" stroke-width="0.5"/>
+<text x="42" y="185" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#185FA5">1C</text>
+<rect x="56" y="166" width="20" height="11" rx="2" fill="#B5D4F4" stroke="#378ADD" stroke-width="0.5"/>
+<text x="66" y="185" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#185FA5">2C</text>
+<rect x="80" y="164" width="20" height="13" rx="2" fill="#B5D4F4" stroke="#378ADD" stroke-width="0.5"/>
+<text x="90" y="185" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#185FA5">4C</text>
+<rect x="104" y="161" width="20" height="16" rx="2" fill="#B5D4F4" stroke="#378ADD" stroke-width="0.5"/>
+<text x="114" y="185" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#185FA5">8C</text>
+<rect x="128" y="158" width="20" height="19" rx="2" fill="#B5D4F4" stroke="#378ADD" stroke-width="0.5"/>
+<text x="138" y="185" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#185FA5">16C</text>
+<rect x="152" y="155" width="20" height="22" rx="2" fill="#B5D4F4" stroke="#378ADD" stroke-width="0.5"/>
+<text x="162" y="185" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#185FA5">32C</text>
+<rect x="176" y="151" width="20" height="26" rx="2" fill="#85B7EB" stroke="#378ADD" stroke-width="0.5"/>
+<text x="186" y="185" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#0C447C">64C</text>
+<rect x="200" y="170" width="20" height="7" rx="2" fill="#D3D1C7" stroke="#888780" stroke-width="0.5"/>
+<text x="210" y="185" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#5F5E5A">1C</text>
+<text x="232" y="162" font-family="sans-serif" font-size="8.5" fill="#185FA5">8 片 → 3 bit unary</text>
+<text x="232" y="175" font-family="sans-serif" font-size="8.5" fill="#185FA5">片内 7 bit binary</text>
+<text x="32" y="192" font-family="sans-serif" font-size="8.5" fill="#185FA5">1024 单位/侧 = 27.648 pF [SSOT #15]</text>
+<text x="32" y="201" font-family="sans-serif" font-size="8" fill="#A32D2D">termination 1C 仍接 VCM：满量程 127/128（OPEN-1）</text>
+
+<rect x="334" y="130" width="322" height="78" rx="8" fill="#FFFFFF" stroke="#1D9E75" stroke-width="0.5"/>
+<text x="344" y="146" font-family="sans-serif" font-size="10" font-weight="500" fill="#085041">DAC2：5 bit 主 + 桥 + 6 bit 子（as-wired）</text>
+<rect x="344" y="156" width="76" height="30" rx="5" fill="#9FE1CB" stroke="#1D9E75" stroke-width="0.5"/>
+<text x="382" y="169" font-family="sans-serif" font-size="8.5" text-anchor="middle" fill="#04342C">主 32×27f</text>
+<text x="382" y="181" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#0F6E56">864 fF</text>
+<rect x="432" y="164" width="48" height="14" rx="3" fill="#FFFFFF" stroke="#1D9E75" stroke-width="0.5"/>
+<text x="456" y="174" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#0F6E56">28 fF</text>
+<rect x="492" y="156" width="76" height="30" rx="5" fill="#9FE1CB" stroke="#1D9E75" stroke-width="0.5"/>
+<text x="530" y="169" font-family="sans-serif" font-size="8.5" text-anchor="middle" fill="#04342C">子 64×27f</text>
+<text x="530" y="181" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#0F6E56">1728 fF</text>
+<line x1="420" y1="171" x2="430" y2="171" stroke="#1D9E75" stroke-width="1" marker-end="url(#ar)"/>
+<line x1="480" y1="171" x2="490" y2="171" stroke="#1D9E75" stroke-width="1" marker-end="url(#ar)"/>
+
+<text x="344" y="199" font-family="sans-serif" font-size="8" fill="#A32D2D">target 12 bit 分段未定：5+7 / 6+6（OPEN-2）</text>
+
+<rect x="12" y="228" width="656" height="96" rx="12" fill="#FAEEDA" stroke="#BA7517" stroke-width="0.5"/>
+<text x="24" y="245" font-family="sans-serif" font-size="10.5" fill="#854F0B">数字域（1.8 V，200 MHz）</text>
+
+<rect x="22" y="254" width="148" height="40" rx="6" fill="#FAC775" stroke="#BA7517" stroke-width="0.5"/>
+<text x="96" y="270" font-family="sans-serif" font-size="9.5" text-anchor="middle" fill="#412402">Mapper + DEM</text>
+<text x="96" y="283" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#854F0B">D1[9:0] → D1_MASK[125:0]</text>
+
+<rect x="182" y="254" width="86" height="40" rx="6" fill="#FAC775" stroke="#BA7517" stroke-width="0.5"/>
+<text x="225" y="270" font-family="sans-serif" font-size="9.5" text-anchor="middle" fill="#412402">Sinc2 8×</text>
+<text x="225" y="283" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#854F0B">DT[7:0]</text>
+
+<rect x="280" y="254" width="112" height="40" rx="6" fill="#FAC775" stroke="#BA7517" stroke-width="0.5"/>
+<text x="336" y="270" font-family="sans-serif" font-size="9.5" text-anchor="middle" fill="#412402">Recon 10+12−2</text>
+<text x="336" y="283" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#854F0B">−512 / −2048 偏置</text>
+
+<rect x="404" y="254" width="116" height="40" rx="6" fill="#FAC775" stroke="#BA7517" stroke-width="0.5"/>
+<text x="462" y="270" font-family="sans-serif" font-size="9.5" text-anchor="middle" fill="#412402">FramePack + LVDS</text>
+<text x="462" y="283" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#854F0B">22 bit · 400 Mbit/s</text>
+
+<rect x="532" y="254" width="118" height="40" rx="6" fill="#FAC775" stroke="#BA7517" stroke-width="0.5"/>
+<text x="591" y="270" font-family="sans-serif" font-size="9.5" text-anchor="middle" fill="#412402">SPI / 系数</text>
+<text x="591" y="283" font-family="sans-serif" font-size="8" text-anchor="middle" fill="#854F0B">片外 LMS，48 项</text>
+
+<line x1="170" y1="274" x2="180" y2="274" stroke="#BA7517" stroke-width="1.2" marker-end="url(#ar)"/>
+<line x1="268" y1="274" x2="278" y2="274" stroke="#BA7517" stroke-width="1.2" marker-end="url(#ar)"/>
+<line x1="392" y1="274" x2="402" y2="274" stroke="#BA7517" stroke-width="1.2" marker-end="url(#ar)"/>
+<text x="24" y="313" font-family="sans-serif" font-size="8" fill="#854F0B">DEM 是 8 态片级旋转（OPEN-5：单位级未做）；dither 当前 D=0（OPEN-3）；CMP1/2_READY 未接（OPEN-4）</text>
+
+<rect x="12" y="334" width="656" height="136" rx="10" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>
+<text x="24" y="351" font-family="sans-serif" font-size="10" font-weight="500" fill="#2C2C2A">关键口径与来源（活口径 = spec/SSOT.md）</text>
+<text x="24" y="369" font-family="sans-serif" font-size="8.5" fill="#444441">量</text>
+<text x="170" y="369" font-family="sans-serif" font-size="8.5" fill="#444441">值</text>
+<text x="430" y="369" font-family="sans-serif" font-size="8.5" fill="#444441">来源</text>
+<text x="545" y="369" font-family="sans-serif" font-size="8.5" fill="#444441">状态</text>
+<line x1="24" y1="374" x2="656" y2="374" stroke="#B4B2A9" stroke-width="0.5"/>
+
+<text x="24" y="388" font-family="sans-serif" font-size="8.5" fill="#2C2C2A">分辨率</text>
+<text x="170" y="388" font-family="sans-serif" font-size="8.5" fill="#2C2C2A">20.00 bit = 10 + 12 − 2</text>
+<text x="430" y="388" font-family="sans-serif" font-size="8.5" fill="#185FA5">SSOT #7</text>
+<text x="545" y="388" font-family="sans-serif" font-size="8.5" fill="#3B6D11">FROZEN</text>
+
+<text x="24" y="403" font-family="sans-serif" font-size="8.5" fill="#2C2C2A">满量程 / 采样电容</text>
+<text x="170" y="403" font-family="sans-serif" font-size="8.5" fill="#2C2C2A">10 Vpp 差分 / 27.648 pF 每侧</text>
+<text x="430" y="403" font-family="sans-serif" font-size="8.5" fill="#185FA5">SSOT #1 / #15</text>
+<text x="545" y="403" font-family="sans-serif" font-size="8.5" fill="#3B6D11">FROZEN</text>
+
+<text x="24" y="418" font-family="sans-serif" font-size="8.5" fill="#2C2C2A">相位 / tick</text>
+<text x="170" y="418" font-family="sans-serif" font-size="8.5" fill="#2C2C2A">10 / 15 / 20 / 45 ns + 10 guard</text>
+<text x="430" y="418" font-family="sans-serif" font-size="8.5" fill="#185FA5">SSOT #12</text>
+<text x="545" y="418" font-family="sans-serif" font-size="8.5" fill="#3B6D11">FROZEN</text>
+
+<text x="24" y="433" font-family="sans-serif" font-size="8.5" fill="#2C2C2A">RA / C_INC / DAC2</text>
+<text x="170" y="433" font-family="sans-serif" font-size="8.5" fill="#2C2C2A">G=32 / 864 fF / 12 bit target</text>
+<text x="430" y="433" font-family="sans-serif" font-size="8.5" fill="#185FA5">SSOT #18/#20/#23</text>
+<text x="545" y="433" font-family="sans-serif" font-size="8.5" fill="#A32D2D">OPEN-2 / 11b</text>
+
+<text x="24" y="448" font-family="sans-serif" font-size="8.5" fill="#2C2C2A">D1 / D1_MASK / D2</text>
+<text x="170" y="448" font-family="sans-serif" font-size="8.5" fill="#2C2C2A">10 bit / 126 bit / 12 bit</text>
+<text x="430" y="448" font-family="sans-serif" font-size="8.5" fill="#185FA5">SSOT #27–#29</text>
+<text x="545" y="448" font-family="sans-serif" font-size="8.5" fill="#3B6D11">FROZEN</text>
+
+<text x="24" y="463" font-family="sans-serif" font-size="8.5" fill="#2C2C2A">DEM / dither</text>
+<text x="170" y="463" font-family="sans-serif" font-size="8.5" fill="#2C2C2A">8 态片级 / D=0</text>
+<text x="430" y="463" font-family="sans-serif" font-size="8.5" fill="#185FA5">OPEN-5 / OPEN-3</text>
+<text x="545" y="463" font-family="sans-serif" font-size="8.5" fill="#A32D2D">未完成</text>
+
+<text x="14" y="488" font-family="sans-serif" font-size="8" fill="#5F5E5A">结构来源：analog/blocks/*/netlist/*.scs 逐行；数字口径：digital/DigitalTop.sv；口径：spec/SSOT.md（2026-11-11）。</text>
+<text x="14" y="500" font-family="sans-serif" font-size="8" fill="#5F5E5A">证据等级：L0 结构 + L1 行为模型；无前仿 / 无版图 / 无硅测。图中 as-wired 与 target 的差异不掩盖，逐项标 OPEN。</text>
+</svg>

@@ -91,6 +91,38 @@ def exp_static():
         rows.append(static.run(bits=10, unit_sigma=sig, seed=7))
     return rows
 
+def exp_static_pools(n_pools=8, sigma=0.002):
+    """多失配池扫描：把「单池一个数」变成分布（对齐 20b10mtask 的多制造 seed 纪律）。
+
+    - 每个池独立 seed = 100+i、同 sigma；片选择仍取池内前 8 片（与 dac1_curves 一致）。
+    - 同时报两种 INL 口径：best_fit（对码回归）与 endpoint（首尾连线）。
+      两口径必须同时出现，否则跨文档比较会混用（REFERENCE_AUDIT §1-8）。
+    - 只读地复用 dac1_curves，不改变 exp_static 的既有口径与数字。
+    """
+    from .charge_model import Pool, dac1_curves, LSB1
+    out = []
+    for i in range(n_pools):
+        c = dac1_curves(pool=Pool.make(sigma=sigma, seed=100 + i))
+        v = c["v"]; codes = c["code"].astype(float)
+        A = np.stack([np.ones_like(codes), codes], axis=1)
+        fit, *_ = np.linalg.lstsq(A, v, rcond=None)
+        slope = (v[-1] - v[0]) / (codes[-1] - codes[0])
+        inl_bf = (v - A @ fit) / LSB1
+        inl_ep = (v - (v[0] + slope * (codes - codes[0]))) / LSB1
+        dnl_bf = np.diff(v) / fit[1] - 1.0
+        dnl_ep = np.diff(v) / slope - 1.0
+        to_ppm = 1e6 / 2**10
+        out.append({
+            "seed": 100 + i,
+            "inl_bf_ppm": float(np.max(np.abs(inl_bf)) * to_ppm),
+            "inl_ep_ppm": float(np.max(np.abs(inl_ep)) * to_ppm),
+            "dnl_bf_lsb": float(np.max(np.abs(dnl_bf))),
+            "dnl_ep_lsb": float(np.max(np.abs(dnl_ep))),
+            "mean_dnl_bf": float(dnl_bf.mean()),
+            "mean_dnl_ep": float(dnl_ep.mean()),
+        })
+    return out
+
 def main():
     res = {
         "caaz": exp_caaz(),

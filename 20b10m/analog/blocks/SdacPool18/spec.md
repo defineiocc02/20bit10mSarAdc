@@ -1,51 +1,48 @@
 # SdacPool18
 
-- 层级：L2　父：`Sar1Top`　子：（叶子）
-- 功能：18 片 slice 池：8 转换 + 8 采样 + 2 备用（随机化）
+- 层级：L1　父：`Sar20bTop`　子：`SdacSlice` × 18
+- 功能：18 片 DAC1 池：8 转换 + 8 采样 + 2 备用；角色每 100 ns 交换。
+- Profile: target。
 
-> **V2（交织）新增模块**，V1 基线不含此模块。
-
-## 端口
+## 端口（与网表 `SdacPool18.scs` 一致）
 
 | 端口 | 方向 | 类型 | 域 | 范围/说明 | 备注 |
 |:---|:---|:---|:---|:---|:---|
-| `VINP` | in | analog | 5V |  |  |
-| `VINN` | in | analog | 5V |  |  |
-| `VREFP` | in | analog | 5V |  |  |
-| `VREFN` | in | analog | 5V |  |  |
-| `VCM` | in | analog | 5V |  |  |
-| `VGND` | in | analog | 5V |  |  |
-| `PHI_ACQ<1:0>` | in | digital | 5V | 两相位采样 |  |
-| `PHI_CONV<1:0>` | in | digital | 5V | 两相位转换 |  |
-| `D1<10:0>` | in | digital | 1.8V |  |  |
-| `SLICE_SEL<4:0>` | in | digital | 1.8V | 洗牌结果 |  |
-| `VTOPP` | io | analog | 5V |  |  |
-| `VTOPN` | io | analog | 5V |  |  |
-| `VDD5` | pwr | power | 5V | 5.0 |  |
-| `GND` | pwr | power | - | 0 |  |
+| `VINP` / `VINN` | in | analog | 5V | 差分输入 |  |
+| `VREFP` / `VREFN` | in | analog | 5V |  |  |
+| `VCM` / `VGND` | in | analog | 5V |  |  |
+| `D<55:0>` | in | digital | 1.8V | 8 片 × 7 bit | `bit[7i+6:7i]` = 片 i |
+| `ACQ<17:0>` | in | digital | 5V | 采样相 |  |
+| `CONV<17:0>` | in | digital | 5V | 转换相 |  |
+| `EN<17:0>` | in | digital | 1.8V | 片使能 | 0 = 备用/未选中 |
+| `VTOPP<17:0>` / `VTOPN<17:0>` | io | analog | 5V | 各片顶板 | 由 SliceMux 选 8 片 |
+| `VDD5` / `GND` | pwr | power | 5V / — |  |  |
 
 ## 关键参数
 
-18 片 × 3.5pF = 63pF；8+8 并发
-
-## 依赖
-
-SdacSlice（×18）
+| 项 | 值 | 来源 |
+|:---|:---|:---|
+| 片数 | 18（8 + 8 + 2） | SSOT #14 |
+| 每片 | 128 × 27 fF = 3.456 pF | SSOT #15 |
+| 活跃片 | 8 → 27.648 pF/侧 | SSOT #15 |
+| 每片码 | 7 bit（127 二进制 + 1 termination） | SSOT #16 |
 
 ## 待定 / TODO
 
-片数（16 还是 18）；备用片的选法
+- 备用片策略（替坏片 vs 打散杂散）。
+- 片间增益失配 <1e-4 的版图约束。
+- termination 1C 的接法（OPEN-1）。
 
 ## 验收判据
 
-两相位间增益失配 <1e-4；切换无电荷丢失
+两相位间增益失配 <1e-4；切换无电荷丢失；8 片顶板求和残差 <0.5 LSB1。
 
-## 文件位置（预留）
+## 文件位置
 
 ```
 blocks/SdacPool18/
 ├── spec.md          本文件
-├── netlist/
+├── netlist/         SdacPool18.scs
 ├── sim/
 ├── reports/
 └── layout/

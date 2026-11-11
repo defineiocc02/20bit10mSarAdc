@@ -1,22 +1,23 @@
 // CincCouple.scs —— C_INC 串联耦合 + 复位 + replica 注入（kickback 抵消）
-// 端口：VINP VINN VOUTP VOUTN VCM D2<10:0> PHI_RA PHI_RST VDD18 GND
-// 说明：VINP/N 来自 RaMux（RA 输出），VOUTP/N 接 Dac2_11b 顶板 VTOP。
-//       replica 的抵消网络（反相注入级）在 L1 定型；本网表先给出 1:1 复刻与耦合电容位置。
+// 端口：VINP VINN VOUTP VOUTN VREFP2 VREFN2 VCM D2<10:0> PHI_RA PHI_RST VDD18 GND
+// 口径：C_INC = 864 fF = 32 × 27 fF（SSOT #20）；1 pF 作废。
+// 说明：VINP/N 来自 RA，VOUTP/N 接 Dac2 顶板；replica 的参考必须与主 DAC 同源（D4 修复）。
+//       真正的差分抵消需要两套 replica（P/N 各一），当前只画了单套，L1 定型。
 simulator lang=spectre
 
-subckt CincCouple VINP VINN VOUTP VOUTN VCM D2<10:0> PHI_RA PHI_RST VDD18 GND
-// 主耦合电容：1.0 pF/侧（37 × 27 fF）
-Cip (VINP VOUTP) capacitor c=1.0p
-Cin (VINN VOUTN) capacitor c=1.0p
+subckt CincCouple VINP VINN VOUTP VOUTN VREFP2 VREFN2 VCM D2<10:0> PHI_RA PHI_RST VDD18 GND
+// 主耦合电容：864 fF/侧（32 × 27 fF）
+Cip (VINP VOUTP) capacitor c=864f
+Cin (VINN VOUTN) capacitor c=864f
 
 // 复位：ΦRA 前把 DAC2 顶板拉到 VCM
+Xrstb (PHI_RST PHI_RSTB VDD18 GND) inv18
 Xrp (VOUTP VCM PHI_RST PHI_RSTB VDD18 GND) tg18 wn=4u wp=8u
 Xrn (VOUTN VCM PHI_RST PHI_RSTB VDD18 GND) tg18 wn=4u wp=8u
 
-// replica：同一 DIN 驱动，顶板经 Crep 注入到主顶板（极性由反相级决定，L1 定）
-Xrep (D2<10:0> VCM VCM VCM VREPP VDD18 GND) Dac2Replica
-Crep (VREPP VOUTP) capacitor c=1.0p
-Cren (VREPP VOUTN) capacitor c=1.0p
+// replica：同一 DIN 驱动，参考与主 DAC 同源；输出交叉耦合到反相顶板
+Xrep (D2<10:0> PHI_RST VREFP2 VREFN2 VCM VREPP VDD18 GND) Dac2Replica
+Crep (VREPP VOUTN) capacitor c=864f
+Cren (VREPP VOUTP) capacitor c=864f
 
-// PHI_RSTB 由数字域给
 ends CincCouple

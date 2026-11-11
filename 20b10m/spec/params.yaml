@@ -1,0 +1,117 @@
+# spec/params.yaml —— SSOT 的机器可读副本
+# 唯一权威是 spec/SSOT.md；本文件供脚本/RTL/网表生成器读取，二者必须一致。
+# 改动顺序：SSOT.md -> 本文件 -> tools/check_ssot.py -> 下游。
+version: 1
+date: 2026-11-11
+authority: spec/SSOT.md
+basis: spec/ARCH_DECISION_BLv3.md
+
+profiles:
+  target:
+    n1: 10
+    n2: 12
+    n_red: 2
+    n_total: 20
+    mapping: "u3b7"
+    note: "BL-v3 冻结目标；文档/接口/RTL/版图按此设计"
+  as_wired:
+    n1: 7
+    n2: 11
+    n_red: 2
+    n_total: 18
+    mapping: "broadcast_d6_0"
+    note: "2026-11-08 网表真实接法；只用于复现，不得对外"
+  candidate_u3b7:
+    n1: 10
+    n2: 11
+    n_red: 2
+    n_total: 19
+    mapping: "u3b7"
+    note: "最小网表修复候选；未授权实施"
+
+frozen:
+  fs_diff_v: 10.0
+  vref_p_v: 5.0
+  vref_n_v: 0.0
+  vcm_v: 2.5
+  n1: 10
+  n2: 12
+  n_red: 2
+  n_total: 20
+  n_xfer: 22
+  xfer_center: 2097152
+  fs_hz: 10000000
+  frame_ns: 100.0
+  tick_ns: 5.0
+  ticks_per_frame: 20
+  clk_hz: 200000000
+  phase_ns:
+    c0: 10.0
+    c1: 15.0
+    ra: 20.0
+    c2: 45.0
+    guard: 10.0
+  c_unit_f: 2.7e-14
+  units_per_side: 1024
+  units_per_slice: 128
+  slices_total: 18
+  slices_active: 8
+  slices_acquire: 8
+  slices_spare: 2
+  unary_bits: 3
+  binary_bits: 7
+  g_ra: 32.0
+  c_inc_f: 8.64e-13
+  dac2_bits_target: 12
+  dac2_bits_as_wired: 11
+  d1_mask_bits: 126
+  d2_bits: 12
+  dt_bits: 8
+  dither_bits: 6
+  dither_prbs: "x^31 + x^28 + 1"
+  dither_steps_per_sample: 6
+  dem_states: 8
+
+derived:
+  lsb1_v: 0.009765625
+  resid_window_pp_v: 0.0390625
+  lsb2_v: 9.5367431640625e-06
+  lsb_total_v: 9.5367431640625e-06
+  lsb_xfer_v: 2.384185791015625e-06
+  c_dac1_side_f: 2.7648e-11
+  ra_out_pp_v: 1.25
+  k_inc: 0.49202733485193617
+  dac2_node_pp_v: 0.6150341685649202
+  lsb2_node_v: 0.00015015482630979497
+
+open:
+  - id: OPEN-1
+    item: "DAC1 三电平实现与 termination 1C 可切换"
+    owner: analog
+  - id: OPEN-2
+    item: "DAC2 12 bit 分段（5+7 vs 6+6）与桥容"
+    owner: arch
+  - id: OPEN-3
+    item: "dither 注入点与幅度"
+    owner: both
+  - id: OPEN-4
+    item: "CMP1/2_READY 握手"
+    owner: both
+  - id: OPEN-5
+    item: "DEM 粒度（片级 8 态 vs 单位级）"
+    owner: digital
+
+forbidden_in_live:
+  - "20.5 bit"
+  - "G=128"
+  - "G = 128"
+  - "1039"
+  - "28 pF"
+  - "28.05 pF"
+  - "D1<10:0>"
+  - "D1[10:0]"
+  - "Dac2_12b"
+  - "ΦRA 25"
+  - "ΦC2 40"
+  - "C_INC 1 pF"
+  - "1.0 pF/侧"

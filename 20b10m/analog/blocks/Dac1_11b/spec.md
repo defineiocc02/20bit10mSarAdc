@@ -1,51 +1,41 @@
-# Dac1_11b
+# Dac1_11b（LEGACY）
 
 - 层级：L2　父：`Sar1Top`　子：（叶子）
-- **V1 基线（单路 5 MS/s），不投产**；V2 交织用 `SdacPool18`。
-- 功能：一级 CDAC：1039×27fF，二进制+冗余，三电平切换
+- **状态：不再使用。** V1 单路基线，已被 `SdacPool18`（18 片池）+ `SdacSlice` 取代；目录保留只为历史引用，**无网表**（`netlist/` 为空）。
+- Profile：target 拓扑见 `SdacPool18` / `SdacSlice`；本块不代表当前设计。
+
+## 目标拓扑（由 SdacSlice 实现）
+
+| 项 | 值 | 来源 |
+|:---|:---|:---|
+| 每片单位数 | 128（127 个二进制 + 1 个 termination） | SSOT #15 |
+| 单位电容 | 27 fF | SSOT #15 |
+| 每片容量 | 3.456 pF | 128 × 27 fF |
+| 活跃片数 | 8（共 18 片池） | SSOT #14 |
+| 每侧总容 | 27.648 pF | SSOT #15 |
+| 分段 | 3 bit unary（片间）+ 7 bit binary（片内） | SSOT #16 |
+| 切换电平 | 目标三电平；当前网表两电平 | SSOT #17 / OPEN-1 |
 
 ## 端口
 
-| 端口 | 方向 | 类型 | 域 | 范围/说明 | 备注 |
-|:---|:---|:---|:---|:---|:---|
-| `VINP` | in | analog | 5V | 采样期底板接 VIN |  |
-| `VINN` | in | analog | 5V |  |  |
-| `VREFP` | in | analog | 5V |  |  |
-| `VREFN` | in | analog | 5V |  |  |
-| `VCM` | in | analog | 5V |  |  |
-| `VGND` | in | analog | 5V |  |  |
-| `D1<10:0>` | in | digital | 1.8V | 11 bit |  |
-| `PHI_S` | in | digital | 5V |  |  |
-| `PHI_C1` | in | digital | 5V |  |  |
-| `VTOPP` | io | analog | 5V |  |  |
-| `VTOPN` | io | analog | 5V |  |  |
-| `VDD5` | pwr | power | 5V | 5.0 |  |
-| `VDD18` | pwr | power | 1.8V | 1.8 |  |
-| `GND` | pwr | power | - | 0 |  |
-
-## 关键参数
-
-C_unit=27fF, N_unit=1039, 差分双阵列
-
-## 依赖
-
-（无子模块）
+本块无网表，端口以 `SdacSlice` 为准（14 个：VINP/VINN/VREFP/VREFN/VCM/VGND/D<6:0>/PHI_ACQ/PHI_CONV/EN/VTOPP/VTOPN/VDD5/GND）。
 
 ## 待定 / TODO
 
-冗余位与三电平的分界；底板寄生预算
+- 三电平落点与 termination 1C 可切换（OPEN-1）。
+- 底板寄生预算（每片 ≤0.5%）。
 
 ## 验收判据
 
-总容 28pF；权重误差 <0.5 LSB（前仿）；建立 90ns 内到 0.25 LSB1
+总容 27.648 pF/侧；权重误差 <0.5 LSB1（前仿）；建立 20 ns 内到 0.25 LSB1。
 
-## 文件位置（预留）
+## 文件位置
 
 ```
 blocks/Dac1_11b/
-├── spec.md          本文件
-├── netlist/         导出的 CDL/网表（G2 起）
-├── sim/             测试台与运行记录（run_id 子目录）
-├── reports/         单元/集成报告
-└── layout/          GDS、DRC/LVS（G4 起）
+├── spec.md          本文件（历史）
+├── netlist/         空；历史 V1 网表未保留
+├── sim/
+├── reports/
+└── layout/
 ```

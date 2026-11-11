@@ -1,23 +1,21 @@
 // ============================================================
 // [CODE-INDEX] DigitalTop.sv —— 10 MS/s 部分交织数字顶层（单转换链）
-// 端口与 analog/netlist/digital_stubs.scs 的 DigitalTop_stub 逐字一致（26 个）。
+// 端口与 analog/netlist/digital_stubs.scs 的 DigitalTop_stub 逐字一致（27 个）。
+// 口径：spec/SSOT.md #27–#28；D1=10 bit，D2=12 bit，D1_MASK=18×7=126 bit。
 // 时序：CLK200=5 ns/tick；cnt 0..19 一帧(100 ns)；
-//       ΦC0 0-1 / ΦC1 2-4 / ΦRA 5-9 / ΦC2 10-17 / cnt19 swap。
+//       ΦC0 0-1 / ΦC1 2-4 / ΦRA 5-8 / ΦC2 9-17 / guard 18-19。
 // 数据流：D1/D2/DT → Sinc2 → ReconWeights → FramePack → DOUT/DRDY。
-// 注意：本文件是行为级骨架；Sar1Ctrl/Sar2Ctrl 在模拟块的数字壳内，
-//       不在本文件例化（见 digital/README.md 的模块表）。
+// Mapper：D1 → 8 lane 码（k 个满量程 + 1 个二进制），按 SLICE_ID 散射到 18 片；
+//         bin_lane 由 dem_state 旋转（8 态片级 DEM）。
 // ============================================================
-// DigitalTop.sv —— 10 MS/s 部分交织数字顶层（单转换链）
-// 端口与 analog/netlist/digital_stubs.scs 的 DigitalTop_stub 逐字一致。
-// 时序：CLK200 = 5 ns tick；帧 20 tick (100 ns)；转换 18 tick (90 ns)。
 `timescale 1ns/1ps
 
 module DigitalTop (
     input  logic        CLK200,
     input  logic        RSTN,
 
-    input  logic [10:0] D1,
-    input  logic [10:0] D2,
+    input  logic [9:0]  D1,
+    input  logic [11:0] D2,
     input  logic [7:0]  DT,
     input  logic        DONE1,
     input  logic        DONE2,
@@ -28,6 +26,7 @@ module DigitalTop (
     output logic [17:0] EN,
     output logic [17:0] SEL,
     output logic [17:0] SELB,
+    output logic [125:0] D1_MASK,
 
     output logic        PHI_C0,
     output logic        PHI_C1,
@@ -50,6 +49,7 @@ module DigitalTop (
     logic       swap;
     logic [4:0] base;
     logic [3:0] m_act;
+    logic [2:0] dem_state;
 
     always_ff @(posedge CLK200 or negedge RSTN) begin
         if (!RSTN) cnt <= 5'd0;
@@ -58,10 +58,15 @@ module DigitalTop (
 
     assign swap = (cnt == 5'd19);
 
+    always_ff @(posedge CLK200 or negedge RSTN) begin
+        if (!RSTN) dem_state <= 3'd0;
+        else if (swap) dem_state <= dem_state + 3'd1;
+    end
+
     assign PHI_C0 = (cnt <= 5'd1);
     assign PHI_C1 = (cnt >= 5'd2) && (cnt <= 5'd4);
-    assign PHI_RA = (cnt >= 5'd5) && (cnt <= 5'd9);
-    assign PHI_C2 = (cnt >= 5'd10) && (cnt <= 5'd17);
+    assign PHI_RA = (cnt >= 5'd5) && (cnt <= 5'd8);
+    assign PHI_C2 = (cnt >= 5'd9) && (cnt <= 5'd17);
     assign PHI_AZ = (cnt >= 5'd4) && (cnt <= 5'd6);
     assign PRE    = (cnt <= 5'd1);
     assign HOLD   = (cnt >= 5'd18) || (cnt <= 5'd0);
@@ -72,6 +77,23 @@ module DigitalTop (
         .acq(ACQ), .conv(CONV), .en(EN), .sel(SEL), .selb(SELB),
         .base(base), .m_act(m_act)
     );
+
+    // D1 -> 8 lane 码 -> 18 片物理掩码
+    always_comb begin
+        int u;
+        u = 0;
+        D1_MASK = '0;
+        for (int j = 0; j < 8; j++) begin
+            int idx;
+            idx = (base + j) % 18;
+            if (j == dem_state) begin
+                D1_MASK[7*idx +: 7] = D1[6:0];   // 二进制片
+            end else if (u < D1[9:7]) begin
+                D1_MASK[7*idx +: 7] = 7'h7F;     // 满量程片
+                u = u + 1;
+            end
+        end
+    end
 
     logic [25:0] acc;
     logic        acc_valid;

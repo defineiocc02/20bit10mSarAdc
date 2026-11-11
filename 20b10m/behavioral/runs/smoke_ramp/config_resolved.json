@@ -1,0 +1,69 @@
+{
+  "contract": {
+    "fs_diff_v": 10.0,
+    "vref_p": 5.0,
+    "vref_n": 0.0,
+    "vcm": 2.5,
+    "n1": 10,
+    "n2": 12,
+    "n_red": 2,
+    "n_xfer": 22,
+    "xfer_center": 2097152,
+    "c_unit_f": 2.7e-14,
+    "n_units_per_side": 1024,
+    "g_ra": 32.0,
+    "fs_hz": 10000000.0,
+    "derived": {
+      "n_total": 20,
+      "lsb1_v": 0.009765625,
+      "resid_window_pp_v": 0.0390625,
+      "lsb2_v": 9.5367431640625e-06,
+      "lsb_analysis_v": 9.5367431640625e-06,
+      "lsb_xfer_v": 2.384185791015625e-06
+    }
+  },
+  "profile": {
+    "name": "ideal",
+    "n1_effective": 10,
+    "units_per_side": 1024,
+    "units_per_slice": 128,
+    "n_slices_active": 8,
+    "mapping": "binary_3p7",
+    "note": "BL-v3 标称：3 bit unary（8 片）+ 片内 7 bit 二进制 = 1024 码"
+  },
+  "nonideal": {
+    "ktc_v": 1.73e-05,
+    "ra_broad_v": 2.4e-05,
+    "cmp_v": 9.7e-06,
+    "ref_v": 2.9e-06,
+    "sigma_u": 0.002,
+    "chip_seed": 7,
+    "c_decap_f": 3e-10,
+    "r_buf_ohm": 20.0,
+    "droop_enabled": false,
+    "settle_tau_s": null,
+    "t_bit_s": 3e-09,
+    "a0_db": null,
+    "ra_tau_s": null,
+    "ra_t_settle_s": 1.7e-08,
+    "m_rep": 1,
+    "rho_rep": 0.61,
+    "rep_weight": "tri",
+    "noise_enabled": false
+  },
+  "seed": 7,
+  "label": "ideal",
+  "nonideal_sources": {
+    "ktc_v": "assumed: Fig.12 读图 + 预算",
+    "ra_broad_v": "assumed: 同上",
+    "cmp_v": "assumed: 同上",
+    "ref_v": "assumed: 偏小未含 droop",
+    "sigma_u": "stress: 0.2% 压力档，非 PDK",
+    "rho_rep": "stress: 反解值非实测",
+    "c_decap_f": "assumed",
+    "r_buf_ohm": "assumed",
+    "settle_tau_s": "assumed（None=理想）",
+    "a0_db": "assumed（None=无限）"
+  },
+  "profile_lsb1_effective_v": 0.009765625
+}

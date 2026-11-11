@@ -1,8 +1,8 @@
 module,port,width,sv_direction
 DigitalTop,CLK200,1,input
 DigitalTop,RSTN,1,input
-DigitalTop,D1,11,input
-DigitalTop,D2,11,input
+DigitalTop,D1,10,input
+DigitalTop,D2,12,input
 DigitalTop,DT,8,input
 DigitalTop,DONE1,1,input
 DigitalTop,DONE2,1,input
@@ -12,6 +12,7 @@ DigitalTop,CONV,18,output
 DigitalTop,EN,18,output
 DigitalTop,SEL,18,output
 DigitalTop,SELB,18,output
+DigitalTop,D1_MASK,126,output
 DigitalTop,PHI_C0,1,output
 DigitalTop,PHI_C1,1,output
 DigitalTop,PHI_RA,1,output

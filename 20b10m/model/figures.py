@@ -288,7 +288,7 @@ def f23(D):
     c = D["curves"]; code = c["code"]; fig, ax = canvas(86)
     ax.step(code, c["inl_raw"], where="post", color=BASE, lw=.8, label="校准前"); ax.step(code, c["inl_cal"], where="post", color=CAAZ, lw=.9, label="位权校准后")
     ax.set(xlabel="DAC1 码（10 bit）", ylabel="INL（LSB1）"); ax.grid(alpha=.26); ax.legend(frameon=False, fontsize=6.6, loc="upper right")
-    viz.annotate(fig, "DAC1 INL：校准前 16.4 ppm → 0.3 ppm", "σu=0.2%，8 unary 片 × 128 单位；校准只扣位权项", "1024 码逐码；不是 20.5 bit 系统 INL。残差由测量噪声决定（n=16）。")
+    viz.annotate(fig, "DAC1 INL：校准前 16.4 ppm → 0.3 ppm", "σu=0.2%，8 unary 片 × 128 单位；校准只扣位权项", "1024 码逐码；不是 20 bit 系统 INL。残差由测量噪声决定（n=16）。")
     return fig, (W, 86)
 
 
@@ -296,7 +296,7 @@ def f24(D):
     c = D["curves"]; code = c["code"][1:]; fig, ax = canvas(82)
     ax.step(code, c["dnl_raw"], where="post", color=BASE, lw=.7, label="校准前"); ax.step(code, c["dnl_cal"], where="post", color=CAAZ, lw=.8, label="位权校准后")
     ax.set(xlabel="DAC1 码（10 bit）", ylabel="DNL（LSB1）"); ax.grid(alpha=.26); ax.legend(frameon=False, fontsize=6.6, loc="upper right")
-    viz.annotate(fig, "DAC1 DNL：失配在进位处出尖峰", "校准后尖峰被位权项吸收；剩余为有限样本残差（±0.6 ppm）", "逐码 DNL；20.5 bit 下不可直接测。")
+    viz.annotate(fig, "DAC1 DNL：失配在进位处出尖峰", "校准后尖峰被位权项吸收；剩余为有限样本残差（±0.6 ppm）", "逐码 DNL；20 bit 下不可直接测。")
     return fig, (W, 82)
 
 

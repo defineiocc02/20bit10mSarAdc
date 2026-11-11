@@ -107,7 +107,7 @@ def p06(D):
     fig, ax = canvas(80); ax.plot(code/1e3, dnl, lw=.4, color=BASE)
     ax.axhspan(-0.4,0.4,color=GOOD,alpha=.08,linewidth=0)
     ax.set(xlabel="20 位输出码（k）", ylabel="DNL（ppm FS）", ylim=(-1.0,1.0)); ax.grid(alpha=.2)
-    viz.annotate(fig,"DNL：±0.4 ppm 量级","模型合成；20.5 bit 逐码 DNL 受噪声平滑，不能直接测","示意/模型曲线。")
+    viz.annotate(fig,"DNL：±0.4 ppm 量级","模型合成；20 bit 逐码 DNL 受噪声平滑，不能直接测","示意/模型曲线。")
     return fig,(W,80)
 
 

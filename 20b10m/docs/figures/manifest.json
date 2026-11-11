@@ -1,0 +1,61 @@
+{
+  "schema": "sar20_10m_effect_figures_v1",
+  "script": "model/figures_ssot.py",
+  "script_sha256": "a567cd9d5f8f2ecbbefdb851bc80822a63938bb4843cc222c61e3ad4e44c44fc",
+  "date": "2026-11-11",
+  "ssot": "spec/SSOT.md",
+  "figures": [
+    {
+      "stem": "f1_spectrum",
+      "question": "100 kHz 输入的 SNDR/DR/SFDR 是多少",
+      "source": "model.adc.simulate + fft_metrics",
+      "evidence": "L1 model"
+    },
+    {
+      "stem": "f2_averaging",
+      "question": "8× LSB 重复值多少 dB",
+      "source": "model.adc.simulate, M sweep",
+      "evidence": "L1 model + paper p.47"
+    },
+    {
+      "stem": "f3_shuffle",
+      "question": "片级随机选片换到什么",
+      "source": "model.adc.simulate, interleave",
+      "evidence": "L1 model"
+    },
+    {
+      "stem": "f4_inl",
+      "question": "0.2% 失配下 INL 与校准残差",
+      "source": "model.static → charge_model",
+      "evidence": "L1 model"
+    },
+    {
+      "stem": "f5_skew_gain",
+      "question": "交织 skew/增益失配的代价",
+      "source": "model.adc.simulate + slice_errors",
+      "evidence": "L1 model, stress 假设"
+    }
+  ],
+  "outputs": {
+    "f1_spectrum.png": "9fd9e460c44954219429ae04beced2ce061bf72e1ff9118d405a7881dded4fed",
+    "f1_spectrum.svg": "fef0d92c3148ec4e0ae6b9bebee4b78e0f8b30997a26b841566535492531ce8b",
+    "f1_spectrum.pdf": "b6d08cbdcd1a49847b2962fc4883722d2cad0c7e5715374b47b111d30a6e979c",
+    "f2_averaging.png": "e715e4c4ad2649851852f987eebed5d9c55c13a3f3a362ddc57ac67341198364",
+    "f2_averaging.svg": "72b19f0a197f208b453ce47375ba2aa7b4c6e0d1baec5443f98389dbad5f2e3d",
+    "f2_averaging.pdf": "9f46c994d079cbbb36b11683842333a890283673417add784271bc48e58725e0",
+    "f3_shuffle.png": "a570a6286379faa140c2ae6466eeff08594296980d8cae157dce658ad0e62829",
+    "f3_shuffle.svg": "7382398986d5932a7dc42916675dfdb596cf27f41c3b77c52042c2f011fac635",
+    "f3_shuffle.pdf": "1bbf89acbfb1cf4e8b3c97a03e5ebf4c4f622f5e9f1d98ede01c4dbe216a2f10",
+    "f4_inl.png": "596ba3a9b793d92a87bfee5be2147831f670ad5515a8dca70ca9d685cb2b3b9d",
+    "f4_inl.svg": "f1a1fadcc47367ea96f1938a564177d8ac992227777d50f58b9a46dec09982a2",
+    "f4_inl.pdf": "7edab43f1366d25dbe6e634ab606fcebb0927fb6a7c97458d06c57e1c2c23afa",
+    "f5_skew_gain.png": "605dc83d30cdebaadb752671e10bc51606825f6823fd8f0a976ec29affa07301",
+    "f5_skew_gain.svg": "4abf9a079d8eff435bd1f4562e569ec0025b178d9967b121eea479ce79a67208",
+    "f5_skew_gain.pdf": "57782d9ccc92b730d95f8d5f51f9e1f9dd5b3990a51dda6f3f54ae234854d27e"
+  },
+  "limits": [
+    "所有曲线是行为模型输出，不是前仿/后仿/硅测",
+    "绝对 SNDR/DR 未标定；只用于技术排序与量级",
+    "片级 shuffle 不是 CDAC 单位级 DEM"
+  ]
+}

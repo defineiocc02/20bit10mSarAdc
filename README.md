@@ -1,114 +1,109 @@
-# SAR20-10M —— 20.5 bit / 10 MS/s 两级 SAR（部分交织，180 nm BCD）
+# SAR20-10M —— 20.00 bit / 10 MS/s 两级 SAR（部分交织，180 nm BCD）
 
-> **目标**：复现 CICC 2026 成电 20.5 bit / 5 MS/s 两级 SAR（CT 二级 + tracking averaging），并用 **ADI ISSCC2024 9.8 式部分交织** 做到 **10 MS/s**：只交织 DAC1 的 18 片池，量化器/RA/CT2/参考/数字全部单套共享。
-> **状态**：G0 规格骨架 + 行为模型 + 模拟网表 + 数字 RTL；**没有硅测**，绝对指标不可签核。
+> **目标**：复现 CICC 2026（Jin et al., DOI [10.1109/CICC65509.2026.11509489](https://doi.org/10.1109/CICC65509.2026.11509489)）的 CT 二级 + tracking averaging，并用 ADI ISSCC 2024 9.8（Bodnar et al., DOI [10.1109/ISSCC49657.2024.10454329](https://doi.org/10.1109/ISSCC49657.2024.10454329)）式部分交织做到 10 MS/s。
+> **状态**：口径已统一（2026-11-11）；行为模型可复现；**模拟零仿真、数字零编译、版图零、硅测零**。
+> **唯一口径**：[`20b10m/spec/SSOT.md`](20b10m/spec/SSOT.md)。本页只做入口，不重复数字。
+
+![架构](20b10m/docs/figures/f0_architecture.svg)
+
+---
 
 ## 1. 一句话架构
 
 ```
 VIN → 18 片 DAC1 池（8 转换 + 8 采样 + 2 备）
-    → SliceMux(18:1，选 8 片) → RA → CT2(C_INC+DAC2+replica) → DigitalTop → LVDS
+    → SliceMux（8 片求和）→ Cmp1 + RA（G=32）
+    → C_INC 864 fF（AC 耦合，不采样）→ DAC2（5+6 as-wired / 12 bit target）
+    → Cmp2 → DigitalTop（Mapper + DEM + Sinc2 + Recon）→ 22 bit LVDS
 ```
 
-- 单相帧 **90 ns**：ΦC0 7.5 / ΦC1 15 / ΦRA 25 / ΦC2 37.5 / guard 5。
-- 转换链每 **100 ns** 跑一帧；slice 角色每 100 ns 交换，每片周期 200 ns（采样 100 + 转换 90 + 空闲 10）。
-- 位账：**20.5 = 10 + 11 + 1.5(8×) − 2(冗余)**；G=32；FS=10 Vpp 差分；28 pF/侧/样本。
+- 帧 **100 ns**：ΦC0 10 / ΦC1 15 / ΦRA 20 / ΦC2 45 / guard 10。
+- 位账 **20.00 = 10 + 12 − 2**；FS **10 Vpp** 差分；采样电容 **27.648 pF/侧**。
+- 一级 **10 bit**（4 flash + 2 SAR + 4 fine；电容 3 unary + 7 binary）。
+- 二级 **12 bit**（target）；当前网表 **as-wired 11 bit**，分段未定（OPEN-2）。
 
-## 2. 关键数字（冻结口径）
+## 2. 三个 profile（不混算）
 
-| 项 | 值 |
-|:---|:---|
-| 分辨率 / 速率 | 20.5 bit / 10 MS/s |
-| 输入 / 采样电容 | 差分 10 Vpp；28 pF/侧/样本（8×3.456 pF） |
-| LSB1 / LSB2 / LSB_total | 9.766 mV / 19.07 µV / 6.744 µV |
-| 粗量化 | 4b flash（15 cmp）+ 2b SAR，6.5 ns |
-| RA | 单套；24.0 µV；Zout 300 Ω；1.7 V 摆幅 |
-| CT2 | 单套；C_INC 1 pF；11 bit + 8× |
-| 时钟 | 外部 200 MHz 差分，无 PLL；σt 1.0 ps 验收 / 0.5 ps 目标 |
-| 输出 | 22 bit 无符号；LVDS DDR 400 Mbit/s；24 bit 帧 |
-| 功耗 / 面积 | core ≈3.5–3.8 mW；4 mm² 宽松版 / 1.06 mm² 对标版 |
-| 封装 / 引脚 | QFN-48 6×6；48 pad（29 功能 + 19 电源/地） |
+| profile | N1 | N2 | 位账 | 用途 |
+|:---|:---:|:---:|:---:|:---|
+| `target` | 10 | 12 | 20.00 | 规格 / 接口 / RTL / 版图 |
+| `as-wired` | 7 | 11 | 18.00 | 当前网表，只用于复现 |
+| `candidate_u3b7` | 10 | 11 | 19.00 | 网表修复候选（未授权） |
 
-## 3. 目录
+## 3. 效果图（每张带来源脚注）
 
-```
-20b10m/
-├── README.md              本文件
-├── HANDOVER.md            交接文档（接手先读：现状/缺陷/下一步）
-├── CODE_INDEX.md          代码索引
-├── TECH_EFFECTIVENESS.md  各技术有效性对比（结论总表）
-├── FILE_LAYOUT.md         文件存放规范
-├── plan/                  规划、架构裁决、面积/floorplan、SPEC 主文档
-├── spec/                  层次、端口、位分配、时序、10M 规格表
-├── interface/             模拟↔数字接口、引脚定义、输出协议
-├── analog/blocks/         25 个模拟块：spec.md + netlist/ sim/ reports/ layout/
-│   └── netlist/           build.scs（编译根）、common_cells.scs、digital_stubs.scs、pdk_models.scs
-├── digital/               DigitalTop / SliceSched / Sar1Ctrl / Sar2Ctrl / Sinc2 / ReconWeights / FramePack / SerLvds
-├── model/                 Python 行为模型（CAAZ / tracking / 交织 / 静态 / 出图）
-│   ├── results/           results.json、report.md
-│   ├── results/figures/   41 张诊断图 + manifest.json
-│   ├── results/figures_paper/   14 张论文测试风格图 + manifest.json
-│   └── results/figures_measured/ 9 张实测风格图（频谱/INL-DNL/DR/技术排序）
-├── verilog/               端口桩
-├── skill/                 建库脚本
-└── docs/                  导入步骤、流程模板
-```
+| 图 | 回答的问题 | 来源 | 等级 |
+|:---|:---|:---|:---:|
+| [`f0_architecture`](20b10m/docs/figures/f0_architecture.svg) | 结构与口径（target vs as-wired） | 网表逐行 + SSOT | L0 |
+| [`f1_spectrum`](20b10m/docs/figures/f1_spectrum.png) | 100 kHz 的 SNDR/DR/SFDR | `model.adc.simulate` + FFT | L1 |
+| [`f2_averaging`](20b10m/docs/figures/f2_averaging.png) | 8× 重复值多少 dB | `model.adc.simulate`，M 扫描 | L1 |
+| [`f3_shuffle`](20b10m/docs/figures/f3_shuffle.png) | 片级随机选片换到什么 | `model.adc.simulate`，interleave | L1 |
+| [`f4_inl`](20b10m/docs/figures/f4_inl.png) | 0.2% 失配的 INL 与校准残差 | `model.static` → `charge_model` | L1 |
+| [`f5_skew_gain`](20b10m/docs/figures/f5_skew_gain.png) | 交织 skew / 增益失配的代价 | `model.adc.simulate` + `slice_errors` | L1 |
 
-## 4. 先看什么
+> 图上的 `[模型]` / `[论文]` / `[估算]` 是来源标签；脚注写脚本、N、seed、SSOT 口径、等级、日期。
+> 旧图目录 `model/results/figures_measured/` 的 "measured" 是**图风格**，不是硅测；见 [`PROVENANCE.md`](20b10m/model/results/PROVENANCE.md)。
 
-| 想了解 | 文件 |
-|:---|:---|
-| 接手这个项目 | `HANDOVER.md`（30 秒摘要 → P0 缺陷 → 里程碑） |
-| 代码在哪、怎么读 | `CODE_INDEX.md` |
-| 架构裁决与预算 | `plan/master_plan_20b5m.md`、`plan/arch_10m.md`、`plan/coarse_quant_decision.md` |
-| 10M 逐块规格 | `spec/spec_tree_10m.md` |
-| 面积对标成电 | `analog/area_vs_cicc.md` |
-| 内部 floorplan | `analog/floorplan_4mm.md`、`floorplan_4mm.png` |
-| 走线规则 | `analog/routing_plan.md` |
-| 各技术到底值多少 dB | `TECH_EFFECTIVENESS.md` |
-| 模型可信度 | `model/AUDIT.md`、`model/REFERENCE_AUDIT.md` |
-| 校准链路缺口 | `digital/CALIBRATION_GAP.md` |
-| 出图规范 | `model/PLOT_DESIGN.md` |
-| 引脚/输出接口 | `interface/PINOUT_QFN48.md`、`interface/OUTPUT_IF_10M.md` |
-
-## 5. 模型结论（可复现）
-
-| 问题 | 结论 | 图 |
-|:---|:---|:---|
-| DAC1 校准有用吗 | 不校准 SNDR **94.5 dB / SFDR 103.5 dBc**，校准后回到噪声底 **101.8 dB**（+7.3 dB）；残余 INL 0.3 ppm | `measured01/02/09`、`fig23–27` |
-| 交织能提速吗 | 理想 10 MS/s 与 5 MS/s 同 DR（101.87 dB）→ 交织只换速率；2 MHz、2 ps skew 掉 1.5 dB；增益 50 ppm 掉 5.4 dB | `fig14–20` |
-| CAAZ 有用吗 | 100 kHz **+3.62 dB**、2 MHz +3.18；其中 3.04 dB 是通用两点平均，AZ 抵消只 **+0.58 dB** | `measured08`、`fig01/02/03/07` |
-| 8× 平均有多少 | M=1→8 只有 **+1.67 dB**（ρ=0.61），不是 4.5 dB | `fig08–13` |
-| 洗牌值不值 | DR −1.0 dB，SFDR **+21.2 dBc**（103.7→124.9） | `fig17–19` |
-| 面积该多大 | 对标成电 core **0.70–1.0**、die 0.95–1.25；4 mm² 是宽松版 | `fig38`、`area_vs_cicc.md` |
-
-**注意**：绝对 DR/SNDR/INL 为模型值，未标定，不能当签核；模型缺参考建立/抖动/亚稳态/DAC 建立，实测 SFDR 预期 100–110 dBc。
-详见 `TECH_EFFECTIVENESS.md`（含"能声称/不能声称"清单）与 `model/REFERENCE_AUDIT.md`（与参考实现的逐点对照）。
-
-## 6. 快速运行
+## 4. 快速复现
 
 ```bash
 cd 20b10m
-# 模型
-python3 -m model.selftest        # 4 项自检
-python3 -m model.experiments     # results.json / report.md
-python3 -m model.figures          # 41 张诊断图 + manifest
-python3 -m model.paper_figures    # 14 张论文风格图 + manifest
-# 模拟网表
+python3 -m model.selftest          # 4 项自检
+python3 -m model.experiments       # 6 s，输出模型结论
+python3 -m model.figures_ssot      # 生成 docs/figures（带来源脚注）
+
+python3 tools/check_ssot.py        # 唯一口径闸门
+python3 tools/check_consistency.py # 位账 / 端口 / 引脚 / 引用
 python3 analog/netlist/check_hier.py
 python3 analog/netlist/check_ports.py
-# 数字（需 iverilog/verilator）
-cd digital && make lint && make sim
 ```
 
-## 7. 当前缺口
+数字 RTL（需 iverilog/verilator，本机未装）：
 
-1. `pdk_models.scs` 未填 SMIC 别名，模拟只能结构检查。
-2. `Sar1Ctrl/Sar2Ctrl` 未替换两个数字 stub。
-3. `ReconWeights` 仍是名义权重，48 系数 SPI 未接。
-4. 模型缺参考纹波、抖动、比较器亚稳态、DAC 建立。
-5. 版图未开始；floorplan 只是约束图。
+```bash
+cd 20b10m/digital && make lint && make sim
+```
 
-## 8. 证据等级
+## 5. 证据边界（不许升级）
 
-L0 静态 → L1 行为/单元 → L2 前仿 → L3 后仿 → L4 PVT/MC → L5 硅测。**任何“20.5 bit 精度”“102.5 dB 已复现”只有 L5 才能写。**
+| 层 | 状态 | 证据 |
+|:---|:---|:---|
+| L0 结构 | ✅ | 网表 28 文件 / 222 实例；SSOT 检查 0 错 |
+| L1 行为 | ✅ | `model.selftest` 4/4；`behavioral` pytest 11 passed |
+| L2 前仿 | ❌ | 无 PDK、DAC1 三电平未接、DAC2 无 12 bit 分段 |
+| L3 后仿 / L4 PVT / L5 硅测 | ❌ | 无版图、无流片 |
+
+**能声称**：码域闭合、模型层面的技术排序（8× / shuffle / 校准）、结构一致性。
+**不能声称**：20 bit 精度已复现、SNDR 99.4 dB 可达、DEM 有效、dither 有效、模拟网表可仿真。
+
+## 6. 未决项（唯一清单见 SSOT §7）
+
+| # | 项 | 影响 |
+|:--|:---|:---|
+| OPEN-1 | DAC1 三电平 + termination 1C 可切换 | 现在只能到 127/128 |
+| OPEN-2 | DAC2 12 bit 分段（5+7 vs 6+6） | 网表仍 11 bit |
+| OPEN-3 | dither 注入点与幅度 | 当前 D=0 |
+| OPEN-4 | `CMP1/2_READY` 握手 | ΦC2 无法闭环 |
+| OPEN-5 | DEM 粒度（片级 8 态 vs 单位级） | 只做片级 |
+
+## 7. 目录
+
+```
+20b10m/
+├── spec/SSOT.md            唯一口径（先读这个）
+├── spec/params.yaml        机器可读副本
+├── spec/LEGACY_INDEX.md    历史文件边界
+├── interface/              模拟↔数字接口、引脚、输出协议
+├── analog/blocks/          24 个块的 spec + netlist
+├── digital/                RTL 骨架 + testbench + 静态检查
+├── model/                  行为模型（CAAZ / tracking / 交织 / 静态）
+├── behavioral/             Python 主引擎（sar20b）
+├── docs/figures/           带来源脚注的效果图
+└── tools/check_ssot.py     口径闸门
+```
+
+## 8. 引用
+
+- CICC 2026: C. Jin et al., "A 3.6mW 5MS/s 100dB-SNDR 2-Step SAR ADC with Continuous-Time Second-Stage and Tracking Averaging," DOI 10.1109/CICC65509.2026.11509489.
+- ISSCC 2024: R. Bodnar et al., "A 9.3nV/√Hz 20b 40MS/s 94.2dB DR Signal-Chain Friendly Precision SAR Converter," DOI 10.1109/ISSCC49657.2024.10454329.
+- 专利：US10505561B2（dither）、US10511316B2（DEM）、US10516408B2、US10707889B1、US10541702B1、US10826519B1。

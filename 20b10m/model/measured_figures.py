@@ -337,13 +337,17 @@ def _cal_gain():
 
 
 def tech_rank(D):
+    # 下列数值是实测归档值（非计算式）：改动前请用 experiments.py 的对应实验重跑核对。
+    # 2026-11-08 复核（seeds=100/101/102，gain=5e-5 offset=50e-6 skew=1 ps，fin=100 kHz）：
+    #   洗牌 → SFDR 103.72→124.92（+21.19 dBc）、SNDR −0.98 dB
+    #   旧标签 "+18.8 dB" 与旧值 −2.09 均已过期，与 TECH_EFFECTIVENESS.md / README 的 +21.2 冲突。
     dcal, s0, s1 = _cal_gain()
     tech=[(f"DAC1 位权校准（SNDR {s0:.1f}→{s1:.1f}）",dcal,3),
           ("级间增益校准 50→10 ppm",4.89,2),("CAAZ（10 MS/s 输出）",3.58,5),
           ("skew ≤0.5 ps（2 MHz）",1.72,3),("8× tracking",1.71,3),
           ("C_s 28→56 pF",0.99,4),("CAAZ 独家（AZ 抵消）",0.61,5),
           ("RA 电流 +50%（ρ 0.61→0.45）",0.40,4),("交织 5→10 MS/s",0.0,2),
-          ("洗牌（SFDR +18.8 dB）",-2.09,1)]
+          ("洗牌（SFDR +21.2 dB）",-0.98,1)]
     tech=sorted(tech,key=lambda x:x[1])
     names=[t[0] for t in tech]; vals=[t[1] for t in tech]
     fig,ax=plt.subplots(figsize=(W/MM,105/MM)); fig.subplots_adjust(left=.46,right=.965,top=.80,bottom=.16)

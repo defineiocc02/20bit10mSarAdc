@@ -1,0 +1,50 @@
+pin,name,type,domain,group,function,note
+1,VINP,AI,5V,analog_in,差分正输入,0-5 V/侧
+2,VINN,AI,5V,analog_in,差分负输入,0-5 V/侧
+3,VREF5,AI,5V,ref,DAC1 高轨,外部 5.000 V
+4,VREF2,AI,2.5V,ref,DAC2 满量程,外部 2.500 V
+5,VCM,AI,2.5V,ref,共模/复位轨,外部 2.500 V；板级 >=100 uF
+6,VREFN,AI,0V,ref,参考地,0 V
+7,VDD5A,PWR,5V,pwr5,DAC1 开关,第 1 路
+8,VDD5A,PWR,5V,pwr5,采样自举,第 2 路
+9,VDD5A,PWR,5V,pwr5,参考 buffer,第 3 路
+10,VSSA,GND,0V,gnd,模拟地,星点回流
+11,VSSA,GND,0V,gnd,模拟地,-
+12,VSSA,GND,0V,gnd,模拟地,-
+13,CLKP,DI,1.8V,clk,200 MHz 差分正,片内 100 ohm 端接
+14,CLKN,DI,1.8V,clk,200 MHz 差分负,-
+15,VDD18A,PWR,1.8V,pwr18a,RA 电源,第 1 路
+16,VSSA,GND,0V,gnd,模拟地,-
+17,VDD18D,PWR,1.8V,pwr18d,数字核心,独立 pad
+18,VSSD,GND,0V,gnd,数字地,-
+19,VDDIO,PWR,1.8V,pwr_io,LVDS/SPI IO,第 1 路
+20,VSSIO,GND,0V,gnd,IO 地,-
+21,VSSD,GND,0V,gnd,数字地,-
+22,VSSA,GND,0V,gnd,模拟地,-
+23,SPARE1,IO,-,spare,备用,可做第二随路时钟
+24,SPARE2,IO,-,spare,备用,-
+25,DOUTP,LVDS,1.8V,lvds_out,数据正,400 Mbit/s DDR
+26,DOUTN,LVDS,1.8V,lvds_out,数据负,-
+27,CLKOUTP,LVDS,1.8V,lvds_out,随路时钟正,200 MHz
+28,CLKOUTN,LVDS,1.8V,lvds_out,随路时钟负,-
+29,DRDYP,LVDS,1.8V,lvds_out,帧首正,10 ns 脉冲
+30,DRDYN,LVDS,1.8V,lvds_out,帧首负,-
+31,SCLK,DI,1.8V,spi,SPI 时钟,<=10 MHz
+32,SDI,DI,1.8V,spi,SPI 数据入,-
+33,SDO,DO,1.8V,spi,SPI 数据出,回读系数/状态
+34,CS,DI,1.8V,spi,SPI 片选,-
+35,CAL_TRIG,DI,1.8V,spi,校准触发,-
+36,RSTN,DI,1.8V,spi,复位,低有效；异步置位同步释放
+37,TEST0,DI,1.8V,test,测试模式 0,-
+38,TEST1,DI,1.8V,test,测试模式 1,-
+39,MON,AO,1.8V,test,模拟观测,8:1 mux 缓冲
+40,DOUT2P,LVDS,1.8V,lvds_out,第二 lane 正,fallback
+41,DOUT2N,LVDS,1.8V,lvds_out,第二 lane 负,-
+42,VDD5A,PWR,5V,pwr5,备用 5 V,第 4 路
+43,VSSA,GND,0V,gnd,模拟地,-
+44,VDD18A,PWR,1.8V,pwr18a,Cmp2 电源,第 2 路
+45,VSSD,GND,0V,gnd,数字地,-
+46,VDDIO,PWR,1.8V,pwr_io,IO 电源,第 2 路
+47,SPARE3,IO,-,spare,备用,可做地
+48,SPARE4,IO,-,spare,备用,可做地
+EP,VSSA,GND,0V,ep,外露焊盘,多点过孔接地

@@ -1,0 +1,9 @@
+# 失配斜坡：看 σu 对全链 INL 的影响
+profile: ideal
+nonidealities:
+  sigma_u: 0.002
+  noise_enabled: false
+experiment:
+  kind: ramp
+  n: 4096
+  seed: 7

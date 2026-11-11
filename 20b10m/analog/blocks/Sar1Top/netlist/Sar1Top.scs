@@ -1,9 +1,10 @@
-// Sar1Top.scs —— 一级（单套）：比较器 + 三电平驱动 + SAR1 逻辑（4b flash + 2b SAR + 5b 细搜）
-// 端口：VTOPP VTOPN VREF VCM VGND COARSE<14:0> PHI_C0 PHI_C1 D1<10:0> SAMN<10:0> CMPP CMPN DONE1 VDD5 VDD18 GND
+// Sar1Top.scs —— 一级壳：比较器 + SAR1 逻辑（4b flash + 2b SAR + 4b fine，共 10 判决）
+// 端口：VTOPP VTOPN VREF VCM VGND COARSE<14:0> PHI_C0 PHI_C1 D1M<125:0> CMPP CMPN DONE1 VDD5 VDD18 GND
+// 说明：采样开关与 DAC1 阵列在 SdacPool18；本壳只做比较与逐位决策。
+//       TriLevelDrv 在 target 下沉到 SdacSlice 的每位底板，本壳不再实例化（原 SEG 悬空）。
 simulator lang=spectre
 
-subckt Sar1Top VTOPP VTOPN VREF VCM VGND COARSE<14:0> PHI_C0 PHI_C1 D1<10:0> SAMN<10:0> CMPP CMPN DONE1 VDD5 VDD18 GND
+subckt Sar1Top VTOPP VTOPN VREF VCM VGND COARSE<14:0> PHI_C0 PHI_C1 D1M<125:0> CMPP CMPN DONE1 VDD5 VDD18 GND
 Xcmp (VTOPP VTOPN PHI_C1 CMPP CMPN VDD18 GND) Cmp1
-Xdrv (VREF VCM VGND D1<10:0> SAMN<10:0> SEG<10:0> VDD5 GND) TriLevelBank11
-Xlogic (CMPP CMPN COARSE<14:0> PHI_C0 PHI_C1 D1<10:0> SAMN<10:0> DONE1 VDD18 GND) SarLogic1_stub
+Xlogic (CMPP CMPN COARSE<14:0> PHI_C0 PHI_C1 D1M<125:0> DONE1 VDD18 GND) SarLogic1_stub
 ends Sar1Top

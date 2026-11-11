@@ -1,0 +1,258 @@
+{
+  "baseline": "BL-v1 / ARCH_V2 2026-11-08",
+  "checks": [
+    {
+      "cid": "B1",
+      "item": "位账 10+11-2+1.5",
+      "value": "20.5 bit",
+      "target": "20.5 bit",
+      "verdict": "PASS",
+      "note": "1.5 = 0.5·log2(8)"
+    },
+    {
+      "cid": "B2",
+      "item": "2^20.5 × LSB_total = FS",
+      "value": "10.0000 Vpp",
+      "target": "10.0000 Vpp",
+      "verdict": "PASS",
+      "note": "LSB_total=6.743 µV"
+    },
+    {
+      "cid": "B3",
+      "item": "LSB2 = 4·LSB1 / 2^11",
+      "value": "19.073 µV",
+      "target": "19.07 µV",
+      "verdict": "PASS",
+      "note": "LSB1=9.766 mV，残差跨距=39.06 mV"
+    },
+    {
+      "cid": "B4",
+      "item": "残差跨距 × A_RA",
+      "value": "1.250 Vpp",
+      "target": "1.25 Vpp",
+      "verdict": "PASS",
+      "note": "A_RA=32"
+    },
+    {
+      "cid": "B5",
+      "item": "k_INC = C_INC/(C_INC+C_DAC2,eff)",
+      "value": "0.4922 → 615.2 mVpp",
+      "target": "≈0.49 / 615 mVpp",
+      "verdict": "PASS",
+      "note": "C_DAC2,eff=891.6 fF（含桥接 27.6 fF）"
+    },
+    {
+      "cid": "B6",
+      "item": "22 bit × 0.5 LSB_total 是否装得下 FS",
+      "value": "LSB=3.372 µV，量程 14.14 V = 141% FS",
+      "target": "≥100% FS",
+      "verdict": "PASS",
+      "note": "余量 41.4% 给失调/过载；中心 0x200000；若改成 21 bit 只有 71% FS，装不下"
+    },
+    {
+      "cid": "B7",
+      "item": "C_INC / DAC2 阵列是单位电容整数倍",
+      "value": "32.000 / 32.000 单位",
+      "target": "整数",
+      "verdict": "PASS",
+      "note": "架构造型要求全片只用 32/64/1024 单位三种块"
+    },
+    {
+      "cid": "B8",
+      "item": "片池 18 = 8 转换 + 8 采样 + 2 备",
+      "value": "18 片（需 16 + 2 备）",
+      "target": "18",
+      "verdict": "PASS",
+      "note": "每片 200 ns 用一次"
+    },
+    {
+      "cid": "N1",
+      "item": "ρ = exp(-Δt/τ_RA)",
+      "value": "0.449（Δt=2 ns, τ=2.5 ns）",
+      "target": "ARCH D-10 取 0.449",
+      "verdict": "PASS",
+      "note": "τ_RA 未仿（U1），ρ 是唯一会翻转结论的假设"
+    },
+    {
+      "cid": "N2",
+      "item": "噪声合计（不含 DT 子码 credit）",
+      "value": "26.18 µV",
+      "target": "≤26.5 µV",
+      "verdict": "PASS",
+      "note": "M_eff=3.54（理想 8）"
+    },
+    {
+      "cid": "N3",
+      "item": "噪声合计（计入 DT 3 bit 子码）",
+      "value": "25.61 µV",
+      "target": "≤26.5 µV",
+      "verdict": "PASS",
+      "note": "架构主张 credit；模型 params 目前用 5.505 µV"
+    },
+    {
+      "cid": "N4",
+      "item": "DR（官方口径：满量程 10 Vpp）",
+      "value": "102.61 dB",
+      "target": "≥102.5 dB",
+      "verdict": "PASS",
+      "note": "架构裁决：DR 以满量程定义；amp4.8 只作历史对比"
+    },
+    {
+      "cid": "N5",
+      "item": "DR（遗留口径：amp 4.8 V 峰/侧 = 9.6 Vpp）",
+      "value": "102.25 dB",
+      "target": "≥102.5 dB",
+      "verdict": "WARN",
+      "note": "同一设计换口径少 3.4 dB 里的 0.35 dB；此口径达不到 102.5，不得用于验收"
+    },
+    {
+      "cid": "N6",
+      "item": "ENOB = (DR-1.76)/6.02",
+      "value": "16.75 bit",
+      "target": "独立于 20.5 bit 字长",
+      "verdict": "PASS",
+      "note": "20.5 bit 是字长，不是精度"
+    },
+    {
+      "cid": "N7",
+      "item": "DR 达标所需的 ρ 上限（计 DT credit）",
+      "value": "amp4.8: 0.424 / 满量程: 0.575",
+      "target": "越大越宽松",
+      "verdict": "WARN",
+      "note": "当前 ρ=0.449；amp4.8 口径下余量 = -0.026"
+    },
+    {
+      "cid": "N8",
+      "item": "抖动噪声 @2 MHz, 1 ps",
+      "value": "42.7 µV",
+      "target": "与 26.5 µV 同量级",
+      "verdict": "WARN",
+      "note": "高频才显著；DR 用低频口径，不叠加此项"
+    },
+    {
+      "cid": "T0",
+      "item": "帧与转换窗",
+      "value": "帧 100 ns / 转换 90 ns",
+      "target": "100 / 90 ns",
+      "verdict": "PASS",
+      "note": "cnt18-19 共 10 ns 做 HOLD/换相，规格里的 guard 5 ns 被吸收"
+    },
+    {
+      "cid": "T1",
+      "item": "ΦC0：flash + 2 次 Cmp1",
+      "value": "7.72 / 10 ns",
+      "target": "≤ 包络",
+      "verdict": "PASS",
+      "note": "余量 2.28 ns；依赖 flash 自然建立（A5 未握手）"
+    },
+    {
+      "cid": "T2",
+      "item": "ΦC1：4 次 Cmp1（10 次判决口径）",
+      "value": "9.44 / 15 ns",
+      "target": "≤ 包络",
+      "verdict": "PASS",
+      "note": "余量 5.56 ns"
+    },
+    {
+      "cid": "T3",
+      "item": "ΦRA：建立 22 ns（9.5τ，τ=0.90 ns）",
+      "value": "25 ns",
+      "target": "≥ 22 ns",
+      "verdict": "PASS",
+      "note": "可借 3 ns 给 ΦC2（架构退路①）"
+    },
+    {
+      "cid": "T4",
+      "item": "ΦC2：19 拍 × 名义 1.80 ns",
+      "value": "34.2 / 40 ns",
+      "target": "≤ 包络",
+      "verdict": "PASS",
+      "note": "占用 86%；Cmp2=0.6 ns 是 U2 未仿值"
+    },
+    {
+      "cid": "T5",
+      "item": "ΦC2：19 拍 × 悲观 3.56 ns（Cmp2=2.36）",
+      "value": "67.6 / 40 ns",
+      "target": "≤ 包络",
+      "verdict": "FAIL",
+      "note": "超 27.6 ns；须借 ΦRA 3 ns 或降 M"
+    },
+    {
+      "cid": "T6",
+      "item": "ΦC2 单拍可用预算",
+      "value": "2.105 ns/拍",
+      "target": "≥ 1.80 ns",
+      "verdict": "PASS",
+      "note": "允许 Cmp2 ≤ 0.91 ns"
+    },
+    {
+      "cid": "T7",
+      "item": "done2 过 2 级同步后的落点",
+      "value": "100 ns（帧 100）",
+      "target": "< 帧长",
+      "verdict": "WARN",
+      "note": "落在帧尾 10 ns 窗口内，余量仅 0 ns（digital 独立报了同一条）"
+    },
+    {
+      "cid": "C1",
+      "item": "DAC1 静态 INL（MC，σ_u=0.2%，含片间失配）",
+      "value": "41.6 ppm（p95 58.6）",
+      "target": "文档 16.4 ppm（另一套失配假设）",
+      "verdict": "WARN",
+      "note": "60 次；本模型把 18 片的整片失配也算进去（σ=0.2%·√128≈2.3% Cu），文档 16.4 ppm 依赖「同一阵列互补开关」假设——两者不可直接比，不作对错判据"
+    },
+    {
+      "cid": "C2",
+      "item": "校准残差（按 2.8 LSB20/权 的文档口径）",
+      "value": "n=1: 21.2 / 16: 5.30 / 256: 1.32 ppm",
+      "target": "文档：2.3 / 0.57 / 0.14 ppm",
+      "verdict": "FAIL",
+      "note": "同一组数差 ~10×：若 2.8 LSB20 是每权测量噪声，n=1 应为 21.2 ppm；文档的 2.3 ppm 对应 ≈0.30 LSB20/权。两者不能同时成立"
+    },
+    {
+      "cid": "C3",
+      "item": "残差按 1/√n 缩放",
+      "value": "4.00×（n 1→16）",
+      "target": "4.00×",
+      "verdict": "PASS",
+      "note": "标度律本身成立；绝对值取决于 C2 的口径"
+    },
+    {
+      "cid": "C4",
+      "item": "校准判据 ≤1.5 ppm 所需平均次数",
+      "value": "n≈200",
+      "target": "≤256",
+      "verdict": "PASS",
+      "note": "按 2.8 LSB20/权 口径反推；口径变了这条跟着变"
+    },
+    {
+      "cid": "D1",
+      "item": "DAC2 桥接 28 fF 保持 11 bit",
+      "value": "max|DNL|=129.1%，负步 31/2047",
+      "target": "单调、无缺码",
+      "verdict": "WARN",
+      "note": "理想值 27.43 fF（DNL≈0）；28 fF 有 +2.1% 重叠 → 回退步，需 1 个系数"
+    },
+    {
+      "cid": "D2",
+      "item": "草案 55.7 fF 会掉到 10 bit",
+      "value": "max|DNL|=6106%，最小步 -60.1 LSB",
+      "target": "应显著劣化（作废依据）",
+      "verdict": "PASS",
+      "note": "子阵覆盖 2 个主 LSB → 2048 码只剩 1024 级"
+    },
+    {
+      "cid": "D3",
+      "item": "理想桥容 = 64/63·C_u",
+      "value": "27.43 fF",
+      "target": "传输曲线 DNL≈0",
+      "verdict": "PASS",
+      "note": "自校验：模型在理论值上必须给出均匀步长"
+    }
+  ],
+  "summary": {
+    "total": 31,
+    "fail": 2,
+    "warn": 6
+  }
+}

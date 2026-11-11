@@ -1,0 +1,8 @@
+{
+  "kind": "ramp",
+  "n": 4096,
+  "inl_peak_lsb20": 45.43279342805722,
+  "inl_peak_ppm": 43.32808821492883,
+  "n_valid": 4096,
+  "n_overload": 0
+}

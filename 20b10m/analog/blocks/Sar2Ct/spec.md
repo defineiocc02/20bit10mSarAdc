@@ -1,48 +1,51 @@
 # Sar2Ct
 
-- 层级：L1　父：`Sar20bTop`　子：`CincCouple`、`Dac2_12b`、`Dac2Replica`、`Cmp2`、`SarLogic2`
-- 功能：二级：CT SAR（C_INC 直连 DAC2，12b，8× LSB 重复）
+- 层级：L1　父：`Sar20bTop`　子：`CincCouple`、`Dac2_11b`（as-wired）、`Dac2Replica`、`Cmp2`、`SarLogic2`（stub）
+- 功能：二级 CT SAR：C_INC 交流耦合 + DAC2 + replica + 8× LSB 重复。
+- Profile: target（DAC2 12 bit；as-wired 11 bit）。
 
-## 端口
+## 端口（与网表 `Sar2Ct.scs` 一致）
 
 | 端口 | 方向 | 类型 | 域 | 范围/说明 | 备注 |
 |:---|:---|:---|:---|:---|:---|
-| `VRESP` | in | analog | 1.8V | 来自 RA |  |
-| `VRESN` | in | analog | 1.8V |  |  |
-| `VREFP2` | in | analog | 1.8V |  |  |
-| `VREFN2` | in | analog | 1.8V |  |  |
+| `VRESP` / `VRESN` | in | analog | 1.8V | 来自 RA | 1.25 Vpp |
+| `VREFP2` / `VREFN2` | in | analog | 1.8V | DAC2 参考 |  |
 | `VCM` | in | analog | 1.8V |  |  |
-| `PHI_RA` | in | digital | 1.8V |  |  |
-| `PHI_C2` | in | digital | 1.8V |  |  |
-| `D2<11:0>` | out | digital | 1.8V | 12 bit |  |
-| `DT<7:0>` | out | digital | 1.8V | 8× 重复码 |  |
+| `PHI_RA` | in | digital | 1.8V | 20 ns |  |
+| `PHI_C2` | in | digital | 1.8V | 45 ns | 20 拍 × 2.25 ns |
+| `D2<11:0>` | out | digital | 1.8V | 12 bit | as-wired 为 11 bit |
+| `DT<7:0>` | out | digital | 1.8V | 8× 重复码 | 零均值 0..7 |
 | `DONE2` | out | digital | 1.8V |  |  |
-| `VDD18` | pwr | power | 1.8V | 1.8 |  |
-| `GND` | pwr | power | - | 0 |  |
+| `VDD18` / `GND` | pwr | power | 1.8V / — |  |  |
 
 ## 关键参数
 
-C_INC 待定；DAC2 12b；8× 重复约 10ns
-
-## 依赖
-
-CincCouple, Dac2_12b, Dac2Replica, Cmp2, SarLogic2
+| 项 | 值 | 来源 |
+|:---|:---|:---|
+| C_INC | 864 fF（32 × 27 fF） | SSOT #20 |
+| CT 分压 k_INC | 0.492 | SSOT #21 |
+| DAC2 节点摆幅 | 615 mVpp | SSOT #22 |
+| DAC2 LSB@节点 | 150 µV（12 bit） | SSOT #22 |
+| 重复 | 8 次，20 拍内 | SSOT #30 |
+| 二级窗口 | ±2 LSB1 = 39.0625 mVpp（输入折算） | SSOT #4 |
 
 ## 待定 / TODO
 
-C_INC 容值；replica 的匹配要求；重复的时序边界
+- DAC2 12 bit 分段（OPEN-2）。
+- replica 的参考与反相注入（当前网表把 `VREFP/VREFN` 接 VCM，D4 未修）。
+- `RST` 与 `PHI_RA` 下降沿的关系。
 
 ## 验收判据
 
-kickback 残差<1 LSB2；20 周期在 40ns 内完成
+kickback 残差 <1 LSB2；20 拍在 45 ns 内完成；C_INC 失配 <0.1%。
 
-## 文件位置（预留）
+## 文件位置
 
 ```
 blocks/Sar2Ct/
 ├── spec.md          本文件
-├── netlist/         导出的 CDL/网表（G2 起）
-├── sim/             测试台与运行记录（run_id 子目录）
-├── reports/         单元/集成报告
-└── layout/          GDS、DRC/LVS（G4 起）
+├── netlist/         Sar2Ct.scs
+├── sim/
+├── reports/
+└── layout/
 ```
