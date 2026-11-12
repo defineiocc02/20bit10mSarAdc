@@ -44,15 +44,16 @@
 | 8× LSB 重复 | **+1.69 dB [1.66,1.72]** @100k；+1.70 @1M；解析预测 1.714 | **VALIDATED** |
 | CAAZ | **+3.65 dB** @100k；@1M +3.54；@2M +3.21；其中 AZ 只 **+0.60** | **VALIDATED** |
 | 片级 shuffle | SFDR **+22.3 dBc** @100k、+21.7 @2M；**DR 方向不稳**（+0.9 / −1.7 两段相反） | SFDR **VALIDATED**；DR **NOT VALIDATED** |
-| 静态校准 | INL **17.8±4.4 → 0.54±0.04 ppm**（33×）；DNL **0.0235 → 0.00073 LSB1**（32×），失码 0→0；out-of-sample **1.87** | **CONDITIONAL**（OOS 超 ±1.5） |
+| 静态校准 | INL **18.6 → 0.56 LSB20**（33×）；DNL **24.0 → 0.75 LSB20**（32×），失码 0→0；out-of-sample **2.0 LSB20** | **CONDITIONAL**（OOS 超 1 LSB20） |
 | 交织 skew | 0.5→2 ps：**−1.44 dB [−1.73,−1.14]**，10/10 负 | **VALIDATED（退化）** |
 | 交织增益 | 10→50 ppm：**−5.58 dB [−6.11,−5.06]**，10/10 负 | **VALIDATED（退化）** |
-| DEM（片级 8 态，模型） | INL **21.8→6.0 ppm（3.6×）**；DNL 0.0234→0.0083 LSB1（2.8×）；网表/RTL 未实现 | 模型 VALIDATED / 实现 OPEN-5 |
-| dither（码域 D=2，模型） | DNL **0.0234→0.0051 LSB1（4.6×）**；INL 21.8→20.2（1.08×，几乎无效）；采样态注入未实现 | 模型 VALIDATED（DNL）/ 实现 OPEN-3 |
-| DEM+dither | INL **5.0 ppm（4.4×）**；DNL **0.0017 LSB1（13.8×）** | 互补 |
+| DEM（片级 8 态，模型） | INL **22.9→6.3 LSB20（3.6×）**；DNL 24.0→8.5 LSB20（2.8×）；网表/RTL 未实现 | 模型 VALIDATED / 实现 OPEN-5 |
+| dither（码域 D=2，模型） | DNL **24.0→5.2 LSB20（4.6×）**；INL 22.9→21.1（1.08×，几乎无效）；采样态注入未实现 | 模型 VALIDATED（DNL）/ 实现 OPEN-3 |
+| DEM+dither | INL **5.2 LSB20（4.4×）**；DNL **1.7 LSB20（13.8×）** | 互补 |
 | 跨实现 INL | `model` 16.4 ppm vs `behavioral` 43.3 ppm（**2.64×**） | **DISCREPANT** |
 
 **不能声称**：8× 在硅上值 1.7 dB；shuffle 用 DR 换 SFDR；校准后 0.3 ppm 达 20 bit；INL=16.4 ppm 是绝对值；DEM/dither 有效。
+> 换算：1 LSB20 = 0.954 ppm FS；1 LSB1 = 1024 LSB20。
 
 ### 效果图（每张带来源脚注）
 

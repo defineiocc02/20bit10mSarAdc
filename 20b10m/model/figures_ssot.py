@@ -224,9 +224,9 @@ def fig_inl_dnl() -> Path:
     miss_raw = int((raw_dnl <= -1).sum())
     miss_cal = int((cal_dnl <= -1).sum())
 
-    fig = plt.figure(figsize=(W_MM / 25.4, 132 / 25.4))
+    fig = plt.figure(figsize=(W_MM / 25.4, 142 / 25.4))
     gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 0.95], hspace=0.62, wspace=0.26,
-                          left=0.115, right=0.975, top=0.80, bottom=0.29)
+                          left=0.115, right=0.975, top=0.80, bottom=0.33)
     ax1 = fig.add_subplot(gs[0, 0])
     ax2 = fig.add_subplot(gs[0, 1])
     ax3 = fig.add_subplot(gs[1, 0])
@@ -275,26 +275,29 @@ def fig_inl_dnl() -> Path:
     rows = [
         ["指标", "legacy 单端", "3+7 raw", "3+7 校准"],
         ["INL pk (ppm)", f"{leg_ppm:.1f}", f"{raw_ppm:.1f}", f"{cal_ppm:.2f}"],
+        ["INL pk (LSB20)", f"{leg_ppm*1.048576:.1f}", f"{raw_ppm*1.048576:.1f}", f"{cal_ppm*1.048576:.2f}"],
         ["DNL pk (LSB1)", f"{leg_dp:.4f}", f"{raw_dp:.4f}", f"{cal_dp:.4f}"],
+        ["DNL pk (LSB20)", f"{leg_dp*1024:.1f}", f"{raw_dp*1024:.1f}", f"{cal_dp*1024:.2f}"],
         ["失码", "0", f"{miss_raw}", f"{miss_cal}"],
     ]
     tb = ax4.table(cellText=rows, cellLoc="center", loc="center", colWidths=[0.32, 0.24, 0.20, 0.20])
     tb.auto_set_font_size(False)
-    tb.set_fontsize(6.6)
-    tb.scale(1.0, 1.55)
+    tb.set_fontsize(5.9)
+    tb.scale(1.0, 1.0)
     for (r, cc), cell in tb.get_celld().items():
         cell.set_linewidth(0.4)
         cell.set_edgecolor("#B4B2A9")
         if r == 0:
             cell.set_facecolor("#F1EFE8")
-    ax4.set_title("同一失配档（σu=0.2%，seed=7/1）", fontsize=8, loc="left", pad=4)
+    ax4.text(0.0, 1.04, "同一失配档（σu=0.2%，seed=7/1）", transform=ax4.transAxes,
+             fontsize=8, va="bottom", ha="left")
 
     head(fig, "DAC1 的 DNL/INL：校准把 INL 压了 30 倍，DNL 本来就没有失码",
-         "σu=0.2%，1024 码；表为 seed=7 示例；校准=16 次平均的有限样本位权拟合")
+         "σu=0.2%，1024 码；纵轴 LSB1；表含 LSB20；校准=16 次平均的有限样本拟合")
     fig.text(0.015, 0.862, "10 芯片：INL 17.8→0.54 ppm；DNL 0.0235→0.00073 LSB1；失码 0→0",
              fontsize=7.2, color=GRAY, va="top")
     foot(fig, [FOOT_COMMON.format(data="charge_model.dac1_curves + _features 有限样本拟合", n=1024, seeds="seed=7；legacy seed=1"),
-               "说明: DNL 本来就没有失码（0/0），校准收益是留裕量（2.3%→0.07% LSB1），不是救失码；legacy 单端仅作对照。"])
+               "说明: DNL 本来就没有失码；校准收益是留裕量（2.3%→0.07% LSB1）；legacy 单端仅作对照。"])
     return save(fig, "f4_inl_dnl")
 
 
@@ -437,17 +440,18 @@ def fig_dem_dither() -> Path | None:
     s7, agg = d["seed7"], d["chips"]["agg"]
     Ds = [0, 1, 2, 4, 8]
     raw, dem = s7["raw"], s7["DEM"]
-    dith_inl = np.array([raw["inl_ppm"]] + [s7[f"dither_D{D}"]["inl_ppm"] for D in Ds[1:]])
-    dith_dnl = np.array([raw["dnl_lsb1"]] + [s7[f"dither_D{D}"]["dnl_lsb1"] for D in Ds[1:]])
-    both_inl = np.array([dem["inl_ppm"]] + [s7[f"DEM+dither_D{D}"]["inl_ppm"] for D in Ds[1:]])
-    both_dnl = np.array([dem["dnl_lsb1"]] + [s7[f"DEM+dither_D{D}"]["dnl_lsb1"] for D in Ds[1:]])
+    K20 = 1.048576  # 1 ppm FS
+    dith_inl = np.array([raw["inl_ppm"]] + [s7[f"dither_D{D}"]["inl_ppm"] for D in Ds[1:]]) * K20
+    dith_dnl = np.array([raw["dnl_lsb1"]] + [s7[f"dither_D{D}"]["dnl_lsb1"] for D in Ds[1:]]) * 1024
+    both_inl = np.array([dem["inl_ppm"]] + [s7[f"DEM+dither_D{D}"]["inl_ppm"] for D in Ds[1:]]) * K20
+    both_dnl = np.array([dem["dnl_lsb1"]] + [s7[f"DEM+dither_D{D}"]["dnl_lsb1"] for D in Ds[1:]]) * 1024
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(W_MM / 25.4, 112 / 25.4))
     fig.subplots_adjust(left=0.10, right=0.975, top=0.80, bottom=0.34, wspace=0.30)
 
     for ax, ys, ys2, ylab, title in (
-        (ax1, dith_inl, both_inl, "INL 峰值 (ppm FS)", "INL：DEM 有效，dither 几乎无效"),
-        (ax2, dith_dnl, both_dnl, "DNL 峰值 (LSB1)", "DNL：dither 有效，DEM 也有帮助"),
+        (ax1, dith_inl, both_inl, "INL 峰值 (LSB20)", "INL：DEM 有效，dither 几乎无效"),
+        (ax2, dith_dnl, both_dnl, "DNL 峰值 (LSB20)", "DNL：dither 有效，DEM 也有帮助"),
     ):
         ax.axhline(ys[0], color=GRAY, ls="--", lw=0.8)
         ax.plot(Ds, ys, "o-", color=ORANGE, ms=4, lw=1.0, label="仅 dither")
@@ -459,7 +463,8 @@ def fig_dem_dither() -> Path | None:
         ax.set_ylabel(ylab)
         ax.grid(alpha=0.25, lw=0.4)
         ax.set_title(title, fontsize=8, loc="left", pad=4)
-    ax2.set_ylim(0, 0.016)
+    ax1.set_ylim(0, 25)
+    ax2.set_ylim(0, 26)
     ax1.legend(fontsize=6.2, loc="center right", frameon=True, framealpha=0.95, edgecolor="#B4B2A9")
     ax2.legend(fontsize=6.2, loc="lower left", frameon=True, framealpha=0.95, edgecolor="#B4B2A9")
 
@@ -468,16 +473,18 @@ def fig_dem_dither() -> Path | None:
     fig.text(0.015, 0.225, "来源: model/tech_effects.py（共顶板） · N=1024 码 · seeds 1-10 · 口径 SSOT 20.00 bit · L1 行为模型",
              fontsize=6.2, color=GRAY, va="bottom")
     fig.text(0.015, 0.192,
-             f"10 芯片 D=2：DEM {agg['DEM']['mean'][0]:.1f}/{agg['DEM']['mean'][1]*1e3:.1f}，"
-             f"dither {agg['dither_D2']['mean'][0]:.1f}/{agg['dither_D2']['mean'][1]*1e3:.1f}，"
-             f"both {agg['DEM+dither_D2']['mean'][0]:.1f}/{agg['DEM+dither_D2']['mean'][1]*1e3:.1f}"
-             "（INL ppm / DNL mLSB1）", fontsize=6.2, color=GRAY, va="bottom")
+             f"10 芯片 D=2（LSB20）：DEM {agg['DEM']['mean'][0]*K20:.1f}/{agg['DEM']['mean'][1]*1024:.1f}，"
+             f"dither {agg['dither_D2']['mean'][0]*K20:.1f}/{agg['dither_D2']['mean'][1]*1024:.1f}，"
+             f"both {agg['DEM+dither_D2']['mean'][0]*K20:.1f}/{agg['DEM+dither_D2']['mean'][1]*1024:.1f}",
+             fontsize=6.2, color=GRAY, va="bottom")
     fig.text(0.015, 0.159,
              f"倍数：DEM {agg['DEM']['inl_ratio']:.1f}×/{agg['DEM']['dnl_ratio']:.1f}×，"
              f"dither {agg['dither_D2']['inl_ratio']:.1f}×/{agg['dither_D2']['dnl_ratio']:.1f}×，"
              f"both {agg['DEM+dither_D2']['inl_ratio']:.1f}×/{agg['DEM+dither_D2']['dnl_ratio']:.1f}×",
              fontsize=6.2, color=GRAY, va="bottom")
-    fig.text(0.015, 0.126, "说明: dither=码域 dither（非采样注入）；DEM=片级 8 态；每样本噪声 0.03–0.12 ppm。",
+    fig.text(0.015, 0.126, "等效：INL 1 LSB20=0.954 ppm FS；DNL 1 LSB20=1/1024 LSB1。raw 22.9/24.0，校准 0.56/0.75，OOS 2.0",
+             fontsize=6.2, color=GRAY, va="bottom")
+    fig.text(0.015, 0.094, "说明: dither=码域 dither（非采样注入）；DEM=片级 8 态；每样本噪声 0.03–0.12 ppm。",
              fontsize=6.2, color=GRAY, va="bottom")
     return save(fig, "f7_dem_dither")
 

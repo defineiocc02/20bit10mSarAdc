@@ -50,14 +50,16 @@ VIN → 18 片 DAC1 池（8 转换 + 8 采样 + 2 备）
 | 8× LSB 重复 | +1.69 dB [1.66,1.72] @100k；解析预测 1.714 | **VALIDATED** |
 | CAAZ | +3.65 dB @100k；其中 AZ 只 +0.60 | **VALIDATED** |
 | 片级 shuffle | SFDR +22.3 dBc；**DR 方向不稳（+0.9 / −1.7）** | SFDR VALIDATED / DR **NOT VALIDATED** |
-| 静态校准 | INL 17.8±4.4 → **0.54±0.04 ppm**（33×）；DNL 0.0235 → **0.00073 LSB1**（32×），失码 0→0；OOS **1.87** | **CONDITIONAL**（OOS 超 ±1.5） |
+| 静态校准 | INL **18.6 → 0.56 LSB20**（33×）；DNL **24.0 → 0.75 LSB20**（32×），失码 0→0；OOS **2.0 LSB20** | **CONDITIONAL**（OOS 超 1 LSB20） |
 | 交织 skew / gain | −1.44 dB / −5.58 dB，10/10 | **VALIDATED（退化）** |
-| DEM（片级 8 态，模型） | INL **21.8→6.0 ppm（3.6×）**；DNL 0.0234→0.0083 LSB1（2.8×）；网表/RTL 未实现 | 模型 VALIDATED / 实现 OPEN-5 |
-| dither（码域 D=2，模型） | DNL **0.0234→0.0051 LSB1（4.6×）**；INL 21.8→20.2（1.08×）；采样态注入未实现 | 模型 VALIDATED（DNL）/ 实现 OPEN-3 |
-| DEM+dither | INL **5.0 ppm（4.4×）**；DNL **0.0017 LSB1（13.8×）** | 互补 |
+| DEM（片级 8 态，模型） | INL **22.9→6.3 LSB20（3.6×）**；DNL 24.0→8.5 LSB20（2.8×）；网表/RTL 未实现 | 模型 VALIDATED / 实现 OPEN-5 |
+| dither（码域 D=2，模型） | DNL **24.0→5.2 LSB20（4.6×）**；INL 22.9→21.1（1.08×）；采样态注入未实现 | 模型 VALIDATED（DNL）/ 实现 OPEN-3 |
+| DEM+dither | INL **5.2 LSB20（4.4×）**；DNL **1.7 LSB20（13.8×）** | 互补 |
 | 跨实现 INL | model 16.4 vs behavioral 43.3 ppm（2.64×） | **DISCREPANT** |
 
-报告：[`review/20261112_crossval.md`](20b10m/review/20261112_crossval.md)；数据：`model/results/crossval/summary.csv`。
+报告：[`review/20261112_crossval.md`](20b10m/review/20261112_crossval.md)、[`review/20261112_dem_dither.md`](20b10m/review/20261112_dem_dither.md)；数据：`model/results/crossval/summary.csv`。
+
+> 换算：1 LSB20 = 0.954 ppm FS；1 LSB1 = 1024 LSB20。
 
 > 图上的 `[模型]` / `[论文]` / `[估算]` 是来源标签；脚注写脚本、N、seeds、SSOT 口径、等级、日期。
 > 旧图目录 `model/results/figures_measured/` 的 "measured" 是**图风格**，不是硅测；见 [`PROVENANCE.md`](20b10m/model/results/PROVENANCE.md)。
