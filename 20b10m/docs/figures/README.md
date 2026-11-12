@@ -18,6 +18,7 @@
 | `f4_inl_dnl` | 0.2% 失配的 INL/DNL 与校准残差 | `charge_model` + `_features` 有限样本拟合，seed 7 + 10 chips | **L1** | INL 17.8→0.54 ppm；DNL 0.0235→0.00073 LSB1；失码 0→0；OOS 1.87 ppm | **CONDITIONAL**（OOS 超 1.5） |
 | `f5_skew_gain` | 交织 skew / 增益失配的代价 | `model.adc.simulate`，10 seeds | **L1** | −1.5 dB / −5.1 dB | **VALIDATED（退化）** |
 | `f6_crossval` | 哪些效果统计显著 | `model.crossval`，K=10 | **L1** | 见报告 | 森林图 + INL 三口径 |
+| `f7_dem_dither` | DEM 与 dither 各自贡献什么 | `model.tech_effects`，K=10 | **L1** | DEM：INL 3.6×/DNL 2.8×；dither：INL 1.08×/DNL 4.6×；both：4.4×/13.8× | DEM 管 INL / dither 管 DNL |
 
 > 判定口径：动态 Δ 的 95% CI 全正 → POSITIVE；全负 → NEGATIVE；跨 0 → INCONCLUSIVE。
 > 校准：cal_max < raw_min → PASS；否则 CONDITIONAL。跨实现差异 >20% → DISCREPANT。
@@ -37,6 +38,16 @@
 - `[估算]`：面积/功耗/版图量级，不是仿真。
 
 ---
+
+## 2.1 DEM 与 dither 分开看（f7）
+
+| 机制 | INL | DNL | 每样本噪声 | 说明 |
+|:---|:---|:---|:---|:---|
+| DEM（8 态片级） | 21.8 → **6.0 ppm（3.6×）** | 0.0234 → **0.0083 LSB1（2.8×）** | 0.12 ppm | 主要平均片内二进制比例误差 |
+| dither（码域 D=2） | 21.8 → **20.2 ppm（1.08×）** | 0.0234 → **0.0051 LSB1（4.6×）** | 0.03 ppm | 平均相邻码台阶，INL 几乎不变 |
+| DEM+dither | 21.8 → **5.0 ppm（4.4×）** | 0.0234 → **0.0017 LSB1（13.8×）** | 0.11 ppm | 互补 |
+
+> 这是**模型层面**的贡献，不是网表/RTL 已实现；采样态 dither（OPEN-3）与单位级 DEM（OPEN-5）仍未做。
 
 ## 3. 口径差异（**必须看**）
 

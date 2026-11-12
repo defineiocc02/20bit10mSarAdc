@@ -1,7 +1,7 @@
 {
   "schema": "sar20_10m_effect_figures_v2",
   "script": "model/figures_ssot.py",
-  "script_sha256": "a818be06030803a0c44ab3fd69df3d12015c21ab1ebf24656b1fd07d8e29ee8c",
+  "script_sha256": "91c620e2e5726b20a88f2496b9acb4b1ca2582336121f8734468ad8a5d0d9be1",
   "date": "2026-11-12",
   "ssot": "spec/SSOT.md",
   "crossval": "model/results/crossval/results.json",
@@ -71,6 +71,12 @@
       "question": "哪些技术效果统计显著",
       "source": "model.crossval, K=10",
       "evidence": "L1"
+    },
+    {
+      "stem": "f7_dem_dither",
+      "question": "DEM 与 dither 各自贡献",
+      "source": "model.tech_effects, K=10",
+      "evidence": "L1"
     }
   ],
   "outputs": {
@@ -91,7 +97,10 @@
     "f5_skew_gain.pdf": "bdd864ceaa7ce8f9aeece010a64956a31d111fe16aef8947e1c98d7c4fac129a",
     "f6_crossval.png": "daa474f7fb69a97f5d1e1d1120be4157eeb394b8f85ff9e52796bdb823dfaeb7",
     "f6_crossval.svg": "d94cd2b4152cc6c359f6e6b1b158935d35fe25123c8cfe0a89040e1bff00b40e",
-    "f6_crossval.pdf": "b1af9d8cbf63ec1d8e2584a887b76765d272a6135b4b0d2b0d7740a703551362"
+    "f6_crossval.pdf": "b1af9d8cbf63ec1d8e2584a887b76765d272a6135b4b0d2b0d7740a703551362",
+    "f7_dem_dither.png": "f9ef8dac878b0359557c7188d9551ec199fa7ee63ce72ed379869ae9170e5192",
+    "f7_dem_dither.svg": "d8318f6b91e6b5887820d7734264ba158ef5e785e07b53eda148f8ca3dd852e3",
+    "f7_dem_dither.pdf": "3ba55d92ae995ba91c3a948416472fcae9f385ffff4257c95c88879f5c19a644"
   },
   "limits": [
     "所有曲线是行为模型输出，不是前仿/后仿/硅测",

@@ -427,12 +427,70 @@ def fig_crossval() -> Path | None:
     return save(fig, "f6_crossval")
 
 
+def fig_dem_dither() -> Path | None:
+    """DEM / dither 的独立贡献：INL 与 DNL 分开画。"""
+    src = ROOT / "model" / "results" / "dem_dither.json"
+    if not src.exists():
+        print("skip f7: 先跑 python3 -m model.tech_effects")
+        return None
+    d = json.loads(src.read_text())
+    s7, agg = d["seed7"], d["chips"]["agg"]
+    Ds = [0, 1, 2, 4, 8]
+    raw, dem = s7["raw"], s7["DEM"]
+    dith_inl = np.array([raw["inl_ppm"]] + [s7[f"dither_D{D}"]["inl_ppm"] for D in Ds[1:]])
+    dith_dnl = np.array([raw["dnl_lsb1"]] + [s7[f"dither_D{D}"]["dnl_lsb1"] for D in Ds[1:]])
+    both_inl = np.array([dem["inl_ppm"]] + [s7[f"DEM+dither_D{D}"]["inl_ppm"] for D in Ds[1:]])
+    both_dnl = np.array([dem["dnl_lsb1"]] + [s7[f"DEM+dither_D{D}"]["dnl_lsb1"] for D in Ds[1:]])
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(W_MM / 25.4, 112 / 25.4))
+    fig.subplots_adjust(left=0.10, right=0.975, top=0.80, bottom=0.34, wspace=0.30)
+
+    for ax, ys, ys2, ylab, title in (
+        (ax1, dith_inl, both_inl, "INL 峰值 (ppm FS)", "INL：DEM 有效，dither 几乎无效"),
+        (ax2, dith_dnl, both_dnl, "DNL 峰值 (LSB1)", "DNL：dither 有效，DEM 也有帮助"),
+    ):
+        ax.axhline(ys[0], color=GRAY, ls="--", lw=0.8)
+        ax.plot(Ds, ys, "o-", color=ORANGE, ms=4, lw=1.0, label="仅 dither")
+        ax.plot(Ds, ys2, "s-", color=BLUE, ms=4, lw=1.0, label="DEM + dither")
+        ax.set_xscale("symlog", linthresh=1)
+        ax.set_xticks(Ds)
+        ax.set_xticklabels([str(x) for x in Ds])
+        ax.set_xlabel("dither 幅度 D (LSB1)")
+        ax.set_ylabel(ylab)
+        ax.grid(alpha=0.25, lw=0.4)
+        ax.set_title(title, fontsize=8, loc="left", pad=4)
+    ax2.set_ylim(0, 0.016)
+    ax1.legend(fontsize=6.2, loc="center right", frameon=True, framealpha=0.95, edgecolor="#B4B2A9")
+    ax2.legend(fontsize=6.2, loc="lower left", frameon=True, framealpha=0.95, edgecolor="#B4B2A9")
+
+    head(fig, "DEM 管 INL，dither 管 DNL：两者互补，不是一回事",
+         "共顶板 8 片模型，σu=0.2%；曲线=seed7；D 为码域整数 dither（数字扣除）")
+    fig.text(0.015, 0.225, "来源: model/tech_effects.py（共顶板） · N=1024 码 · seeds 1-10 · 口径 SSOT 20.00 bit · L1 行为模型",
+             fontsize=6.2, color=GRAY, va="bottom")
+    fig.text(0.015, 0.192,
+             f"10 芯片 D=2：DEM {agg['DEM']['mean'][0]:.1f}/{agg['DEM']['mean'][1]*1e3:.1f}，"
+             f"dither {agg['dither_D2']['mean'][0]:.1f}/{agg['dither_D2']['mean'][1]*1e3:.1f}，"
+             f"both {agg['DEM+dither_D2']['mean'][0]:.1f}/{agg['DEM+dither_D2']['mean'][1]*1e3:.1f}"
+             "（INL ppm / DNL mLSB1）", fontsize=6.2, color=GRAY, va="bottom")
+    fig.text(0.015, 0.159,
+             f"倍数：DEM {agg['DEM']['inl_ratio']:.1f}×/{agg['DEM']['dnl_ratio']:.1f}×，"
+             f"dither {agg['dither_D2']['inl_ratio']:.1f}×/{agg['dither_D2']['dnl_ratio']:.1f}×，"
+             f"both {agg['DEM+dither_D2']['inl_ratio']:.1f}×/{agg['DEM+dither_D2']['dnl_ratio']:.1f}×",
+             fontsize=6.2, color=GRAY, va="bottom")
+    fig.text(0.015, 0.126, "说明: dither=码域 dither（非采样注入）；DEM=片级 8 态；每样本噪声 0.03–0.12 ppm。",
+             fontsize=6.2, color=GRAY, va="bottom")
+    return save(fig, "f7_dem_dither")
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     outs = [fig_spectrum(), fig_averaging(), fig_shuffle(), fig_inl_dnl(), fig_skew_gain()]
     f6 = fig_crossval()
     if f6:
         outs.append(f6)
+    f7 = fig_dem_dither()
+    if f7:
+        outs.append(f7)
     files = []
     for p in outs:
         for ext in (".png", ".svg", ".pdf"):
@@ -456,6 +514,7 @@ def main() -> None:
             {"stem": "f4_inl_dnl", "question": "0.2% 失配的 INL/DNL 与校准残差", "source": "charge_model + finite-sample fit", "evidence": "L1"},
             {"stem": "f5_skew_gain", "question": "交织 skew/增益失配的代价", "source": "model.adc.simulate, 10 seeds", "evidence": "L1"},
             {"stem": "f6_crossval", "question": "哪些技术效果统计显著", "source": "model.crossval, K=10", "evidence": "L1"},
+            {"stem": "f7_dem_dither", "question": "DEM 与 dither 各自贡献", "source": "model.tech_effects, K=10", "evidence": "L1"},
         ],
         "outputs": {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in files},
         "limits": [

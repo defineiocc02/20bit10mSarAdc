@@ -41,6 +41,7 @@ VIN → 18 片 DAC1 池（8 转换 + 8 采样 + 2 备）
 | [`f4_inl_dnl`](20b10m/docs/figures/f4_inl_dnl.png) | 0.2% 失配的 INL/DNL 与校准残差 | `charge_model` + 有限样本拟合 | L1 |
 | [`f5_skew_gain`](20b10m/docs/figures/f5_skew_gain.png) | 交织 skew / 增益失配的代价 | `model.adc.simulate` + `slice_errors` | L1 |
 | [`f6_crossval`](20b10m/docs/figures/f6_crossval.png) | 哪些效果统计显著（森林图） | `model.crossval`，K=10 | L1 |
+| [`f7_dem_dither`](20b10m/docs/figures/f7_dem_dither.png) | DEM 与 dither 各自贡献 | `model.tech_effects`，K=10 | L1 |
 
 ### 技术有效性（交叉验证后）
 
@@ -51,7 +52,9 @@ VIN → 18 片 DAC1 池（8 转换 + 8 采样 + 2 备）
 | 片级 shuffle | SFDR +22.3 dBc；**DR 方向不稳（+0.9 / −1.7）** | SFDR VALIDATED / DR **NOT VALIDATED** |
 | 静态校准 | INL 17.8±4.4 → **0.54±0.04 ppm**（33×）；DNL 0.0235 → **0.00073 LSB1**（32×），失码 0→0；OOS **1.87** | **CONDITIONAL**（OOS 超 ±1.5） |
 | 交织 skew / gain | −1.44 dB / −5.58 dB，10/10 | **VALIDATED（退化）** |
-| DEM / dither | 只有字生成，无注入/扣除 | **NOT IMPLEMENTED** |
+| DEM（片级 8 态，模型） | INL **21.8→6.0 ppm（3.6×）**；DNL 0.0234→0.0083 LSB1（2.8×）；网表/RTL 未实现 | 模型 VALIDATED / 实现 OPEN-5 |
+| dither（码域 D=2，模型） | DNL **0.0234→0.0051 LSB1（4.6×）**；INL 21.8→20.2（1.08×）；采样态注入未实现 | 模型 VALIDATED（DNL）/ 实现 OPEN-3 |
+| DEM+dither | INL **5.0 ppm（4.4×）**；DNL **0.0017 LSB1（13.8×）** | 互补 |
 | 跨实现 INL | model 16.4 vs behavioral 43.3 ppm（2.64×） | **DISCREPANT** |
 
 报告：[`review/20261112_crossval.md`](20b10m/review/20261112_crossval.md)；数据：`model/results/crossval/summary.csv`。

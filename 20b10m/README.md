@@ -47,7 +47,9 @@
 | 静态校准 | INL **17.8±4.4 → 0.54±0.04 ppm**（33×）；DNL **0.0235 → 0.00073 LSB1**（32×），失码 0→0；out-of-sample **1.87** | **CONDITIONAL**（OOS 超 ±1.5） |
 | 交织 skew | 0.5→2 ps：**−1.44 dB [−1.73,−1.14]**，10/10 负 | **VALIDATED（退化）** |
 | 交织增益 | 10→50 ppm：**−5.58 dB [−6.11,−5.06]**，10/10 负 | **VALIDATED（退化）** |
-| DEM / dither | 只有 dither 字生成；**注入/扣除/DEM 均无** | **NOT IMPLEMENTED** |
+| DEM（片级 8 态，模型） | INL **21.8→6.0 ppm（3.6×）**；DNL 0.0234→0.0083 LSB1（2.8×）；网表/RTL 未实现 | 模型 VALIDATED / 实现 OPEN-5 |
+| dither（码域 D=2，模型） | DNL **0.0234→0.0051 LSB1（4.6×）**；INL 21.8→20.2（1.08×，几乎无效）；采样态注入未实现 | 模型 VALIDATED（DNL）/ 实现 OPEN-3 |
+| DEM+dither | INL **5.0 ppm（4.4×）**；DNL **0.0017 LSB1（13.8×）** | 互补 |
 | 跨实现 INL | `model` 16.4 ppm vs `behavioral` 43.3 ppm（**2.64×**） | **DISCREPANT** |
 
 **不能声称**：8× 在硅上值 1.7 dB；shuffle 用 DR 换 SFDR；校准后 0.3 ppm 达 20 bit；INL=16.4 ppm 是绝对值；DEM/dither 有效。
@@ -63,6 +65,7 @@
 | `f4_inl_dnl` | 0.2% 失配的 INL/DNL 与校准残差 | `charge_model` + 有限样本拟合，seed 7 + 10 chips | L1 | INL 33× / DNL 32×；OOS CONDITIONAL |
 | `f5_skew_gain` | 交织 skew/增益失配的代价 | `model.adc.simulate`，10 seeds | L1 | VALIDATED（退化） |
 | `f6_crossval` | 哪些效果统计显著 | `model.crossval`，K=10 | L1 | 森林图 + INL 三口径 |
+| `f7_dem_dither` | DEM 与 dither 各自贡献 | `model.tech_effects`，K=10 | L1 | DEM 管 INL / dither 管 DNL |
 
 > 规则：图上每个效果数字带 `[模型]` / `[论文]` / `[估算]`；脚注写脚本、N、seeds、SSOT 口径、等级、日期。
 > 生成：`python3 -m model.crossval && python3 -m model.figures_ssot`；清单：`docs/figures/manifest.json`。
