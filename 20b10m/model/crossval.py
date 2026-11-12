@@ -144,25 +144,50 @@ def t3_shuffle():
 # ---------------------------------------------------------------- T4 校准
 def t4_calibration():
     rows = []
-    raw_ppm, fin_ppm = [], []
+    raw_ppm, cal_ppm = [], []
+    raw_dnl, cal_dnl = [], []
+    miss_raw = miss_cal = 0
     for s in range(1, K + 1):
         c = dac1_curves(sigma=0.002, seed=s)
-        raw_ppm.append(float(np.max(np.abs(c["inl_raw"]))) * 1e6 / 1024)
-        pk, _ = cal_residual(n_avg=16, sigma_meas=2.8, trials=8, seed=s)
-        fin_ppm.append(float(pk) * 1e6 / 1024)
-    raw_ppm, fin_ppm = np.array(raw_ppm), np.array(fin_ppm)
-    d = fin_ppm - raw_ppm
-    ci = T95 * d.std(ddof=1) / math.sqrt(K)
-    rows.append({"test": "T4_calibration", "config": "sigma=0.2%/10 chips",
-                 "metric": "INL_ppm", "base_mean": float(raw_ppm.mean()),
-                 "tech_mean": float(fin_ppm.mean()), "delta_mean": float(d.mean()),
-                 "delta_std": float(d.std(ddof=1)), "ci95": float(ci),
-                 "ci_low": float(d.mean() - ci), "ci_high": float(d.mean() + ci),
-                 "positive": int((d < 0).sum()), "negative": int((d > 0).sum()),
-                 "min": float(d.min()), "max": float(d.max()), "k": K,
-                 "raw_mean": float(raw_ppm.mean()), "raw_std": float(raw_ppm.std(ddof=1)),
-                 "cal_mean": float(fin_ppm.mean()), "cal_std": float(fin_ppm.std(ddof=1)),
-                 "verdict": "PASS" if fin_ppm.max() < raw_ppm.min() else "CONDITIONAL"})
+        codes, inl, dnl = c["code"], c["inl_raw"], c["dnl_raw"]
+        B = _features(codes >> 7, codes & 127)
+        rng = np.random.default_rng(s + 1000)
+        y = inl + rng.normal(0, (2.8 / 1024) / math.sqrt(16), len(inl))
+        w, *_ = np.linalg.lstsq(B, y, rcond=None)
+        res = B @ w - inl
+        dnl_c = np.diff(codes + res) - 1
+        raw_ppm.append(float(np.max(np.abs(inl))) * 1e6 / 1024)
+        cal_ppm.append(float(np.max(np.abs(res))) * 1e6 / 1024)
+        raw_dnl.append(float(np.max(np.abs(dnl))))
+        cal_dnl.append(float(np.max(np.abs(dnl_c))))
+        miss_raw += int((dnl <= -1).sum())
+        miss_cal += int((dnl_c <= -1).sum())
+
+    def pair_row(test, metric, a, b, unit_note):
+        a, b = np.array(a), np.array(b)
+        d = b - a
+        ci = T95 * float(d.std(ddof=1)) / math.sqrt(K)
+        return {"test": test, "config": "sigma=0.2%/10 chips", "metric": metric,
+                "base_mean": float(a.mean()), "tech_mean": float(b.mean()),
+                "delta_mean": float(d.mean()), "delta_std": float(d.std(ddof=1)),
+                "ci95": float(ci), "ci_low": float(d.mean() - ci),
+                "ci_high": float(d.mean() + ci),
+                "positive": int((d < 0).sum()), "negative": int((d > 0).sum()),
+                "min": float(b.min()), "max": float(b.max()), "k": K,
+                "raw_mean": float(a.mean()), "raw_std": float(a.std(ddof=1)),
+                "cal_mean": float(b.mean()), "cal_std": float(b.std(ddof=1)),
+                "note": unit_note,
+                "verdict": "PASS" if b.max() < a.min() else "CONDITIONAL"}
+
+    rows.append(pair_row("T4_calibration", "INL_ppm", raw_ppm, cal_ppm, "INL 峰，ppm FS"))
+    rows.append(pair_row("T4_dnl", "DNL_LSB1", raw_dnl, cal_dnl, "DNL 峰，LSB1（1 LSB1=1024 LSB20）"))
+    rows.append({"test": "T4_missing", "config": "sigma=0.2%/10 chips",
+                 "metric": "missing_codes", "base_mean": miss_raw, "tech_mean": miss_cal,
+                 "delta_mean": miss_cal - miss_raw, "delta_std": 0, "ci95": 0,
+                 "ci_low": 0, "ci_high": 0, "positive": 0, "negative": 0,
+                 "min": miss_cal, "max": miss_cal, "k": K,
+                 "verdict": "PASS" if miss_cal <= miss_raw else "FAIL"})
+
     # out-of-sample：偶数码拟合，奇数码评估
     in_ppm, out_ppm = [], []
     for s in range(1, K + 1):

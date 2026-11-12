@@ -2527,8 +2527,8 @@ z
    <g id="patch_9">
     <path d="M 330.947767 73439.95253 
 L 354.739257 73439.95253 
-L 354.739257 217.232171 
-L 330.947767 217.232171 
+L 354.739257 222.527329 
+L 330.947767 222.527329 
 z
 " clip-path="url(#pa00f8218c7)" style="fill: #0072b2"/>
    </g>
@@ -3337,8 +3337,8 @@ z
     <path d="M 299.586258 120.336153 
 L 299.586258 104.242361 
 " clip-path="url(#pa00f8218c7)" style="fill: none; stroke: #000000"/>
-    <path d="M 342.843512 219.562571 
-L 342.843512 215.060922 
+    <path d="M 342.843512 225.164136 
+L 342.843512 220.09248 
 " clip-path="url(#pa00f8218c7)" style="fill: none; stroke: #000000"/>
     <path d="M 386.100766 190.569224 
 L 386.100766 176.617535 
@@ -3352,14 +3352,14 @@ L -3 -0
     </defs>
     <g clip-path="url(#pa00f8218c7)">
      <use xlink:href="#mbf7d530255" x="299.586258" y="120.336153" style="fill: #1f77b4; stroke: #000000"/>
-     <use xlink:href="#mbf7d530255" x="342.843512" y="219.562571" style="fill: #1f77b4; stroke: #000000"/>
+     <use xlink:href="#mbf7d530255" x="342.843512" y="225.164136" style="fill: #1f77b4; stroke: #000000"/>
      <use xlink:href="#mbf7d530255" x="386.100766" y="190.569224" style="fill: #1f77b4; stroke: #000000"/>
     </g>
    </g>
    <g id="line2d_85">
     <g clip-path="url(#pa00f8218c7)">
      <use xlink:href="#mbf7d530255" x="299.586258" y="104.242361" style="fill: #1f77b4; stroke: #000000"/>
-     <use xlink:href="#mbf7d530255" x="342.843512" y="215.060922" style="fill: #1f77b4; stroke: #000000"/>
+     <use xlink:href="#mbf7d530255" x="342.843512" y="220.09248" style="fill: #1f77b4; stroke: #000000"/>
      <use xlink:href="#mbf7d530255" x="386.100766" y="176.617535" style="fill: #1f77b4; stroke: #000000"/>
     </g>
    </g>
@@ -3443,8 +3443,8 @@ z
     </g>
    </g>
    <g id="text_28">
-    <!-- 0.64 -->
-    <g transform="translate(335.091012 208.192116) scale(0.07 -0.07)">
+    <!-- 0.54 -->
+    <g transform="translate(335.091012 213.147731) scale(0.07 -0.07)">
      <defs>
       <path id="HiraginoSansGB-W3-15" d="M 198 1254 
 C 410 1274 602 1280 960 1280 
@@ -3478,7 +3478,7 @@ z
      </defs>
      <use xlink:href="#HiraginoSansGB-W3-11"/>
      <use xlink:href="#HiraginoSansGB-W3-f" transform="translate(65.703125 0)"/>
-     <use xlink:href="#HiraginoSansGB-W3-17" transform="translate(89.703125 0)"/>
+     <use xlink:href="#HiraginoSansGB-W3-16" transform="translate(89.703125 0)"/>
      <use xlink:href="#HiraginoSansGB-W3-15" transform="translate(155.40625 0)"/>
     </g>
    </g>

@@ -201,35 +201,103 @@ def fig_shuffle() -> Path:
 
 
 # ---------------------------------------------------------------- 4. INL / DNL
-def fig_inl() -> Path:
-    c = static.curves(bits=10, unit_sigma=0.002, seed=7)
-    code, raw, cal = c["code"], c["inl_raw"], c["inl_cal"]
-    step = max(1, len(code) // 256)
-    sl = slice(None, None, step)
+def fig_inl_dnl() -> Path:
+    """INL + DNL 的前/后对比：曲线、最差码、汇总表。"""
+    from .charge_model import dac1_curves, _features
 
-    fig, ax = canvas(94)
-    ax.plot(code[sl], raw[sl], ".", ms=1.4, color=ORANGE, label="未校准（seed=7 示例）  [模型]")
-    ax.plot(code[sl], cal[sl], ".", ms=1.4, color=BLUE, label="校准后（有限样本）  [模型]")
-    ax.axhline(0, color=GRAY, lw=0.5)
-    ax.set_xlabel("DAC1 码 (0..1023)")
-    ax.set_ylabel("INL (LSB1)")
-    ax.grid(alpha=0.25, lw=0.4)
-    ax.legend(fontsize=6.4, loc="upper right", frameon=True, framealpha=0.95, edgecolor="#B4B2A9")
+    c = dac1_curves(sigma=0.002, seed=7)
+    code, raw_inl, raw_dnl = c["code"], c["inl_raw"], c["dnl_raw"]
+    # 有限样本校准：16 次平均、单次 2.8 LSB20 噪声；固定 realization，不玩随机符号
+    B = _features(code >> 7, code & 127)
+    rng = np.random.default_rng(7 + 1000)
+    y = raw_inl + rng.normal(0, (2.8 / 1024) / math.sqrt(16), len(raw_inl))
+    w, *_ = np.linalg.lstsq(B, y, rcond=None)
+    cal_inl = B @ w - raw_inl
+    cal_dnl = np.diff(code + cal_inl) - 1
+    leg = static.curves_binary(bits=10, unit_sigma=0.002, seed=1)
 
-    pk_raw = float(np.max(np.abs(raw)))
-    pk_cal = float(np.max(np.abs(cal)))
-    ax.annotate(f"本芯片: {pk_raw:.3f} → {pk_cal:.3f} LSB1\n10 芯片: 17.8 → 0.64 ppm  [模型]",
-                xy=(0.03, 0.10), xycoords="axes fraction", fontsize=7.2, va="bottom",
-                bbox=dict(boxstyle="round,pad=0.35", fc="white", ec="#B4B2A9", lw=0.5))
+    pk = lambda a: float(np.max(np.abs(a)))
+    raw_ppm = pk(raw_inl) * 1e6 / 1024
+    cal_ppm = pk(cal_inl) * 1e6 / 1024
+    leg_ppm = pk(leg["inl_raw"]) * 1e6 / 1024
+    raw_dp, cal_dp, leg_dp = pk(raw_dnl), pk(cal_dnl), pk(leg["dnl_raw"])
+    miss_raw = int((raw_dnl <= -1).sum())
+    miss_cal = int((cal_dnl <= -1).sum())
 
-    head(fig, f"DAC1 静态 INL：0.2% 失配下，校准把 {pk_raw/1024*1e6:.1f} ppm 压到 {pk_cal/1024*1e6:.2f} ppm",
-         "曲线为 seed=7 示例；10 芯片 17.8±4.4 → 0.64±0.04 ppm；out-of-sample 1.9 ppm（见 f6）")
-    foot(fig, [FOOT_COMMON.format(data="model.static → charge_model.dac1_curves，1024 码", n=1024, seeds="seed=7 + 10 chips"),
-               "说明: 16.4 ppm 与 0.3 ppm 是同一模型的开/关校准对比；不是论文实测，也不是硅测。"])
-    return save(fig, "f4_inl")
+    fig = plt.figure(figsize=(W_MM / 25.4, 132 / 25.4))
+    gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 0.95], hspace=0.62, wspace=0.26,
+                          left=0.115, right=0.975, top=0.80, bottom=0.29)
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[0, 1])
+    ax3 = fig.add_subplot(gs[1, 0])
+    ax4 = fig.add_subplot(gs[1, 1])
+
+    # A: INL
+    ax1.plot(code, raw_inl, color=ORANGE, lw=0.6, label="未校准")
+    ax1.plot(code, cal_inl, color=BLUE, lw=0.8, label="校准后（16 次平均）")
+    ax1.axhline(0, color=GRAY, lw=0.4)
+    ax1.set_xlim(0, 1023)
+    ax1.set_xlabel("DAC1 码")
+    ax1.set_ylabel("INL (LSB1)")
+    ax1.grid(alpha=0.25, lw=0.4)
+    ax1.legend(fontsize=6.0, loc="upper right", frameon=True, framealpha=0.95, edgecolor="#B4B2A9")
+    ax1.set_title(f"INL：{raw_ppm:.1f} → {cal_ppm:.2f} ppm（{raw_ppm/cal_ppm:.0f}×）",
+                  fontsize=8, loc="left", pad=4)
+
+    # B: DNL
+    ax2.plot(code[1:], raw_dnl, color=ORANGE, lw=0.6, label="未校准")
+    ax2.plot(code[1:], cal_dnl, color=BLUE, lw=0.8, label="校准后")
+    ax2.axhline(0, color=GRAY, lw=0.4)
+    ax2.set_xlim(0, 1023)
+    ax2.set_ylim(-0.02, 0.02)
+    ax2.set_xlabel("DAC1 码")
+    ax2.set_ylabel("DNL (LSB1)")
+    ax2.grid(alpha=0.25, lw=0.4)
+    ax2.legend(fontsize=6.0, loc="upper right", frameon=True, framealpha=0.95, edgecolor="#B4B2A9")
+    ax2.set_title(f"DNL：{raw_dp:.4f} → {cal_dp:.4f} LSB1（{raw_dp/cal_dp:.0f}×）",
+                  fontsize=8, loc="left", pad=4)
+
+    # C: 最差 DNL 码附近
+    k = int(np.argmax(np.abs(raw_dnl))) + 1
+    lo, hi = max(1, k - 7), min(1023, k + 7)
+    zc = np.arange(lo, hi + 1)
+    ax3.plot(zc, raw_dnl[lo-1:hi], "o-", color=ORANGE, ms=3, lw=0.8)
+    ax3.plot(zc, cal_dnl[lo-1:hi], "s-", color=BLUE, ms=3, lw=0.8)
+    ax3.axhline(0, color=GRAY, lw=0.4)
+    ax3.set_xlim(lo, hi)
+    ax3.set_xlabel("DAC1 码")
+    ax3.set_ylabel("DNL (LSB1)")
+    ax3.grid(alpha=0.25, lw=0.4)
+    ax3.set_title(f"最差 DNL 码附近（code {k}）", fontsize=8, loc="left", pad=4)
+
+    # D: 汇总表
+    ax4.axis("off")
+    rows = [
+        ["指标", "legacy 单端", "3+7 raw", "3+7 校准"],
+        ["INL pk (ppm)", f"{leg_ppm:.1f}", f"{raw_ppm:.1f}", f"{cal_ppm:.2f}"],
+        ["DNL pk (LSB1)", f"{leg_dp:.4f}", f"{raw_dp:.4f}", f"{cal_dp:.4f}"],
+        ["失码", "0", f"{miss_raw}", f"{miss_cal}"],
+    ]
+    tb = ax4.table(cellText=rows, cellLoc="center", loc="center", colWidths=[0.32, 0.24, 0.20, 0.20])
+    tb.auto_set_font_size(False)
+    tb.set_fontsize(6.6)
+    tb.scale(1.0, 1.55)
+    for (r, cc), cell in tb.get_celld().items():
+        cell.set_linewidth(0.4)
+        cell.set_edgecolor("#B4B2A9")
+        if r == 0:
+            cell.set_facecolor("#F1EFE8")
+    ax4.set_title("同一失配档（σu=0.2%，seed=7/1）", fontsize=8, loc="left", pad=4)
+
+    head(fig, "DAC1 的 DNL/INL：校准把 INL 压了 30 倍，DNL 本来就没有失码",
+         "σu=0.2%，1024 码；表为 seed=7 示例；校准=16 次平均的有限样本位权拟合")
+    fig.text(0.015, 0.862, "10 芯片：INL 17.8→0.54 ppm；DNL 0.0235→0.00073 LSB1；失码 0→0",
+             fontsize=7.2, color=GRAY, va="top")
+    foot(fig, [FOOT_COMMON.format(data="charge_model.dac1_curves + _features 有限样本拟合", n=1024, seeds="seed=7；legacy seed=1"),
+               "说明: DNL 本来就没有失码（0/0），校准收益是留裕量（2.3%→0.07% LSB1），不是救失码；legacy 单端仅作对照。"])
+    return save(fig, "f4_inl_dnl")
 
 
-# ---------------------------------------------------------------- 5. skew / gain（10 seeds）
 def fig_skew_gain() -> Path:
     skews = [0.5, 1.0, 2.0, 4.0]
     sm, sc = [], []
@@ -361,7 +429,7 @@ def fig_crossval() -> Path | None:
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    outs = [fig_spectrum(), fig_averaging(), fig_shuffle(), fig_inl(), fig_skew_gain()]
+    outs = [fig_spectrum(), fig_averaging(), fig_shuffle(), fig_inl_dnl(), fig_skew_gain()]
     f6 = fig_crossval()
     if f6:
         outs.append(f6)
@@ -385,7 +453,7 @@ def main() -> None:
             {"stem": "f1_spectrum", "question": "100 kHz 的 SNDR/DR/SFDR", "source": "model.adc.simulate", "evidence": "L1"},
             {"stem": "f2_averaging", "question": "8× 重复值多少 dB", "source": "model.adc.simulate, 10 seeds", "evidence": "L1"},
             {"stem": "f3_shuffle", "question": "片级随机选片换到什么", "source": "model.adc.simulate, 10 seeds", "evidence": "L1"},
-            {"stem": "f4_inl", "question": "0.2% 失配的 INL 与校准残差", "source": "model.static, seed 7 + 10 chips", "evidence": "L1"},
+            {"stem": "f4_inl_dnl", "question": "0.2% 失配的 INL/DNL 与校准残差", "source": "charge_model + finite-sample fit", "evidence": "L1"},
             {"stem": "f5_skew_gain", "question": "交织 skew/增益失配的代价", "source": "model.adc.simulate, 10 seeds", "evidence": "L1"},
             {"stem": "f6_crossval", "question": "哪些技术效果统计显著", "source": "model.crossval, K=10", "evidence": "L1"},
         ],

@@ -129,7 +129,7 @@ flash 的 4 bit 落在「3 个 unary + 片内 64C 位」，SAR 的 6 次落在 3
 | 位账自洽 | ✅ | `NumericalContract.check()` |
 | 码域（理想） | ✅ | `behavioral` smoke：INL 0.000 LSB20 |
 | 失配→INL | ✅ | 0.2% → 16.4 ppm（旧模型）/ 45.3 LSB（behavioral） |
-| 校准 | ⚠️ CONDITIONAL | 17.8±4.4 → 0.64±0.04 ppm（有限样本）；out-of-sample 1.87 ppm，未达 ±1.5 |
+| 校准 | ⚠️ CONDITIONAL | INL 17.8±4.4 → 0.54±0.04 ppm；DNL 0.0235 → 0.00073 LSB1；out-of-sample 1.87 ppm，未达 ±1.5 |
 | 模拟网表 | ⚠️ 仅结构 | `check_hier.py` 220 实例；零仿真、零 PDK |
 | 数字 RTL | ⚠️ 仅结构 | 本机无 iverilog；`DigitalTop` 是骨架 |
 | 版图/后仿/硅测 | ❌ | 无 |

@@ -1,7 +1,7 @@
 {
   "schema": "sar20_10m_effect_figures_v2",
   "script": "model/figures_ssot.py",
-  "script_sha256": "5c292bfe621a6ec0d183c283298202e9cea531faccae406a07ba223a288df3c9",
+  "script_sha256": "a818be06030803a0c44ab3fd69df3d12015c21ab1ebf24656b1fd07d8e29ee8c",
   "date": "2026-11-12",
   "ssot": "spec/SSOT.md",
   "crossval": "model/results/crossval/results.json",
@@ -55,9 +55,9 @@
       "evidence": "L1"
     },
     {
-      "stem": "f4_inl",
-      "question": "0.2% 失配的 INL 与校准残差",
-      "source": "model.static, seed 7 + 10 chips",
+      "stem": "f4_inl_dnl",
+      "question": "0.2% 失配的 INL/DNL 与校准残差",
+      "source": "charge_model + finite-sample fit",
       "evidence": "L1"
     },
     {
@@ -83,15 +83,15 @@
     "f3_shuffle.png": "d6366fa6cda8cbd982f250826b9283c59c124281b438b4a0f6cc7e26cdddab76",
     "f3_shuffle.svg": "7931fc4aa6982cb564d2153a2b9de319091ee5b6c71ad0405f4286019e6ad9c1",
     "f3_shuffle.pdf": "1880ca968dc412ea1baf5f10af6ad0a6cd31d017ea2b9f3e56cdb2d77d66e980",
-    "f4_inl.png": "82642ed92a31f0c436ae3644a6a31857a97fc015c82bac2a2dc9d49bdd0cefff",
-    "f4_inl.svg": "0b15e525c4ae87d5d3b43765e43c89f7c386c040ead9f4bee9db91fd02792cd0",
-    "f4_inl.pdf": "1b10ecd95c16ab1fb17d49165eb9fcaf167aacf1026e9b091d8758b735b522a8",
+    "f4_inl_dnl.png": "08042d7e97a5bd5c3f83e697c1f065a78d6edeb9a44a8001aedae130dc419438",
+    "f4_inl_dnl.svg": "c29558522d75c9cbbdec5d287484edc43e86e1a5a0df511c4938e9376a0052e3",
+    "f4_inl_dnl.pdf": "7eae5982e436967da591e121eb02303a5bfbad350ca609b31b293d803220da81",
     "f5_skew_gain.png": "4722630b3cac10d4f683aa033a4ba01e0bc85fda483f56ad140b71bb19cfdac3",
     "f5_skew_gain.svg": "c095de48f9d799cb4bf2f99262ab680d7ba9f346121461fac96ac5b5b935c620",
     "f5_skew_gain.pdf": "bdd864ceaa7ce8f9aeece010a64956a31d111fe16aef8947e1c98d7c4fac129a",
-    "f6_crossval.png": "d5b8e552a72a63599628554e74ebc61ac1435fe4399ae851664848c7b9953995",
-    "f6_crossval.svg": "055a4a8719deb596ec7feb2243227b4bf25155aaa6464c06ea640e289774d52d",
-    "f6_crossval.pdf": "2f7abbfddadc62146f501bce2aee42c38a444b693c5be8693b54e17251edb8f9"
+    "f6_crossval.png": "daa474f7fb69a97f5d1e1d1120be4157eeb394b8f85ff9e52796bdb823dfaeb7",
+    "f6_crossval.svg": "d94cd2b4152cc6c359f6e6b1b158935d35fe25123c8cfe0a89040e1bff00b40e",
+    "f6_crossval.pdf": "b1af9d8cbf63ec1d8e2584a887b76765d272a6135b4b0d2b0d7740a703551362"
   },
   "limits": [
     "所有曲线是行为模型输出，不是前仿/后仿/硅测",

@@ -44,7 +44,7 @@
 | 8× LSB 重复 | **+1.69 dB [1.66,1.72]** @100k；+1.70 @1M；解析预测 1.714 | **VALIDATED** |
 | CAAZ | **+3.65 dB** @100k；@1M +3.54；@2M +3.21；其中 AZ 只 **+0.60** | **VALIDATED** |
 | 片级 shuffle | SFDR **+22.3 dBc** @100k、+21.7 @2M；**DR 方向不稳**（+0.9 / −1.7 两段相反） | SFDR **VALIDATED**；DR **NOT VALIDATED** |
-| 静态校准 | raw **17.8±4.4 ppm** → 有限样本 **0.64±0.04**；out-of-sample **1.87 [1.47,2.28]** | **CONDITIONAL**（OOS 超 ±1.5） |
+| 静态校准 | INL **17.8±4.4 → 0.54±0.04 ppm**（33×）；DNL **0.0235 → 0.00073 LSB1**（32×），失码 0→0；out-of-sample **1.87** | **CONDITIONAL**（OOS 超 ±1.5） |
 | 交织 skew | 0.5→2 ps：**−1.44 dB [−1.73,−1.14]**，10/10 负 | **VALIDATED（退化）** |
 | 交织增益 | 10→50 ppm：**−5.58 dB [−6.11,−5.06]**，10/10 负 | **VALIDATED（退化）** |
 | DEM / dither | 只有 dither 字生成；**注入/扣除/DEM 均无** | **NOT IMPLEMENTED** |
@@ -60,7 +60,7 @@
 | `f1_spectrum` | 100 kHz 的 SNDR/DR/SFDR | `model.adc.simulate` + FFT | L1 | 单点示例 |
 | `f2_averaging` | 8× 重复值多少 dB | `model.adc.simulate`，10 seeds | L1 | VALIDATED |
 | `f3_shuffle` | 片级随机选片换到什么 | `model.adc.simulate`，10 seeds | L1 | SFDR VALIDATED / DR 不稳 |
-| `f4_inl` | 0.2% 失配的 INL 与校准残差 | `model.static`，seed 7 + 10 chips | L1 | CONDITIONAL |
+| `f4_inl_dnl` | 0.2% 失配的 INL/DNL 与校准残差 | `charge_model` + 有限样本拟合，seed 7 + 10 chips | L1 | INL 33× / DNL 32×；OOS CONDITIONAL |
 | `f5_skew_gain` | 交织 skew/增益失配的代价 | `model.adc.simulate`，10 seeds | L1 | VALIDATED（退化） |
 | `f6_crossval` | 哪些效果统计显著 | `model.crossval`，K=10 | L1 | 森林图 + INL 三口径 |
 
