@@ -129,3 +129,65 @@ python3 -m model.figures_ssot     # f7_dem_dither.png/svg/pdf
 - INL/DNL 是跨状态平均后的静态峰值；
 - noise 是每样本状态间 RMS，必须与 INL/DNL 一起报；
 - 10 芯片均值 ± 标准差，不是单芯片点估计。
+
+
+---
+
+## 6. dither 幅度：论文与专利到底说了什么
+
+### 6.1 ISSCC 2024 9.8 原文
+
+> "The architecture allows the dither range of the quantizer to be different from that of the RDAC.
+> Thus, the dither range is **enhanced by 2b** when the result is transferred from the quantizer to the RDAC."
+> — ISSCC 2024, 9.8, p.1（DEM 段）
+
+这句话只给了**两个 dither 范围的比值**，没有给绝对 LSB 数：
+
+- **2b 范围 = 4 倍**；
+- 若量化器 dither 为 0，RDAC dither 范围就是 **±2 LSB1（4 LSB1 pp）**；
+- 若量化器 dither 为 ±0.5 LSB1，RDAC 就是 ±2 LSB1；若量化器 ±1，RDAC 就是 ±4。
+
+论文同页给的实测是 **INL +2.2/−1.8 ppm、DNL ±0.27 ppm**（20b 级），
+DNL ±0.27 ppm ≈ **±0.28 LSB20**；这是 DEM + dither + 校准之后的结果，不是单靠 dither。
+
+### 6.2 专利 US10505561B2
+
+| 权利要求 | 说的量 | 是否给绝对值 |
+|:---|:---|:---|
+| claim 1 | dither 只加到 sampling DAC、不加到量化器；用相关数字值改码 | 否 |
+| claim 2 | 采样相把 DAC 元件置非零码态（采样态电荷注入） | 否 |
+| claim 7 | **fractional dither < 1 LSB** | 上限 1 LSB，不是定值 |
+| claim 8 | **integer dither 以 1 LSB 的倍数表示** | 单位 1 LSB，不是定值 |
+| claim 12 | 第一 dither 为 n bit，第二 dither 取其中 m bit，其余用于数字修正 | 字宽拆分，不是幅度 |
+
+专利给的是**结构约束**：分数部分 <1 LSB + 整数部分按 1 LSB 倍数；绝对幅度由架构/冗余决定。
+Fig.19 的七片示例（6 bit 字拆成 m/L/u）里，高路 u 的取值为 {0,1,4,5}，低路 L 为 0..3 LSB；
+但这是**七片示例**，不能直接当 20b 芯片的幅度。
+
+### 6.3 参考实现与本设计的取值
+
+| 来源 | 取值 | 说明 |
+|:---|:---|:---|
+| ADI 参考仓库 `dither_headroom.json` | `dither_amplitude_lsb1 = 2.0`，`dither_enhancement_bits = 2` | 对 "2b" 的字面读法：±2 LSB1，PMF `[1,2,2,2,1]/8`，方差 1.5 |
+| 本设计（R=2 bit，±2 LSB1） | **D=1 LSB1 安全；D=2 用满窗口** | 约束 `D + e_RA + e_cmp + e_ref ≤ R` |
+| 本设计若 D=4 | 需要 3 bit 冗余 | 与当前 2 bit 不兼容 |
+
+**推荐**：
+1. **先取 D=1 LSB1（±1，3 状态）**：占 2 LSB1 pp，留 1 LSB1 给 RA/比较器/参考误差。
+2. 若一定要按论文的 "2b 范围" 取 **D=2 LSB1（±2，5 状态）**：它正好用满 2 bit 冗余，
+   必须证明 `e_RA + e_cmp + e_ref < 0.2 LSB1`，否则会溢出。
+3. **D=4 不要用**，除非把冗余加到 3 bit。
+4. 专利的 **fractional dither（<1 LSB）** 更省冗余，但需要双端口/采样态注入 + 数字扣除；
+   我们现在的码域整数 dither 做不到分数，属 OPEN-3。
+
+### 6.4 模型里的实际收益（LSB20，DEM+dither）
+
+| D | 支持集 | 占冗余 (LSB1 pp) | DNL (LSB20) | 结论 |
+|:---:|:---|:---:|:---:|:---|
+| 1 | {-1,0,1} | 2 | 1.9 | 2 bit 冗余下推荐 |
+| 2 | {-2..2} | 4 | 1.1 | 用满冗余，需其他误差 <0.2 LSB1 |
+| 4 | {-4..4} | 8 | 0.73 | 需 3 bit 冗余 |
+
+> 即便 D=4，DNL 也只到 0.73 LSB20，仍比论文的 0.28 LSB20 差 2.6×——
+> 说明**幅度不是唯一因素**，DEM 状态数、校准精度、参考建立都在限制。
+

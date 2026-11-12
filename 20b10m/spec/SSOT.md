@@ -143,7 +143,7 @@ flash 的 4 bit 落在「3 个 unary + 片内 64C 位」，SAR 的 6 次落在 3
 |:--|:---|:---|:---|:---|
 | OPEN-1 | DAC1 三电平实现（VREFP/VCM/VGND）与 termination 1C 可切换 | 功耗、共模、INL | 模拟 | 网表 L1 前 |
 | OPEN-2 | DAC2 12 bit 分段（5+7 vs 6+6）与桥容 | C_top / α / kickback | 架构 | T-B01 |
-| OPEN-3 | dither 注入点与幅度（采样态 / 双端口 / Fig.19 位分裂） | 余量、INL | 双方 | 接口 v1.0 前 |
+| OPEN-3 | dither 注入点与幅度（论文只说 2b 范围；专利只给 <1 LSB 分数 + 1 LSB 整数倍数；本设计 R=2 → D=1 安全、D=2 用满） | 余量、INL | 双方 | 接口 v1.0 前 |
 | OPEN-4 | `CMP1/2_READY` 握手 | ΦC2 能否实现 | 模拟+数字 | 接口 v1.0 前 |
 | OPEN-5 | DEM 粒度（片级 8 态旋转 vs 单位级） | DNL/杂散 | 数字 | D1_MASK 前 |
 
